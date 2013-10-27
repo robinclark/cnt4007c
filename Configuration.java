@@ -1,9 +1,10 @@
 import java.io.*;
 import java.util.*;
-public class Configuration
-{
-	private peerInfo peerConfiguration;
 
+public class Configuration extends Module {
+
+	private HashMap<String, peerInfo> peerList;
+	
 	public class peerInfo
 	{
 		private int peerID;
@@ -52,13 +53,14 @@ public class Configuration
 		}
 
 	}
-	public Configuration(int peerID)
-	{
 	
+	@Override
+	public void intialConfiguration() {
+
 		String st;
 		boolean hasFile;
-		peerConfiguration = new peerInfo();
-		
+		peerList = new HashMap<String,peerInfo>();
+		peerInfo node = new peerInfo();
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(Constants.CFG_FILE));
 		
@@ -66,9 +68,7 @@ public class Configuration
 					while((st = in.readLine()) != null)
 					{
 						String tokens[] = st.split(" ");
-				
-						if(peerID == Integer.parseInt(tokens[0]))
-						{
+							
 							
 							node.setPeerID(Integer.parseInt(tokens[0]));
 							node.setHostName(tokens[1]);
@@ -76,25 +76,23 @@ public class Configuration
 				
 							hasFile = (tokens[3] == "1")  ? true : false;
 							node.setHasFile(hasFile);
-							peerConfiguration = node;
+					
+							peerList.put(tokens[0], node);
 						}
 						
 						
-			
-			
-					}
-
 				in.close();
 			}	catch(IOException e)
 				{
 					System.out.println("There was a problem opening the configuration file. Make sure the file exists");
 				}
-
-	}
-
-	public HashMap<Integer, peerInfo> getPeerCollection()
-	{
-			return peerCollection;
+		
 	}
 	
+	public HashMap<String,peerInfo> getPeerListCollection()
+	{
+		return peerList;
+	}
+
 }
+
