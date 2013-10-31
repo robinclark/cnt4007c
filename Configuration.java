@@ -4,7 +4,10 @@ import java.util.*;
 public class Configuration extends Module {
 
 	private HashMap<String, Configuration.PeerInfo> peerList;
-        private CommonInfo commonInfo;
+
+        private HashMap<String, String> commonInfo;
+        //private Configuration.CommonInfo commonInfo;
+
 
     /**
      * @return the peerList
@@ -16,103 +19,11 @@ public class Configuration extends Module {
     /**
      * @return the commonInfo
      */
-    public CommonInfo getCommonInfo() {
-        return commonInfo;
+
+    public HashMap<String,String> getCommonInfo() {
+       return commonInfo;
     }
         
-        public class CommonInfo
-        {
-            private int numberOfPreferredNeighbors;
-            private float unchokingInterval;
-            private float optimisticUnchokingInterval;
-            private String fileName;
-            private int fileSize;
-            private int pieceSize;
-
-            /**
-             * @return the numberOfPreferredNeighbors
-             */
-            public int getNumberOfPreferredNeighbors() {
-                return numberOfPreferredNeighbors;
-            }
-
-            /**
-             * @param numberOfPreferredNeighbors the numberOfPreferredNeighbors to set
-             */
-            public void setNumberOfPreferredNeighbors(int numberOfPreferredNeighbors) {
-                this.numberOfPreferredNeighbors = numberOfPreferredNeighbors;
-            }
-
-            /**
-             * @return the unchokingInterval
-             */
-            public float getUnchokingInterval() {
-                return unchokingInterval;
-            }
-
-            /**
-             * @param unchokingInterval the unchokingInterval to set
-             */
-            public void setUnchokingInterval(float unchokingInterval) {
-                this.unchokingInterval = unchokingInterval;
-            }
-
-            /**
-             * @return the optimisticUnchokingInterval
-             */
-            public float getOptimisticUnchokingInterval() {
-                return optimisticUnchokingInterval;
-            }
-
-            /**
-             * @param optimisticUnchokingInterval the optimisticUnchokingInterval to set
-             */
-            public void setOptimisticUnchokingInterval(float optimisticUnchokingInterval) {
-                this.optimisticUnchokingInterval = optimisticUnchokingInterval;
-            }
-
-            /**
-             * @return the fileName
-             */
-            public String getFileName() {
-                return fileName;
-            }
-
-            /**
-             * @param fileName the fileName to set
-             */
-            public void setFileName(String fileName) {
-                this.fileName = fileName;
-            }
-
-            /**
-             * @return the fileSize
-             */
-            public int getFileSize() {
-                return fileSize;
-            }
-
-            /**
-             * @param fileSize the fileSize to set
-             */
-            public void setFileSize(int fileSize) {
-                this.fileSize = fileSize;
-            }           
-
-        /**
-         * @return the pieceSize
-         */
-        public int getPieceSize() {
-            return pieceSize;
-        }
-
-        /**
-         * @param pieceSize the pieceSize to set
-         */
-        public void setPieceSize(int pieceSize) {
-            this.pieceSize = pieceSize;
-        }
-        }
 	
 	public class PeerInfo
 	{
@@ -197,28 +108,19 @@ public class Configuration extends Module {
 				}
                         
                         //read in config info
-                        peerList = new HashMap<String, Configuration.PeerInfo>();
-                        Configuration.CommonInfo commonInfo = new Configuration.CommonInfo();
+                        
+                        commonInfo = new HashMap<String, String>();
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(Constants.COMMON_CFG_FILE));
 		
 
 					while((st = in.readLine()) != null)
 					{
+                                               System.out.println("ST: " + st);
 						String tokens[] = st.split(" ");
+                                                
+                                                commonInfo.put(tokens[0], tokens[1]);
 							
-							/*private int numberOfPreferredNeighbors;
-                                                        private float unchokingInterval;
-                                                        private float optimisticUnchokingInterval;
-                                                        private String fileName;
-                                                        private int fileSize;
-                                                        private int pieceSize;*/
-							commonInfo.setNumberOfPreferredNeighbors(Integer.parseInt(tokens[0]));
-							commonInfo.setUnchokingInterval(Float.parseFloat(tokens[1]));
-							commonInfo.setOptimisticUnchokingInterval(Float.parseFloat(tokens[2]));
-                                                        commonInfo.setFileName(tokens[3]);
-                                                        commonInfo.setFileSize(Integer.parseInt(tokens[4]));
-                                                        commonInfo.setPieceSize(Integer.parseInt(tokens[5]));                                                   		
 						}
 						
 						

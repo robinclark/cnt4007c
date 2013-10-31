@@ -23,7 +23,7 @@ public class Peer extends Module implements Runnable{
 			
 	}
 	@Override
-	public void intialConfiguration() 
+	public void initialConfiguration() 
 	{
 		
 			peerID = controller.getPeerID();
@@ -37,8 +37,8 @@ public class Peer extends Module implements Runnable{
 			if(inputStream == null && outputStream  == null)
 			{
 				try {
-					inputStream = (ObjectInputStream) neighborPeer.getInputStream();
-					outputStream = (ObjectOutputStream) neighborPeer.getOutputStream();
+					inputStream = new ObjectInputStream(neighborPeer.getInputStream());
+					outputStream = new ObjectOutputStream(neighborPeer.getOutputStream());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

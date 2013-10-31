@@ -87,6 +87,8 @@ public class Controller extends Module {
 	public void createClients() throws UnknownHostException, IOException
 	{
 		HashMap<String, Configuration.PeerInfo> map = configInstance.getPeerList();
+
+
 		
 		Set<String> peerKeys = map.keySet();
 		

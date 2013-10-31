@@ -4,7 +4,7 @@ public class ModuleFactory {
 	public static Module createConfigMod()
 	{
 		Configuration config = new Configuration();
-		config.intialConfiguration();
+		config.initialConfiguration();
 		
 		return config;
 		
@@ -13,7 +13,7 @@ public class ModuleFactory {
 	public static Module createLogMod(String peerID) {
 		
 		Logger log = new Logger(peerID);
-		log.intialConfiguration();
+		log.initialConfiguration();
 		
 		return log;
 	}
@@ -21,21 +21,21 @@ public class ModuleFactory {
 	public static Module createCtrlMod(String peerID)
 	{
 		Controller controller = new Controller(peerID);
-		controller.intialConfiguration();
+		controller.initialConfiguration();
 		return controller;
 	}
 	
 	public static Module createServerMod(String peerID, Controller controller)
 	{
 		Server server = new Server(peerID, controller);
-		server.intialConfiguration();
+		server.initialConfiguration();
 		return server;
 	}
 	
 	public static Module createPeer(Socket socket, Controller controller)
 	{
 		Peer peer = new Peer(socket, controller);
-		peer.intialConfiguration();
+		peer.initialConfiguration();
 		return peer;
 	}
 
