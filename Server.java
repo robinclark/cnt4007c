@@ -17,7 +17,7 @@ public class Server extends Module implements Runnable
 	}
 
 	@Override
-	public void intialConfiguration() {
+	public void initialConfiguration() {
 		if(configInstance == null)
 		{
 			configInstance = (Configuration) ModuleFactory.createConfigMod();
@@ -28,12 +28,12 @@ public class Server extends Module implements Runnable
 	@Override
 	public void run() {
 		
-		HashMap<String,peerInfo> peers = configInstance.getPeerListCollection();
+		HashMap<String,Configuration.PeerInfo> peers = configInstance.getPeerList();
 		
 		int numOfPeers = controllerInstance.getNumberOfConnectedPeers(peerID);
 		
 		System.out.println(numOfPeers);
-		peerInfo node = peers.get(peerID);
+		Configuration.PeerInfo node = peers.get(peerID);
 		
 		try
 		{
