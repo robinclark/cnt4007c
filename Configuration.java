@@ -193,7 +193,7 @@ public class Configuration extends Module {
 			}	catch(IOException e)
 				{
 					System.out.println("There was a problem opening the peer configuration file. Make sure the file exists");
-				}
+				}   
                         
                         //read in config info
                         peerList = new HashMap<String, Configuration.PeerInfo>();
@@ -213,11 +213,11 @@ public class Configuration extends Module {
                                                         private int fileSize;
                                                         private int pieceSize;*/
 							commonInfo.setNumberOfPreferredNeighbors(Integer.parseInt(tokens[1]));
-							commonInfo.setUnchokingInterval(Integer.parseInt(tokens[1]));
-							commonInfo.setOptimisticUnchokingInterval(Float.parseFloat(tokens[1]));
-                                                        commonInfo.setFileName(tokens[1]);
-                                                        commonInfo.setFileSize(Integer.parseInt(tokens[1]));
-                                                        commonInfo.setPieceSize(Integer.parseInt(tokens[1]));                                                   		
+							commonInfo.setUnchokingInterval(Integer.parseInt(tokens[3]));
+							commonInfo.setOptimisticUnchokingInterval(Integer.parseInt(tokens[5]));
+                                                        commonInfo.setFileName(tokens[7]);
+                                                        commonInfo.setFileSize(Integer.parseInt(tokens[9]));
+                                                        commonInfo.setPieceSize(Integer.parseInt(tokens[11]));                                                   		
 						}
 						
 						
