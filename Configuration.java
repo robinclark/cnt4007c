@@ -212,12 +212,12 @@ public class Configuration extends Module {
                                                         private String fileName;
                                                         private int fileSize;
                                                         private int pieceSize;*/
-							commonInfo.setNumberOfPreferredNeighbors(Integer.parseInt(tokens[0]));
-							commonInfo.setUnchokingInterval(Float.parseFloat(tokens[1]));
-							commonInfo.setOptimisticUnchokingInterval(Float.parseFloat(tokens[2]));
-                                                        commonInfo.setFileName(tokens[3]);
-                                                        commonInfo.setFileSize(Integer.parseInt(tokens[4]));
-                                                        commonInfo.setPieceSize(Integer.parseInt(tokens[5]));                                                   		
+							commonInfo.setNumberOfPreferredNeighbors(Integer.parseInt(tokens[1]));
+							commonInfo.setUnchokingInterval(Integer.parseInt(tokens[1]));
+							commonInfo.setOptimisticUnchokingInterval(Float.parseFloat(tokens[1]));
+                                                        commonInfo.setFileName(tokens[1]);
+                                                        commonInfo.setFileSize(Integer.parseInt(tokens[1]));
+                                                        commonInfo.setPieceSize(Integer.parseInt(tokens[1]));                                                   		
 						}
 						
 						
