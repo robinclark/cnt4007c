@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -30,6 +31,8 @@ public class Server extends Module implements Runnable
 		HashMap<String,peerInfo> peers = configInstance.getPeerListCollection();
 		
 		int numOfPeers = controllerInstance.getNumberOfConnectedPeers(peerID);
+		
+		System.out.println(numOfPeers);
 		peerInfo node = peers.get(peerID);
 		
 		try
@@ -42,13 +45,14 @@ public class Server extends Module implements Runnable
 				
 				Peer neighborPeer = (Peer) ModuleFactory.createPeer(peer, controllerInstance);
 				
+				System.out.println("NP: " + neighborPeer);
 				controllerInstance.addNeighbors(neighborPeer);
 				
 				new Thread(neighborPeer).start();
 			}
 		}catch(IOException e)
 		{
-			
+			e.printStackTrace();
 		}
 		
 		
