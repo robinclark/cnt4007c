@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -11,6 +14,7 @@ public class Controller extends Module {
 	private String peerID;
 	private Server serverInstance;
 	private List<Peer> neighborPeers;
+	private boolean isShuttingDown;
 
 	public Controller(String peerID)
 	{
@@ -39,23 +43,66 @@ public class Controller extends Module {
 			{
 				neighborPeers = new ArrayList<Peer>();
 			}
+			
+			isShuttingDown = false;
 
 	}
 	
 	public void execute()
 	{
-			createServers();
-			//createClients();
+			try {
+				createServers();	
+				createClients();
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	
 	public void setPeerID(String peerID)
 	{
 		this.peerID = peerID;
 	}
+	
+	public String getPeerID()
+	{
+		return peerID;
+	}
+	
+	public boolean isShuttingDown()
+	{
+		return isShuttingDown;
+	}
 
 	public void createServers()
 	{
-		//new Thread(Server)
+		new Thread(serverInstance).start();
+	}
+	
+	public void createClients() throws UnknownHostException, IOException
+	{
+		HashMap<String, peerInfo> map = configInstance.getPeerListCollection();
+		peerInfo handler;
+		
+		Set<String> peerKeys = map.keySet();
+		
+		for(String peerKey : peerKeys)
+		{
+		
+				if(Integer.parseInt(peerID) > Integer.parseInt(peerKey))
+				{
+					handler = map.get(peerKey);
+					Socket socket = new Socket(InetAddress.getLocalHost().getHostName(),handler.getPortNumber());
+					
+					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
+					
+					new Thread(clientPeer).start();
+				}
+		}
+		
 	}
 	
 	public int getNumberOfConnectedPeers(String peerID)
@@ -81,6 +128,11 @@ public class Controller extends Module {
 	public void addNeighbors(Peer peer)
 	{
 		neighborPeers.add(peer);
+	}
+	
+	public List<Peer> getNeighborsList()
+	{
+		return neighborPeers;
 	}
 	
 	public Module getLogger()
