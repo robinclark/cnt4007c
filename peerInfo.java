@@ -1,16 +1,16 @@
 public class peerInfo
 {
-	private int peerID;
+	private String peerID;
 	private String hostName;
 	private int portNumber;
 	private boolean hasFile;
 	
-	protected void setPeerID(int peerID)
+	protected void setPeerID(String peerID)
 	{
 		this.peerID = peerID;
 	}
 
-	public int getPeerID()
+	public String getPeerID()
 	{		
 		return peerID;
 	}
