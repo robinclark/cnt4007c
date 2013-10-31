@@ -15,6 +15,8 @@ public class Controller extends Module {
 	private Server serverInstance;
 	private List<Peer> neighborPeers;
 	private boolean isShuttingDown;
+        private OptimisticNeighborManager optimisticNeighborManager;
+        private PreferredNeighborManager preferredNeighborManager;
 
 	public Controller(String peerID)
 	{
@@ -85,7 +87,8 @@ public class Controller extends Module {
 	public void createClients() throws UnknownHostException, IOException
 	{
 		HashMap<String, Configuration.PeerInfo> map = configInstance.getPeerList();
-		Configuration.PeerInfo handler;
+
+
 		
 		Set<String> peerKeys = map.keySet();
 		
@@ -94,8 +97,7 @@ public class Controller extends Module {
 		
 				if(Integer.parseInt(peerID) > Integer.parseInt(peerKey))
 				{
-					handler = map.get(peerKey);
-					Socket socket = new Socket(InetAddress.getLocalHost().getHostName(),handler.getPortNumber());
+					Socket socket = new Socket(map.get(peerID).getHostName(), map.get(peerKey).getPortNumber());
 					
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
 					
@@ -134,6 +136,11 @@ public class Controller extends Module {
 	{
 		return neighborPeers;
 	}
+        
+        public Configuration getConfiguration()
+        {
+            return configInstance;
+        }
 	
 	public Module getLogger()
 	{
