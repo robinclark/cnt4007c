@@ -4,7 +4,7 @@ import java.util.*;
 public class Configuration extends Module {
 
 	private HashMap<String, Configuration.PeerInfo> peerList;
-        private Configuration.CommonInfo commonInfo;
+        private CommonInfo commonInfo;
 
     /**
      * @return the peerList
@@ -16,7 +16,7 @@ public class Configuration extends Module {
     /**
      * @return the commonInfo
      */
-    public Configuration.CommonInfo getCommonInfo() {
+    public CommonInfo getCommonInfo() {
         return commonInfo;
     }
         
@@ -163,6 +163,7 @@ public class Configuration extends Module {
 
 	}
 	
+        @Override
 	public void initialConfiguration() {
 
 		String st;

@@ -1,5 +1,5 @@
 abstract class Module {
-	public abstract void intialConfiguration();
+	public abstract void initialConfiguration();
 	public void execute() {};
 }
 
