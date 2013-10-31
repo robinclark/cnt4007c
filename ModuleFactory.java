@@ -22,7 +22,6 @@ public class ModuleFactory {
 	{
 		Controller controller = new Controller(peerID);
 		controller.intialConfiguration();
-		
 		return controller;
 	}
 	
@@ -45,7 +44,7 @@ public class ModuleFactory {
 			return null;
 	}
 
-	public static Module crateOptimisticMod()
+	public static Module createOptimisticMod()
 	{
 			return null;
 	}
