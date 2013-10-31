@@ -13,15 +13,21 @@ public class Peer extends Module implements Runnable{
 	private int downloadDataSize;
 	private int downloadTime;
 	private Socket neighborPeer;
+	private boolean isShuttingDown;
+	private byte[] readBuffer;
 	
 	public Peer(Socket socket, Controller controller)
 	{
 			neighborPeer = socket;
 			this.controller = controller;
+			
 	}
 	@Override
 	public void intialConfiguration() 
 	{
+		
+			peerID = controller.getPeerID();
+			isShuttingDown = controller.isShuttingDown();
 			
 			if(logInstance == null)
 			{
@@ -39,9 +45,43 @@ public class Peer extends Module implements Runnable{
 				}
 				
 			}
+			
+			
+			
 	}
 	@Override
 	public void run() {
+		
+		System.out.println("RUNNING");
+		sendHandShake();
+		
+		
+		while(!isShuttingDown)
+		{
+			try {
+				
+				Message message = (Message) inputStream.readObject();
+				
+				if(message.getUID() == Constants.HANDSHAKE_UID)
+				{
+					handleHandShakeMessage(message);
+				}
+				else
+				{
+					
+				}
+				
+				
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
 		
 		
 	}
@@ -49,8 +89,42 @@ public class Peer extends Module implements Runnable{
 	private void sendHandShake()
 	{
 		
+		try {
+			
+			System.out.println("SENDING HANDSHAKE");
+			HandShakeMessage message = new HandShakeMessage();
+			
+			message.setPeerID(peerID);
+		
+			outputStream.writeUnshared(message);
+			outputStream.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
+	private void handleHandShakeMessage(Message msg)
+	{
+		 HandShakeMessage newMsg = (HandShakeMessage) msg;
+		 
+		 if(newMsg.getHeader() == Constants.HANDSHAKE_HEADER)
+		 {
+			 for(Peer e : controller.getNeighborsList())
+			 {
+				System.out.println("PEERID: " + e.getPeerID()); 	
+			 }
+			 
+			 
+			 System.out.println();
+		 }	
+		 
+	}
+		 
+	public String getPeerID()
+	{
+		return peerID;
+	}
 	
 	
 
