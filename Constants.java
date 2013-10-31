@@ -10,6 +10,9 @@ public class Constants {
 		public static int MSG_BITFIELD_TYPE = 5;
 		public static int MSG_REQUEST_TYPE = 6;
 		public static int MSG_PIECE_TYPE = 7;
+		public static String HANDSHAKE_HEADER = "HELLO";
+		public static final long HANDSHAKE_UID = 3L;
+
 		
 		
 }
