@@ -25,7 +25,7 @@ public class Logger extends Module {
 	}
 	
 	@Override
-	public void intialConfiguration() {
+	public void initialConfiguration() {
 		
 			if(loggerFile == null)
 			{

@@ -23,7 +23,7 @@ public class Peer extends Module implements Runnable{
 			
 	}
 	@Override
-	public void intialConfiguration() 
+	public void initialConfiguration() 
 	{
 		
 			peerID = controller.getPeerID();
