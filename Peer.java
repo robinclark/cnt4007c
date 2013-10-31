@@ -8,19 +8,20 @@ public class Peer extends Module implements Runnable{
 	private ObjectOutputStream outputStream;
 	private String peerID;
 	private Logger logInstance;
-	private Controller controller;
+	private PeerController controller;
 	private boolean isChockedByPeer;
 	private int downloadDataSize;
 	private int downloadTime;
 	private Socket neighborPeer;
 	
-	public Peer(Socket socket, Controller controller)
+	public Peer(Socket socket, PeerController controller)
 	{
 			neighborPeer = socket;
 			this.controller = controller;
+                        initialConfiguration();
 	}
 	@Override
-	public void intialConfiguration() 
+	public void initialConfiguration() 
 	{
 			
 			if(logInstance == null)
@@ -42,7 +43,7 @@ public class Peer extends Module implements Runnable{
 	}
 	@Override
 	public void run() {
-		
+	//send and recieve messages
 		
 	}
 	

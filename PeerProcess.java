@@ -1,9 +1,9 @@
-public class peerProcess {
+public class PeerProcess {
 	public static void main(String[] args)
 	{
 		ModuleFactory factory = new ModuleFactory();
-		Module ctrl = factory.createCtrlMod(args[0]);
-		ctrl.execute();
+		Module peerController = factory.createCtrlMod(args[0]);
+		peerController.begin();
 	}
 }
 

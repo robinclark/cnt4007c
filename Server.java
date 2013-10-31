@@ -7,11 +7,11 @@ public class Server extends Module implements Runnable
 {
 	private Configuration configInstance;
 	private String peerID;
-	private Controller controllerInstance;
+	private PeerController controllerInstance;
 	
 	public Server(String peerID, Module ctrl)
 	{
-		controllerInstance = (Controller) ctrl;
+		controllerInstance = (PeerController) ctrl;
 		this.peerID = peerID;
 	}
 

@@ -11,7 +11,7 @@ public class Test {
 			BufferedReader in = new BufferedReader(new FileReader("PeerInfo.cfg"));
 			Peer handler;
 			HashMap<Integer, Peer> peerCollection = new HashMap<Integer, Peer>();
-			Controller controller = new Controller();
+			PeerController controller = new PeerController();
 			while((st = in.readLine()) != null)
 			{
 				String tokens[] = st.split(" ");
