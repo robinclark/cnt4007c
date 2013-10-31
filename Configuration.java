@@ -104,14 +104,15 @@ public class Configuration extends Module {
 				}
                         
                         //read in config info
-                        peerList = new HashMap<String, Configuration.PeerInfo>();
-                       // Configuration.CommonInfo commonInfo = new Configuration.CommonInfo();
+                        
+                        commonInfo = new HashMap<String, String>();
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(Constants.COMMON_CFG_FILE));
 		
 
 					while((st = in.readLine()) != null)
 					{
+                                               System.out.println("ST: " + st);
 						String tokens[] = st.split(" ");
                                                 
                                                 commonInfo.put(tokens[0], tokens[1]);
