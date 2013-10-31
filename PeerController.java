@@ -133,6 +133,11 @@ public class PeerController extends Module {
 	{
 		
 	}
+        
+        public Configuration getConfiguration()
+        {
+            return configInstance;
+        }
 	
 	public Module getLogger()
 	{

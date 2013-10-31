@@ -7,9 +7,6 @@
  *
  * @author Robin
  */
-public class PreferredNeighbor {
-    private PeerController peerController;
-    
-    
+public class BitfieldManager {
     
 }
