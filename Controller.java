@@ -97,7 +97,7 @@ public class Controller extends Module {
 		
 				if(Integer.parseInt(peerID) > Integer.parseInt(peerKey))
 				{
-					Socket socket = new Socket(map.get(peerID).getHostName(), map.get(peerKey).getPortNumber());
+					Socket socket = new Socket(map.get(peerKey).getHostName(), map.get(peerKey).getPortNumber());
 					
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
 					
