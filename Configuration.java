@@ -5,54 +5,6 @@ public class Configuration extends Module {
 
 	private HashMap<String, peerInfo> peerList;
 	
-	public class peerInfo
-	{
-		private int peerID;
-		private String hostName;
-		private int portNumber;
-		private boolean hasFile;
-		
-		protected void setPeerID(int peerID)
-		{
-			this.peerID = peerID;
-		}
-
-		public int getPeerID()
-		{		
-			return peerID;
-		}
-
-		protected void setHostName(String hostName)
-		{
-			this.hostName = hostName;
-		}
-
-		public String getHostName()
-		{
-			return hostName;
-		}
-
-		protected void setPortNumber(int portNumber)
-		{
-			this.portNumber = portNumber;
-		}
-
-		public int getPortNumber()
-		{
-			return portNumber;
-		}
-
-		protected void setHasFile(boolean hasFile)
-		{
-			this.hasFile = hasFile;
-		}
-
-		public boolean getHasFile()
-		{
-			return hasFile;
-		}
-
-	}
 	
 	@Override
 	public void intialConfiguration() {
@@ -60,7 +12,7 @@ public class Configuration extends Module {
 		String st;
 		boolean hasFile;
 		peerList = new HashMap<String,peerInfo>();
-		peerInfo node = new peerInfo();
+		peerInfo node;
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(Constants.CFG_FILE));
 		
@@ -69,8 +21,8 @@ public class Configuration extends Module {
 					{
 						String tokens[] = st.split(" ");
 							
-							
-							node.setPeerID(Integer.parseInt(tokens[0]));
+						 	node = new peerInfo();
+							node.setPeerID(tokens[0]);
 							node.setHostName(tokens[1]);
 							node.setPortNumber(Integer.parseInt(tokens[2]));
 				
