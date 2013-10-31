@@ -1,7 +1,7 @@
 public class NormalMessageCreator {
-	private NormalMessage builder;
+	private Message builder;
 	
-	public NormalMessageCreator(NormalMessage builder)
+	public NormalMessageCreator(Message builder)
 	{
 		this.builder = builder;
 	}
@@ -12,6 +12,6 @@ public class NormalMessageCreator {
 		builder.setMsgPayLoad(payload);
 		builder.setMsgLen();
 	}
-
+	
 	
 }
