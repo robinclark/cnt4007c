@@ -6,13 +6,13 @@ public class Configuration extends Module {
 	private HashMap<String, Configuration.PeerInfo> peerList;
 
         private HashMap<String, String> commonInfo;
-        //private Configuration.CommonInfo commonInfo;
+       
 
 
     /**
      * @return the peerList
      */
-    public HashMap<String, Configuration.PeerInfo> getPeerList() {
+    public HashMap<String, PeerInfo> getPeerList() {
         return peerList;
     }
 
@@ -80,9 +80,9 @@ public class Configuration extends Module {
 		String st;
 		boolean hasFile;
 		peerList = new HashMap<String, Configuration.PeerInfo>();
-		Configuration.PeerInfo node = new Configuration.PeerInfo();
+		PeerInfo node = new PeerInfo();
 			try {
-				BufferedReader in = new BufferedReader(new FileReader(Constants.PEER_CFG_FILE));
+				BufferedReader in = new BufferedReader(new FileReader("PeerInfo.cfg"));
 		
 
 					while((st = in.readLine()) != null)
@@ -104,7 +104,8 @@ public class Configuration extends Module {
 				in.close();
 			}	catch(IOException e)
 				{
-					System.out.println("There was a problem opening the peer configuration file. Make sure the file exists");
+                                    System.out.println(e.getMessage());
+                                    //System.out.println("There was a problem opening the peer configuration file. Make sure the file exists");
 				}
                         
                         //read in config info
@@ -127,7 +128,8 @@ public class Configuration extends Module {
 				in.close();
 			}	catch(IOException e)
 				{
-					System.out.println("There was a problem opening the common configuration file. Make sure the file exists");
+                                    System.out.println(e.getMessage());
+					//System.out.println("There was a problem opening the common configuration file. Make sure the file exists");
 				}
 	}
 

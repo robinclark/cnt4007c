@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Server extends Module implements Runnable
 {
-	private Configuration configInstance;
+	//private Configuration configInstance;
 	private String peerID;
 	private Controller controllerInstance;
 	
@@ -18,17 +18,14 @@ public class Server extends Module implements Runnable
 
 	@Override
 	public void initialConfiguration() {
-		if(configInstance == null)
-		{
-			configInstance = (Configuration) ModuleFactory.createConfigMod();
-		}
+		
 		
 	}
 
 	@Override
 	public void run() {
 		
-		HashMap<String,Configuration.PeerInfo> peers = configInstance.getPeerList();
+		HashMap<String,Configuration.PeerInfo> peers = controllerInstance.getConfiguration().getPeerList();
 		
 		int numOfPeers = controllerInstance.getNumberOfConnectedPeers(peerID);
 		
