@@ -80,13 +80,14 @@ public class Configuration extends Module {
 		String st;
 		boolean hasFile;
 		peerList = new HashMap<String, Configuration.PeerInfo>();
-		PeerInfo node = new PeerInfo();
+		PeerInfo node = null;
 			try {
 				BufferedReader in = new BufferedReader(new FileReader("PeerInfo.cfg"));
 		
 
 					while((st = in.readLine()) != null)
 					{
+						node = new PeerInfo();
 						String tokens[] = st.split(" ");
 							
 							
