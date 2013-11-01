@@ -32,10 +32,13 @@ public class ModuleFactory {
 		return server;
 	}
 	
-	public static Module createPeer(Socket socket, Controller controller)
+	public synchronized static Module createPeer(Socket socket, Controller controller)
 	{
+		int count = 0;
 		Peer peer = new Peer(socket, controller);
 		peer.initialConfiguration();
+		if(count < 3){count++;}
+		System.out.println("CREATING PEER");
 		return peer;
 	}
 

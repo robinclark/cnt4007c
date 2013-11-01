@@ -37,8 +37,9 @@ public class Peer extends Module implements Runnable{
 			if(inputStream == null && outputStream  == null)
 			{
 				try {
-					inputStream = new ObjectInputStream(neighborPeer.getInputStream());
 					outputStream = new ObjectOutputStream(neighborPeer.getOutputStream());
+					inputStream = new ObjectInputStream(neighborPeer.getInputStream());
+				
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -51,15 +52,11 @@ public class Peer extends Module implements Runnable{
 	}
 	@Override
 	public void run() {
-		
-		System.out.println("RUNNING");
 		sendHandShake();
-		
-		
 		while(!isShuttingDown)
 		{
+
 			try {
-				
 				Message message = (Message) inputStream.readObject();
 				
 				if(message.getUID() == Constants.HANDSHAKE_UID)
@@ -79,8 +76,10 @@ public class Peer extends Module implements Runnable{
 			} catch(IOException e)
 			{
 				e.printStackTrace();
-			}
-		}
+			}	
+}
+
+
 		
 		
 		

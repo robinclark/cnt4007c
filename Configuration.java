@@ -3,16 +3,16 @@ import java.util.*;
 
 public class Configuration extends Module {
 
-	private HashMap<String, Configuration.PeerInfo> peerList;
+	private LinkedHashMap<String, Configuration.PeerInfo> peerList;
 
-        private HashMap<String, String> commonInfo;
+        private LinkedHashMap<String, String> commonInfo;
         //private Configuration.CommonInfo commonInfo;
 
 
     /**
      * @return the peerList
      */
-    public HashMap<String, Configuration.PeerInfo> getPeerList() {
+    public LinkedHashMap<String, Configuration.PeerInfo> getPeerList() {
         return peerList;
     }
 
@@ -20,7 +20,7 @@ public class Configuration extends Module {
      * @return the commonInfo
      */
 
-    public HashMap<String,String> getCommonInfo() {
+    public LinkedHashMap<String,String> getCommonInfo() {
        return commonInfo;
     }
         
@@ -79,8 +79,8 @@ public class Configuration extends Module {
 
 		String st;
 		boolean hasFile;
-		peerList = new HashMap<String, Configuration.PeerInfo>();
-		Configuration.PeerInfo node = new Configuration.PeerInfo();
+		peerList = new LinkedHashMap<String, Configuration.PeerInfo>();
+		Configuration.PeerInfo node;
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(Constants.PEER_CFG_FILE));
 		
@@ -89,7 +89,7 @@ public class Configuration extends Module {
 					{
 						String tokens[] = st.split(" ");
 							
-							
+							node  = new Configuration.PeerInfo();
 							node.setPeerID(Integer.parseInt(tokens[0]));
 							node.setHostName(tokens[1]);
 							node.setPortNumber(Integer.parseInt(tokens[2]));
@@ -109,7 +109,7 @@ public class Configuration extends Module {
                         
                         //read in config info
                         
-                        commonInfo = new HashMap<String, String>();
+                        commonInfo = new LinkedHashMap<String, String>();
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(Constants.COMMON_CFG_FILE));
 		

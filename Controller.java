@@ -2,10 +2,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 public class Controller extends Module {
 	
@@ -86,21 +83,21 @@ public class Controller extends Module {
 	
 	public void createClients() throws UnknownHostException, IOException
 	{
-		HashMap<String, Configuration.PeerInfo> map = configInstance.getPeerList();
+		LinkedHashMap<String, Configuration.PeerInfo> map = configInstance.getPeerList();
 
-
-		
 		Set<String> peerKeys = map.keySet();
 		
-		for(String peerKey : peerKeys)
+		
+		for(String peerKey :  peerKeys)
 		{
 		
 				if(Integer.parseInt(peerID) > Integer.parseInt(peerKey))
 				{
-					Socket socket = new Socket(map.get(peerID).getHostName(), map.get(peerKey).getPortNumber());
+					Socket socket = new Socket(map.get(peerKey).getHostName(), map.get(peerKey).getPortNumber());
+					System.out.println("SOCKET: " + socket);
 					
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
-					
+					neighborPeers.add(clientPeer);
 					new Thread(clientPeer).start();
 				}
 		}
@@ -111,7 +108,7 @@ public class Controller extends Module {
 	{
 		int numOfPeers = 0;
 		
-		HashMap<String, Configuration.PeerInfo> peers = configInstance.getPeerList();
+		LinkedHashMap<String, Configuration.PeerInfo> peers = configInstance.getPeerList();
 		
 		Set<String> peerKeys = peers.keySet();
 		

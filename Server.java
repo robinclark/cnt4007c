@@ -28,11 +28,11 @@ public class Server extends Module implements Runnable
 	@Override
 	public void run() {
 		
-		HashMap<String,Configuration.PeerInfo> peers = configInstance.getPeerList();
+		LinkedHashMap<String,Configuration.PeerInfo> peers = configInstance.getPeerList();
 		
 		int numOfPeers = controllerInstance.getNumberOfConnectedPeers(peerID);
 		
-		System.out.println(numOfPeers);
+		System.out.println("NUM: " + numOfPeers);
 		Configuration.PeerInfo node = peers.get(peerID);
 		
 		try
@@ -41,13 +41,18 @@ public class Server extends Module implements Runnable
 			
 			for(int i = 0; i < numOfPeers; i++)
 			{
+			
+				System.out.println("WAITING");
+
 				Socket peer = peerServer.accept();
 				
+				System.out.println("CONNECTING: " + peer);
+			
 				Peer neighborPeer = (Peer) ModuleFactory.createPeer(peer, controllerInstance);
-				
-				System.out.println("NP: " + neighborPeer);
+
+		
+				//System.out.println("NP: " + neighborPeer);
 				controllerInstance.addNeighbors(neighborPeer);
-				
 				new Thread(neighborPeer).start();
 			}
 		}catch(IOException e)
