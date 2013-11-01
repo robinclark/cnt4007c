@@ -83,7 +83,7 @@ public class Controller extends Module {
 	
 	public void createClients() throws UnknownHostException, IOException
 	{
-		LinkedHashMap<String, Configuration.PeerInfo> map = configInstance.getPeerList();
+		HashMap<String, Configuration.PeerInfo> map = configInstance.getPeerList();
 
 		Set<String> peerKeys = map.keySet();
 		
@@ -94,8 +94,6 @@ public class Controller extends Module {
 				if(Integer.parseInt(peerID) > Integer.parseInt(peerKey))
 				{
 					Socket socket = new Socket(map.get(peerKey).getHostName(), map.get(peerKey).getPortNumber());
-					System.out.println("SOCKET: " + socket);
-					
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
 					neighborPeers.add(clientPeer);
 					new Thread(clientPeer).start();
@@ -108,7 +106,7 @@ public class Controller extends Module {
 	{
 		int numOfPeers = 0;
 		
-		LinkedHashMap<String, Configuration.PeerInfo> peers = configInstance.getPeerList();
+		HashMap<String, Configuration.PeerInfo> peers = configInstance.getPeerList();
 		
 		Set<String> peerKeys = peers.keySet();
 		

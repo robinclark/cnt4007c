@@ -3,24 +3,16 @@ import java.util.*;
 
 public class Configuration extends Module {
 
-	private LinkedHashMap<String, Configuration.PeerInfo> peerList;
+	private HashMap<String, Configuration.PeerInfo> peerList;
 
-        private LinkedHashMap<String, String> commonInfo;
-        //private Configuration.CommonInfo commonInfo;
+        private HashMap<String, String> commonInfo;
 
 
-    /**
-     * @return the peerList
-     */
-    public LinkedHashMap<String, Configuration.PeerInfo> getPeerList() {
+    public HashMap<String, PeerInfo> getPeerList() {
         return peerList;
     }
 
-    /**
-     * @return the commonInfo
-     */
-
-    public LinkedHashMap<String,String> getCommonInfo() {
+    public HashMap<String,String> getCommonInfo() {
        return commonInfo;
     }
         
@@ -79,14 +71,15 @@ public class Configuration extends Module {
 
 		String st;
 		boolean hasFile;
-		peerList = new LinkedHashMap<String, Configuration.PeerInfo>();
-		Configuration.PeerInfo node;
+		peerList = new HashMap<String, Configuration.PeerInfo>();
+		PeerInfo node = null;
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(Constants.PEER_CFG_FILE));
 		
 
 					while((st = in.readLine()) != null)
 					{
+						node = new PeerInfo();
 						String tokens[] = st.split(" ");
 							
 							node  = new Configuration.PeerInfo();
@@ -104,7 +97,8 @@ public class Configuration extends Module {
 				in.close();
 			}	catch(IOException e)
 				{
-					System.out.println("There was a problem opening the peer configuration file. Make sure the file exists");
+                                 
+                                    System.out.println("There was a problem opening the peer configuration file. Make sure the file exists");
 				}
                         
                         //read in config info
@@ -116,7 +110,7 @@ public class Configuration extends Module {
 
 					while((st = in.readLine()) != null)
 					{
-                                               System.out.println("ST: " + st);
+                                 
 						String tokens[] = st.split(" ");
                                                 
                                                 commonInfo.put(tokens[0], tokens[1]);
@@ -127,7 +121,8 @@ public class Configuration extends Module {
 				in.close();
 			}	catch(IOException e)
 				{
-					System.out.println("There was a problem opening the common configuration file. Make sure the file exists");
+                                    System.out.println(e.getMessage());
+					//System.out.println("There was a problem opening the common configuration file. Make sure the file exists");
 				}
 	}
 
