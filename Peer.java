@@ -7,6 +7,7 @@ public class Peer extends Module implements Runnable{
 	private ObjectInputStream inputStream;
 	private ObjectOutputStream outputStream;
 	private String peerID;
+	private String neighborPeerID;
 	private Logger logInstance;
 	private Controller controller;
 	private boolean isChockedByPeer;
@@ -45,9 +46,7 @@ public class Peer extends Module implements Runnable{
 					e.printStackTrace();
 				}
 				
-			}
-			
-			
+			}		
 			
 	}
 	@Override
@@ -90,7 +89,6 @@ public class Peer extends Module implements Runnable{
 		
 		try {
 			
-			System.out.println("SENDING HANDSHAKE");
 			HandShakeMessage message = new HandShakeMessage();
 			
 			message.setPeerID(peerID);
@@ -107,16 +105,19 @@ public class Peer extends Module implements Runnable{
 	{
 		 HandShakeMessage newMsg = (HandShakeMessage) msg;
 		 
-		 if(newMsg.getHeader() == Constants.HANDSHAKE_HEADER)
-		 {
-			 for(Peer e : controller.getNeighborsList())
+		try {
+			 if(newMsg.getHeader() == Constants.HANDSHAKE_HEADER)
 			 {
-				System.out.println("PEERID: " + e.getPeerID()); 	
-			 }
-			 
-			 
-			 System.out.println();
-		 }	
+				neighborPeerID = newMsg.getPeerID();
+				logInstance.writeLogger(logInstance.TCPConnectLog(neighborPeerID));
+				logInstance.close(); //temp closing writer
+
+				//sendBitFieldMessage();
+			 }	
+		   }catch(IOException e)
+		    {
+			e.printStackTrace();
+		    }
 		 
 	}
 		 

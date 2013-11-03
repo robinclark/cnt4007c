@@ -96,6 +96,7 @@ public class Controller extends Module {
 					Socket socket = new Socket(map.get(peerKey).getHostName(), map.get(peerKey).getPortNumber());
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
 					neighborPeers.add(clientPeer);
+					System.out.println("ADDING PEER FROM CLIENT: " + clientPeer);
 					new Thread(clientPeer).start();
 				}
 		}
@@ -125,6 +126,7 @@ public class Controller extends Module {
 	public void addNeighbors(Peer peer)
 	{
 		neighborPeers.add(peer);
+		System.out.println("ADDING PEER FROM SEVER: " + peer);
 	}
 	
 	public List<Peer> getNeighborsList()

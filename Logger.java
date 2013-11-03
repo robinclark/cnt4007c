@@ -30,59 +30,61 @@ public class Logger extends Module {
 			if(loggerFile == null)
 			{
 				loggerFile = new File(Constants.PDIR + fileName);
-				if(!loggerFile.exists())
+				try 
 				{
-					try {
+					if(!loggerFile.exists())
+					{
 						loggerFile.createNewFile();
-						fw = new FileWriter(loggerFile.getAbsoluteFile());
-						bw = new BufferedWriter(fw);
-					} catch (IOException e) {
-							e.printStackTrace();
 					}
+			
+					fw = new FileWriter(loggerFile.getName(),true);
+					bw = new BufferedWriter(fw);
+				} catch (IOException e) 
+				{
+					e.printStackTrace();
 				}
+			}
 			
 			}
-
-	}
 	
-	public String TCPConnectLog(int destPeerID)
+	public String TCPConnectLog(String destPeerID)
 	{
 		return "[" + Time + "]: Peer [" + peer_ID + "]  makes a connection to Peer [" + destPeerID + "].";
 	}
 	
-	public String changeOfPeers(List<Integer> neighborList)
+	public String changeOfPeers(List<String> neighborList)
 	{
 		String list = formatPeerList(neighborList);
 		return "[" + Time + "]: Peer [" + peer_ID + "] has the prefeered neighbors [" + list + "]"; 
 	}
 	
-	public String changeOfOptimistic(int optimisticID)
+	public String changeOfOptimistic(String optimisticID)
 	{
 		return "[" + Time + "]: Peer [ " + peer_ID + "] has the optimistically-unchoked neighbor [" + optimisticID + "].";
  	}
 	
-	public String unchoking(int destPeerID)
+	public String unchoking(String destPeerID)
 	{
 		return "[" + Time + "]: Peer [ " + peer_ID + "] is unchocked by [ " + destPeerID + "].";
 	}
 	
-	public String chocking(int destPeerID)
+	public String chocking(String destPeerID)
 	{
 		return "[" + Time + "]: Peer [ " + peer_ID + "] is chocked by [ " + destPeerID + "].";
 	}
 	
-	public String haveMessage(int destPeerID, int pieceIndx)
+	public String haveMessage(String destPeerID, int pieceIndx)
 	{
 		return "[" + Time + "]: Peer [ " + peer_ID + "] received a 'have' message from [" + destPeerID +"] for the piece [" + pieceIndx + "]."; 
 	}
 	
-	public String interestedMessage(int destPeerID)
+	public String interestedMessage(String destPeerID)
 	{
 		return "[" + Time + "]: Peer [ " + peer_ID + "] recieved an 'interested' message from [ " + destPeerID + "].";
 		
 	}
 	
-	public String notInterestedMessage(int destPeerID)
+	public String notInterestedMessage(String destPeerID)
 	{
 		return "[" + Time + "]: Peer [ " + peer_ID + "] recieved an ' not interested' message from [ " + destPeerID + "].";
 	}
@@ -101,9 +103,9 @@ public class Logger extends Module {
 	{
 		bw.write(msg);
 	}
-	private String formatPeerList(List<Integer> list)
+	private String formatPeerList(List<String> list)
 	{
-		Iterator<Integer> iter = list.iterator();
+		Iterator<String> iter = list.iterator();
 		StringBuilder peerList = new StringBuilder();
 		int extracommaIndex;
 		while(iter.hasNext())
