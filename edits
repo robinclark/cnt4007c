@@ -1,2 +1,0 @@
-BitField Manager - changing to byte type rather boolean type to maintain transparency for all normal messages
-		 - removed clone() method because it performs shallow copies 
