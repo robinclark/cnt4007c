@@ -49,6 +49,12 @@ public class ModuleFactory {
 		return peer;
 	}
 
+	public static Module createFileHandlerMod(Configuration config)
+	{
+		FileHandler fileHandler = new FileHandler(config);
+		return fileHandler;
+	}
+
 	public static Module createTopPeerMod()
 	{
 			return null;

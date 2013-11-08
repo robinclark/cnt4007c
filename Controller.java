@@ -58,6 +58,10 @@ public class Controller extends Module {
 				bitFieldManager = new BitFieldManager(this);
 				System.out.println("BIT: " + bitFieldManager);
 			}
+			if(fileHandler == null)
+			{
+				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerInstance(configInstance);				
+			}
 			
 			isShuttingDown = false;
 
