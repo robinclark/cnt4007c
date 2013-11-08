@@ -1,6 +1,7 @@
 import java.net.Socket;
 
 public class ModuleFactory {
+	private static volatile Module ctrl;
 	public static Module createConfigMod()
 	{
 		Configuration config = new Configuration();
@@ -10,6 +11,13 @@ public class ModuleFactory {
 		
 	}
 
+	public static ModuleFactory getFactory()
+	{
+		ModuleFactory fac = new ModuleFactory();
+
+		return fac;
+	}
+
 	public static Module createLogMod(String peerID) {
 		
 		Logger log = new Logger(peerID);
@@ -17,13 +25,14 @@ public class ModuleFactory {
 		
 		return log;
 	}
-	
-	public static Module createCtrlMod(String peerID)
+
+	public synchronized static Module createCtrlMod(String peerID)
 	{
-		Controller controller = new Controller(peerID);
-		controller.initialConfiguration();
-		return controller;
+		ctrl = new Controller(peerID);
+		ctrl.initialConfiguration();
+		return ctrl;
 	}
+
 	
 	public static Module createServerMod(String peerID, Controller controller)
 	{
@@ -37,8 +46,6 @@ public class ModuleFactory {
 		int count = 0;
 		Peer peer = new Peer(socket, controller);
 		peer.initialConfiguration();
-		if(count < 3){count++;}
-		System.out.println("CREATING PEER");
 		return peer;
 	}
 

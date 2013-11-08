@@ -87,7 +87,7 @@ public class Configuration extends Module {
 							node.setHostName(tokens[1]);
 							node.setPortNumber(Integer.parseInt(tokens[2]));
 				
-							hasFile = (tokens[3] == "1")  ? true : false;
+							hasFile = (Integer.parseInt(tokens[3]) == 1)  ? true : false;
 							node.setHasFile(hasFile);
 					
 							getPeerList().put(tokens[0], node);

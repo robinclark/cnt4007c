@@ -2,25 +2,32 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Peer extends Module implements Runnable{
 	private ObjectInputStream inputStream;
+	private ArrayList<String> peers = new ArrayList<String>();
 	private ObjectOutputStream outputStream;
 	private String peerID;
 	private String neighborPeerID;
 	private Logger logInstance;
-	private Controller controller;
+	private static Controller controller;
 	private boolean isChockedByPeer;
 	private int downloadDataSize;
 	private int downloadTime;
 	private Socket neighborPeer;
 	private boolean isShuttingDown;
 	private byte[] readBuffer;
+	private boolean hasFile;
+	private byte[] bitField;
 	
 	public Peer(Socket socket, Controller controller)
 	{
 			neighborPeer = socket;
 			this.controller = controller;
+			
 			
 	}
 	@Override
@@ -28,6 +35,7 @@ public class Peer extends Module implements Runnable{
 	{
 		
 			peerID = controller.getPeerID();
+			
 			isShuttingDown = controller.isShuttingDown();
 			
 			if(logInstance == null)
@@ -46,7 +54,29 @@ public class Peer extends Module implements Runnable{
 					e.printStackTrace();
 				}
 				
-			}		
+			}
+
+			Configuration config = controller.getConfiguration();
+			HashMap<String, Configuration.PeerInfo> peers = config.getPeerList();
+		
+			Configuration.PeerInfo peer = peers.get(peerID);
+			hasFile = peer.getHasFile();
+
+			try{
+			Thread.sleep(2000);
+			}catch(InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+
+			synchronized(this)
+			{
+				bitField = controller.getBitFieldManager().setBits(peerID, hasFile);
+			}
+
+			
+
+					
 			
 	}
 	@Override
@@ -64,7 +94,11 @@ public class Peer extends Module implements Runnable{
 				}
 				else
 				{
-					
+					System.out.println("MSGTYPE: " + message.getMsgType());
+					if(message.getMsgType() == Constants.MSG_BITFIELD_TYPE)
+					{
+						handleBitFieldMsg(message);
+					}
 				}
 				
 				
@@ -104,21 +138,60 @@ public class Peer extends Module implements Runnable{
 	private void handleHandShakeMessage(Message msg)
 	{
 		 HandShakeMessage newMsg = (HandShakeMessage) msg;
+		 System.out.println("CTRL: " + controller);
+		 System.out.println("peers: " + controller.getNeighborsList());
 		 
 		try {
 			 if(newMsg.getHeader() == Constants.HANDSHAKE_HEADER)
 			 {
 				neighborPeerID = newMsg.getPeerID();
 				logInstance.writeLogger(logInstance.TCPConnectLog(neighborPeerID));
-				logInstance.close(); //temp closing writer
-
-				//sendBitFieldMessage();
+				sendBitFieldMsg();
 			 }	
 		   }catch(IOException e)
 		    {
 			e.printStackTrace();
 		    }
 		 
+	}
+	
+	private void sendBitFieldMsg()
+	{
+		try 
+		{
+			byte[] bits = controller.getBitFieldManager().getBitFields(peerID);
+
+			BitFieldMessage builder = new BitFieldMessage();
+			NormalMessageCreator creator = new NormalMessageCreator(builder);
+			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, bits);
+			Message msg = builder.getMessage();
+
+			outputStream.writeUnshared(msg);
+			outputStream.flush();
+		}catch(IOException e) {
+			e.printStackTrace();		
+		}
+
+	}
+
+	private void handleBitFieldMsg(Message msg)
+	{
+		
+		//try {
+			BitFieldMessage newMsg = (BitFieldMessage) msg;
+			
+			boolean isInterested = controller.getBitFieldManager().compareBytesForInterested(bitField, newMsg.getMsgPayLoad());			
+			if(isInterested)
+			{
+				System.out.println("Interested");
+				logInstance.interestedMessage(neighborPeerID);
+				//logInstance.close(); //temp closing writer
+			}
+		//}catch(IOException e)
+		//{
+		//	e.printStackTrace();
+		//}
+		
 	}
 		 
 	public String getPeerID()
