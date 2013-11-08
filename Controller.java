@@ -8,12 +8,22 @@ public class Controller extends Module {
 	
 	private Configuration configInstance;
 	private Logger logInstance;
+	private BitFieldManager bitFieldManager;
 	private String peerID;
 	private Server serverInstance;
 	private List<Peer> neighborPeers;
 	private boolean isShuttingDown;
+	private static Controller ctrl;
         private OptimisticNeighborManager optimisticNeighborManager;
         private PreferredNeighborManager preferredNeighborManager;
+
+
+	public synchronized static Module createCtrlMod(String peerID)
+	{
+		ctrl = new Controller(peerID);
+		ctrl.initialConfiguration();
+		return ctrl;
+	}
 
 	public Controller(String peerID)
 	{
@@ -41,6 +51,12 @@ public class Controller extends Module {
 			if(neighborPeers == null)
 			{
 				neighborPeers = new ArrayList<Peer>();
+			}
+
+			if(bitFieldManager == null)
+			{
+				bitFieldManager = new BitFieldManager(this);
+				System.out.println("BIT: " + bitFieldManager);
 			}
 			
 			isShuttingDown = false;
@@ -94,8 +110,11 @@ public class Controller extends Module {
 				if(Integer.parseInt(peerID) > Integer.parseInt(peerKey))
 				{
 					Socket socket = new Socket(map.get(peerKey).getHostName(), map.get(peerKey).getPortNumber());
+					System.out.println("CTRL1: " + this);
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
 					neighborPeers.add(clientPeer);
+					
+					System.out.println("ADDING PEER FROM CLIENT: " + clientPeer);
 					new Thread(clientPeer).start();
 				}
 		}
@@ -122,9 +141,10 @@ public class Controller extends Module {
 		
 	}
 	
-	public void addNeighbors(Peer peer)
+	public synchronized void addNeighbors(Peer peer)
 	{
 		neighborPeers.add(peer);
+		System.out.println("ADDING PEER FROM SEVER: " + peer);
 	}
 	
 	public List<Peer> getNeighborsList()
@@ -140,6 +160,11 @@ public class Controller extends Module {
 	public Module getLogger()
 	{
 		return logInstance;
+	}
+	
+	public BitFieldManager getBitFieldManager()
+	{
+		return bitFieldManager;
 	}
 
 }

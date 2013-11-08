@@ -47,7 +47,10 @@ public class Server extends Module implements Runnable
 
 		
 				//System.out.println("NP: " + neighborPeer);
-				controllerInstance.addNeighbors(neighborPeer);
+			//	synchronized(this)
+			//0	{			
+					controllerInstance.addNeighbors(neighborPeer);
+			//	}
 				new Thread(neighborPeer).start();
 			}
 		}catch(IOException e)
