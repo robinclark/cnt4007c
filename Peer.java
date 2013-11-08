@@ -13,7 +13,7 @@ public class Peer extends Module implements Runnable{
 	private String peerID;
 	private String neighborPeerID;
 	private Logger logInstance;
-	private static Controller controller;
+	private  Controller controller;
 	private boolean isChockedByPeer;
 	private int downloadDataSize;
 	private int downloadTime;
@@ -62,17 +62,10 @@ public class Peer extends Module implements Runnable{
 			Configuration.PeerInfo peer = peers.get(peerID);
 			hasFile = peer.getHasFile();
 
-			try{
-			Thread.sleep(2000);
-			}catch(InterruptedException e)
-			{
-				e.printStackTrace();
-			}
+			
 
-			synchronized(this)
-			{
-				bitField = controller.getBitFieldManager().setBits(peerID, hasFile);
-			}
+				bitField = controller.setBits(peerID, hasFile);
+			
 
 			
 
@@ -140,6 +133,7 @@ public class Peer extends Module implements Runnable{
 		 HandShakeMessage newMsg = (HandShakeMessage) msg;
 		 System.out.println("CTRL: " + controller);
 		 System.out.println("peers: " + controller.getNeighborsList());
+	
 		 
 		try {
 			 if(newMsg.getHeader() == Constants.HANDSHAKE_HEADER)
@@ -159,11 +153,10 @@ public class Peer extends Module implements Runnable{
 	{
 		try 
 		{
-			byte[] bits = controller.getBitFieldManager().getBitFields(peerID);
-
+			
 			BitFieldMessage builder = new BitFieldMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
-			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, bits);
+			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, bitField);
 			Message msg = builder.getMessage();
 
 			outputStream.writeUnshared(msg);
@@ -180,7 +173,7 @@ public class Peer extends Module implements Runnable{
 		//try {
 			BitFieldMessage newMsg = (BitFieldMessage) msg;
 			
-			boolean isInterested = controller.getBitFieldManager().compareBytesForInterested(bitField, newMsg.getMsgPayLoad());			
+			boolean isInterested = controller.compareBytesForInterested(bitField, newMsg.getMsgPayLoad());			
 			if(isInterested)
 			{
 				System.out.println("Interested");

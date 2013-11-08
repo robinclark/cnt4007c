@@ -8,26 +8,22 @@ public class Controller extends Module {
 	
 	private Configuration configInstance;
 	private Logger logInstance;
-	private BitFieldManager bitFieldManager;
 	private String peerID;
 	private Server serverInstance;
 	private List<Peer> neighborPeers;
 	private boolean isShuttingDown;
-	private static Controller ctrl;
+	private Controller ctrl;
         private OptimisticNeighborManager optimisticNeighborManager;
         private PreferredNeighborManager preferredNeighborManager;
-
-
-	public synchronized static Module createCtrlMod(String peerID)
-	{
-		ctrl = new Controller(peerID);
-		ctrl.initialConfiguration();
-		return ctrl;
-	}
+	private HashMap<String, String> commonInfo;
+	private int fileSize;
+	private int pieceSize;
+	private int numOfPieces;
 
 	public Controller(String peerID)
 	{
 		this.peerID = peerID;
+		
 	}
 	
 	@Override
@@ -35,6 +31,10 @@ public class Controller extends Module {
 			if(configInstance == null)
 			{
 				configInstance = (Configuration) ModuleFactory.createConfigMod();
+				commonInfo = configInstance.getCommonInfo();
+				fileSize = Integer.parseInt(commonInfo.get("FileSize"));
+				pieceSize = Integer.parseInt(commonInfo.get("PieceSize"));
+				numOfPieces = (int) Math.ceil(fileSize/pieceSize);
 				
 			}
 			
@@ -53,11 +53,6 @@ public class Controller extends Module {
 				neighborPeers = new ArrayList<Peer>();
 			}
 
-			if(bitFieldManager == null)
-			{
-				bitFieldManager = new BitFieldManager(this);
-				System.out.println("BIT: " + bitFieldManager);
-			}
 			
 			isShuttingDown = false;
 
@@ -110,11 +105,11 @@ public class Controller extends Module {
 				if(Integer.parseInt(peerID) > Integer.parseInt(peerKey))
 				{
 					Socket socket = new Socket(map.get(peerKey).getHostName(), map.get(peerKey).getPortNumber());
-					System.out.println("CTRL1: " + this);
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
 					neighborPeers.add(clientPeer);
 					
-					System.out.println("ADDING PEER FROM CLIENT: " + clientPeer);
+					System.out.println("ADDING PEER FROM CLIENT: " + clientPeer + " " + peerKey);
+					
 					new Thread(clientPeer).start();
 				}
 		}
@@ -140,8 +135,45 @@ public class Controller extends Module {
 		return numOfPeers;	
 		
 	}
+
+
+	public byte[] setBits(String peerID, boolean hasFile)
+	{
+		byte[] bits = new byte[numOfPieces];
+		if(hasFile)
+		{
+			Arrays.fill(bits, (byte)1);
+		}
+		else
+		{
+			Arrays.fill(bits,(byte)0);
+		}
+		
 	
-	public synchronized void addNeighbors(Peer peer)
+		return bits;
+		
+	}
+	
+	public boolean compareBytesForInterested(byte[] bitFieldA, byte[] bitFieldB)
+	{
+		boolean flag = false;
+		for(int i = 0; i < numOfPieces; i++)
+		{
+			if((byte)bitFieldA[i] != (byte)bitFieldB[i] && bitFieldA[i] == (byte)0)
+			{
+				flag = true;
+				break;
+				
+			}
+			
+		}
+		
+		return flag;
+	
+	}
+
+	
+	public  void addNeighbors(Peer peer)
 	{
 		neighborPeers.add(peer);
 		System.out.println("ADDING PEER FROM SEVER: " + peer);
@@ -162,10 +194,5 @@ public class Controller extends Module {
 		return logInstance;
 	}
 	
-	public BitFieldManager getBitFieldManager()
-	{
-		return bitFieldManager;
-	}
-
 }
 
