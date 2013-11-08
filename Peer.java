@@ -92,6 +92,16 @@ public class Peer extends Module implements Runnable{
 					{
 						handleBitFieldMsg(message);
 					}
+
+					else if(message.getMsgType() == Constants.MSG_INTERESTED_TYPE)	
+					{
+						handleInterestedMsg();
+					}
+
+					else if(message.getMsgType() == Constants.MSG_UNINTERESTED_TYPE)
+					{
+						handleUnInterestedMsg();
+					}
 				}
 				
 				
@@ -176,15 +186,69 @@ public class Peer extends Module implements Runnable{
 			boolean isInterested = controller.compareBytesForInterested(bitField, newMsg.getMsgPayLoad());			
 			if(isInterested)
 			{
-				System.out.println("Interested");
-				logInstance.interestedMessage(neighborPeerID);
+				sendInterestedMsg();
+			
+				//logInstance.interestedMessage(neighborPeerID);
 				//logInstance.close(); //temp closing writer
+			}
+			else
+			{
+				sendUnInterestedMsg();
 			}
 		//}catch(IOException e)
 		//{
 		//	e.printStackTrace();
 		//}
 		
+	}
+
+	private void handleUnInterestedMsg()
+	{
+		System.out.println("UnInterested");
+		logInstance.notInterestedMessage(neighborPeerID);
+	}
+
+	private void sendUnInterestedMsg()
+	{	
+		try 
+		{
+			
+			UnInterestedMessage builder = new UnInterestedMessage();
+			NormalMessageCreator creator = new NormalMessageCreator(builder);
+			creator.createNormalMessage(Constants.MSG_UNINTERESTED_TYPE);
+			Message msg = builder.getMessage();
+
+			outputStream.writeUnshared(msg);
+			outputStream.flush();
+		}catch(IOException e) {
+			e.printStackTrace();		
+		}
+
+	}
+
+	private void handleInterestedMsg()
+	{
+		System.out.println("Interested");
+		logInstance.interestedMessage(neighborPeerID);
+		
+	}
+
+	private void sendInterestedMsg()
+	{
+		try 
+		{
+			
+			InterestedMessage builder = new InterestedMessage();
+			NormalMessageCreator creator = new NormalMessageCreator(builder);
+			creator.createNormalMessage(Constants.MSG_INTERESTED_TYPE);
+			Message msg = builder.getMessage();
+
+			outputStream.writeUnshared(msg);
+			outputStream.flush();
+		}catch(IOException e) {
+			e.printStackTrace();		
+		}
+
 	}
 		 
 	public String getPeerID()

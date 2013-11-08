@@ -1,5 +1,5 @@
 
-public class ChokeMessage extends Message {
+public class ChokeMessage implements Message {
 	private static final long serialVersionUID = 2L;
 	private int msg_len;
 	private int msg_type;
