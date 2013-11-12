@@ -137,7 +137,7 @@ public class Controller extends Module {
 	}
 
 
-	public byte[] setBits(String peerID, boolean hasFile)
+	public byte[] setBits(boolean hasFile)
 	{
 		byte[] bits = new byte[numOfPieces];
 		if(hasFile)
@@ -154,12 +154,12 @@ public class Controller extends Module {
 		
 	}
 	
-	public boolean compareBytesForInterested(byte[] bitFieldA, byte[] bitFieldB)
+	public synchronized boolean compareBytesForInterested(byte[] bitFieldA, byte[] bitFieldB)
 	{
 		boolean flag = false;
 		for(int i = 0; i < numOfPieces; i++)
 		{
-			if((byte)bitFieldA[i] != (byte)bitFieldB[i] && bitFieldA[i] == (byte)0)
+			if((byte)bitFieldA[i] != (byte)bitFieldB[i] && bitFieldA[i] == (byte)1)
 			{
 				flag = true;
 				break;
@@ -171,6 +171,26 @@ public class Controller extends Module {
 		return flag;
 	
 	}
+
+	public synchronized int getRandomInterestedPiece(byte[] bitFieldA, byte[] bitFieldB)
+	{
+		Random rdx = new Random();
+		int requestedIndex;
+		ArrayList<Integer> availablePieces = new ArrayList<Integer>();
+		for(int i = 0; i < numOfPieces; i++)
+		{
+			if((byte)bitFieldA[i] != (byte)bitFieldB[i] && bitFieldA[i] == (byte)1)
+			{
+				availablePieces.add(i);
+			}
+		}
+		
+		requestedIndex = availablePieces.get(rdx.nextInt(availablePieces.size()));
+
+		return requestedIndex;
+		
+	}
+
 
 	
 	public  void addNeighbors(Peer peer)

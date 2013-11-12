@@ -6,10 +6,12 @@ interface Message extends Serializable {
 	public  void setMsgLen();
 	public void setMsgType(int type);
 	public  void setMsgPayLoad();
+	public  void setMsgPayLoad(int index);	
 	public  void setMsgPayLoad(byte[] payload);
 	public  int getMsgType();
 	public  int getMsgLen();
 	public  long getUID();
+	
 
 	
 }

@@ -62,9 +62,9 @@ public class Peer extends Module implements Runnable{
 			Configuration.PeerInfo peer = peers.get(peerID);
 			hasFile = peer.getHasFile();
 
-			
+			System.out.println("hasFile: " + hasFile);
 
-				bitField = controller.setBits(peerID, hasFile);
+				bitField = controller.setBits(hasFile);
 			
 
 			
@@ -101,6 +101,11 @@ public class Peer extends Module implements Runnable{
 					else if(message.getMsgType() == Constants.MSG_UNINTERESTED_TYPE)
 					{
 						handleUnInterestedMsg();
+					}
+					
+					else if(message.getMsgType() == Constants.MSG_REQUEST_TYPE)
+					{
+						handleRequestMsg(message);
 					}
 				}
 				
@@ -179,6 +184,7 @@ public class Peer extends Module implements Runnable{
 
 	private void handleBitFieldMsg(Message msg)
 	{
+		int interestedIndex = 0;
 		
 		//try {
 			BitFieldMessage newMsg = (BitFieldMessage) msg;
@@ -187,7 +193,9 @@ public class Peer extends Module implements Runnable{
 			if(isInterested)
 			{
 				sendInterestedMsg();
-			
+				interestedIndex = controller.getRandomInterestedPiece(bitField, newMsg.getMsgPayLoad());
+				sendRequestMsg(interestedIndex);
+				
 				//logInstance.interestedMessage(neighborPeerID);
 				//logInstance.close(); //temp closing writer
 			}
@@ -250,6 +258,36 @@ public class Peer extends Module implements Runnable{
 		}
 
 	}
+
+	private void sendRequestMsg(int index)
+	{
+		try 
+		{
+			if(!isChockedByPeer)
+			{ 
+			
+				RequestMessage builder = new RequestMessage();
+				NormalMessageCreator creator = new NormalMessageCreator(builder);
+				creator.createNormalMessage(Constants.MSG_REQUEST_TYPE, index);
+				Message msg = builder.getMessage();
+
+				outputStream.writeUnshared(msg);
+				outputStream.flush();
+			}
+		}catch(IOException e) {
+			e.printStackTrace();		
+		}
+		
+	}
+
+	private void handleRequestMsg(Message msg)
+	{
+		RequestMessage newMsg = (RequestMessage) msg;
+		System.out.println("Requested Index: " + newMsg.getPieceIndex());
+		
+		
+	}
+
 		 
 	public String getPeerID()
 	{

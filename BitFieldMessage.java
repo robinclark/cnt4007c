@@ -49,10 +49,8 @@ public class BitFieldMessage implements Message{
 	}
 
 	@Override
-	public void setMsgPayLoad() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setMsgPayLoad(){}
+	public void setMsgPayLoad(int index){}
 	
 
 }

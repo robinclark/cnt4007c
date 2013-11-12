@@ -20,6 +20,13 @@ public class NormalMessageCreator {
 		builder.setMsgLen();
 	}
 
+	public void createNormalMessage(int type, int index)
+	{
+		builder.setMsgType(type);
+		builder.setMsgPayLoad(index);
+		builder.setMsgLen();
+	}
+
 }
 	
 	

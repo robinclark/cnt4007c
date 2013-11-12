@@ -29,6 +29,8 @@ public class ChokeMessage implements Message {
 		msg_payload = new byte[4];
 	}
 
+	public void setMsgPayLoad(int index){}
+
 	@Override
 	public int getMsgType() {
 		return msg_type;
@@ -54,6 +56,8 @@ public class ChokeMessage implements Message {
 	{
 		return this;
 	}
+
+	
 	
 	
 
