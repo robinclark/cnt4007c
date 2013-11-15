@@ -39,7 +39,7 @@ public class HandShakeMessage implements Message
 	}
 
 	@Override
-	public void setMsgType(int type) {
+	public void setMsgType(byte type) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -68,6 +68,12 @@ public class HandShakeMessage implements Message
 	public int getMsgLen() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void setMsgLen(int length) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

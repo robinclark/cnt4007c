@@ -12,12 +12,6 @@ public class ChokeMessage implements Message {
 	}
 
 	@Override
-	public void setMsgType(int type) {	
-		msg_type = type;
-		
-	}
-
-	@Override
 	public void setMsgPayLoad() {
 		msg_payload = new byte[4];
 	}
@@ -55,6 +49,18 @@ public class ChokeMessage implements Message {
 	public Message getMessage()
 	{
 		return this;
+	}
+
+	@Override
+	public void setMsgLen(int length) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setMsgType(byte type) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

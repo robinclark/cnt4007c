@@ -6,25 +6,32 @@ public class NormalMessageCreator {
 		this.builder = builder;
 	}
 	
-	public void createNormalMessage(int type, byte[] payload)
+	public void createNormalMessage(byte type, byte[] payload)
 	{
 		builder.setMsgType(type);
 		builder.setMsgPayLoad(payload);
 		builder.setMsgLen();
 	}
 
-	public void createNormalMessage(int type)
+	public void createNormalMessage(byte type)
 	{
 		builder.setMsgType(type);
 		builder.setMsgPayLoad();
 		builder.setMsgLen();
 	}
 
-	public void createNormalMessage(int type, int index)
+	public void createNormalMessage(byte type, int index)
 	{
 		builder.setMsgType(type);
 		builder.setMsgPayLoad(index);
 		builder.setMsgLen();
+	}
+	
+	public void createNormalMessage(int length, byte type, byte[] payload)
+	{
+		builder.setMsgLen(length);
+		builder.setMsgType(type);
+		builder.setMsgPayLoad(payload);		
 	}
 
 }

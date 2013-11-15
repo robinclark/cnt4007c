@@ -11,12 +11,6 @@ public class BitFieldMessage implements Message{
 	}
 
 	@Override
-	public void setMsgType(int type) {	
-		msg_type = type;
-		
-	}
-
-	@Override
 	public void setMsgPayLoad(byte[] payload) {
 		
 		msg_payload = payload;
@@ -51,6 +45,18 @@ public class BitFieldMessage implements Message{
 	@Override
 	public void setMsgPayLoad(){}
 	public void setMsgPayLoad(int index){}
+
+	@Override
+	public void setMsgLen(int length) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setMsgType(byte type) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
