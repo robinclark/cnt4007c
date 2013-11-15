@@ -35,7 +35,7 @@ public class FileHandler extends Module
 		try
 		{
 			outputFile = new RandomAccessFile(outFileName, "rw");
-			outputFile.setLength(fileSize);
+			//outputFile.setLength(fileSize);
 			System.out.println("file length: " + outputFile.length());
 			//outputFile.setLength(fileSize);
 		}
@@ -78,8 +78,7 @@ public class FileHandler extends Module
 			{
 				byte[] smallerData = new byte[readSize];
 				System.arraycopy(smallerData, 0, data,0, smallerData.length);
-			}	
-			
+			}				
 			return data;
 		}
 		catch(IOException e)
