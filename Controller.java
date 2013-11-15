@@ -13,12 +13,13 @@ public class Controller extends Module {
 	private List<Peer> neighborPeers;
 	private boolean isShuttingDown;
 	private Controller ctrl;
-        private OptimisticNeighborManager optimisticNeighborManager;
-        private PreferredNeighborManager preferredNeighborManager;
+    private OptimisticNeighborManager optimisticNeighborManager;
+    private PreferredNeighborManager preferredNeighborManager;
 	private HashMap<String, String> commonInfo;
 	private int fileSize;
 	private int pieceSize;
 	private int numOfPieces;
+	private FileHandler fileHandlerInstance;
 
 	public Controller(String peerID)
 	{
@@ -54,9 +55,9 @@ public class Controller extends Module {
 			}
 
 
-			if(fileHandler == null)
+			if(fileHandlerInstance == null)
 			{
-				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerInstance(configInstance);				
+				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerMod(configInstance);				
 			}
 
 			

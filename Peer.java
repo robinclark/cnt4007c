@@ -218,7 +218,7 @@ public class Peer extends Module implements Runnable{
 
 	private void sendUnInterestedMsg()
 	{	
-		try 
+		/*try 
 		{
 			
 			UnInterestedMessage builder = new UnInterestedMessage();
@@ -230,7 +230,7 @@ public class Peer extends Module implements Runnable{
 			outputStream.flush();
 		}catch(IOException e) {
 			e.printStackTrace();		
-		}
+		}*/
 
 	}
 
@@ -243,10 +243,10 @@ public class Peer extends Module implements Runnable{
 
 	private void sendInterestedMsg()
 	{
-		try 
+		/*try 
 		{
 			
-			InterestedMessage builder = new InterestedMessage();
+			InterestedMessage builder = new InterestedMessage(); //**no interested message class
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			creator.createNormalMessage(Constants.MSG_INTERESTED_TYPE);
 			Message msg = builder.getMessage();
@@ -255,13 +255,13 @@ public class Peer extends Module implements Runnable{
 			outputStream.flush();
 		}catch(IOException e) {
 			e.printStackTrace();		
-		}
+		}*/
 
 	}
 
 	private void sendRequestMsg(int index)
 	{
-		try 
+		/*try 
 		{
 			if(!isChockedByPeer)
 			{ 
@@ -276,15 +276,15 @@ public class Peer extends Module implements Runnable{
 			}
 		}catch(IOException e) {
 			e.printStackTrace();		
-		}
+		}*/
 		
 	}
 
 	private void handleRequestMsg(Message msg)
 	{
-		RequestMessage newMsg = (RequestMessage) msg;
+		/*RequestMessage newMsg = (RequestMessage) msg;
 		System.out.println("Requested Index: " + newMsg.getPieceIndex());
-		
+		*/
 		
 	}
 

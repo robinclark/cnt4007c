@@ -53,6 +53,13 @@ public class ModuleFactory {
 		FileHandler fileHandler = new FileHandler(config);
 		return fileHandler;
 	}
+	
+	public static Module createFileHandlerMod(String file, int fileSize, int pieceSize)
+	{
+		FileHandler fileHandler = new FileHandler(file, fileSize, pieceSize);
+		fileHandler.initialConfiguration();
+		return fileHandler;
+	}
 
 	public static Module createTopPeerMod()
 	{
