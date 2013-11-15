@@ -12,6 +12,22 @@ public class NormalMessageCreator {
 		builder.setMsgPayLoad(payload);
 		builder.setMsgLen();
 	}
-	
-	
+
+	public void createNormalMessage(int type)
+	{
+		builder.setMsgType(type);
+		builder.setMsgPayLoad();
+		builder.setMsgLen();
+	}
+
+	public void createNormalMessage(int type, int index)
+	{
+		builder.setMsgType(type);
+		builder.setMsgPayLoad(index);
+		builder.setMsgLen();
+	}
+
 }
+	
+	
+

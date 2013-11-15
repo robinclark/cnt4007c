@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class HandShakeMessage extends Message
+public class HandShakeMessage implements Message
 {
 	
 	private int msg_type;
@@ -55,6 +55,8 @@ public class HandShakeMessage extends Message
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void setMsgPayLoad(int index){}
 
 	@Override
 	public int getMsgType() {

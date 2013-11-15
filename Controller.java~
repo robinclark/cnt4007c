@@ -53,12 +53,18 @@ public class Controller extends Module {
 				neighborPeers = new ArrayList<Peer>();
 			}
 
-
+<<<<<<< HEAD
+			if(bitFieldManager == null)
+			{
+				bitFieldManager = new BitFieldManager(this);
+				System.out.println("BIT: " + bitFieldManager);
+			}
 			if(fileHandler == null)
 			{
 				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerInstance(configInstance);				
 			}
-
+=======
+>>>>>>> 0b7be176a8aa3aceeea833d3a58f1b37da834208
 			
 			isShuttingDown = false;
 

@@ -1,11 +1,11 @@
-public class BitFieldMessage extends Message{
+public class BitFieldMessage implements Message{
 	private int msg_len;
 	private int msg_type;
 	private byte[] msg_payload;
 	private static final long serialVersionUID = 4L;
 	
 
-	@Override
+
 	public void setMsgLen() {
 		msg_len = msg_payload.length;
 	}
@@ -47,6 +47,10 @@ public class BitFieldMessage extends Message{
 	{
 		return this;
 	}
+
+	@Override
+	public void setMsgPayLoad(){}
+	public void setMsgPayLoad(int index){}
 	
 
 }

@@ -1,7 +1,6 @@
 import java.net.Socket;
 
 public class ModuleFactory {
-	private static volatile Module ctrl;
 	public static Module createConfigMod()
 	{
 		Configuration config = new Configuration();
@@ -26,9 +25,9 @@ public class ModuleFactory {
 		return log;
 	}
 
-	public synchronized static Module createCtrlMod(String peerID)
+	public static Module createCtrlMod(String peerID)
 	{
-		ctrl = new Controller(peerID);
+		Controller ctrl = new Controller(peerID);
 		ctrl.initialConfiguration();
 		return ctrl;
 	}

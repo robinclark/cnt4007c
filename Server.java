@@ -44,6 +44,7 @@ public class Server extends Module implements Runnable
 				System.out.println("CONNECTING: " + peer);
 			
 				Peer neighborPeer = (Peer) ModuleFactory.createPeer(peer, controllerInstance);
+				System.out.println("PEERID : " + controllerInstance.getPeerID());
 
 		
 				//System.out.println("NP: " + neighborPeer);

@@ -1,5 +1,5 @@
 
-public class ChokeMessage extends Message {
+public class ChokeMessage implements Message {
 	private static final long serialVersionUID = 2L;
 	private int msg_len;
 	private int msg_type;
@@ -29,6 +29,8 @@ public class ChokeMessage extends Message {
 		msg_payload = new byte[4];
 	}
 
+	public void setMsgPayLoad(int index){}
+
 	@Override
 	public int getMsgType() {
 		return msg_type;
@@ -54,6 +56,8 @@ public class ChokeMessage extends Message {
 	{
 		return this;
 	}
+
+	
 	
 	
 
