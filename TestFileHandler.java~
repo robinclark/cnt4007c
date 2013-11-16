@@ -1,0 +1,12 @@
+//test file handler
+
+public class TestFileHandler
+{
+	public static void main(String[] args)
+	{
+		FileHandler fileHander0 = (FileHandler) ModuleFactory.createFileHandlerMod("test_a.txt", 175177, 32768);
+		FileHandler fileHander1 = (FileHandler) ModuleFactory.createFileHandlerMod("test_b.txt", 175177, 32768);
+
+		
+	}
+}

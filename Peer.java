@@ -22,6 +22,7 @@ public class Peer extends Module implements Runnable{
 	private byte[] readBuffer;
 	private boolean hasFile;
 	private byte[] bitField;
+	private boolean handshakeSent = false;
 	
 	public Peer(Socket socket, Controller controller)
 	{
@@ -137,6 +138,7 @@ public class Peer extends Module implements Runnable{
 		
 			outputStream.writeUnshared(message);
 			outputStream.flush();
+			handshakeSent = true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -153,9 +155,12 @@ public class Peer extends Module implements Runnable{
 		try {
 			 if(newMsg.getHeader() == Constants.HANDSHAKE_HEADER)
 			 {
-				neighborPeerID = newMsg.getPeerID();
-				logInstance.writeLogger(logInstance.TCPConnectLog(neighborPeerID));
-				sendBitFieldMsg();
+				 if(!handshakeSent)
+				 {
+					neighborPeerID = newMsg.getPeerID();
+					logInstance.writeLogger(logInstance.TCPConnectLog(neighborPeerID));
+					sendBitFieldMsg();
+				 }
 			 }	
 		   }catch(IOException e)
 		    {

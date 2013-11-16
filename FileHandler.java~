@@ -1,0 +1,82 @@
+//handle file segments
+import java.util.*;
+import java.lang.Exception.*;
+import java.io.RandomAccessFile;
+
+public class FileHandler extends Module
+{
+	private HashMap<String, String> commonInfo;
+	private RandomAccessFile outputFile;
+	private String outFileName;
+	private int fileSize;
+	private int pieceSize;
+	private int numOfPieces;
+
+	public FileHandler(Controller controller)
+	{
+		commonInfo = controller.getConfiguration().getCommonInfo();
+		outFileName = commonInfo.get("FileName");
+		fileSize = Integer.parseInt(commonInfo.get("FileSize"));
+		pieceSize = Integer.parseInt(commonInfo.get("PieceSize"));
+		numOfPieces = (int) Math.ceil(fileSize/pieceSize);
+	}
+
+	public FileHandler(String outFileName, int fileSize, int pieceSize)
+	{
+		this.outFileName = outFileName;
+		this.fileSize = fileSize;
+		this.pieceSize = pieceSize;
+		numOfPieces = (int) Math.ceil(fileSize/pieceSize);
+	}
+	
+	public void initialConfiguration()
+	{
+		try
+		{
+			outputFile = new RandomAccessFile(fileName, "rw");
+			//outputFile.setLength(fileSize);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	//write piece to file
+	public void writePiece(int index, Message m)
+	{
+		//outputFile.seek(index*pieceSize);
+		//outputFile.write(
+	}
+
+	public void writePiece(int index, byte[])
+	{
+
+	}
+
+	//return piece from file
+	/*public byte[] getPiece(int index)
+	{
+
+	}*/
+
+	public String getOutFileName()
+	{
+		return outFileName;
+	}
+
+	public int getFileSize()
+	{
+		return fileSize;
+	}
+
+	public int getPieceSize()
+	{
+		return pieceSize;
+	}
+
+	public int getNumberOfPieces()
+	{
+		return numberOfPieces;
+	}
+}
