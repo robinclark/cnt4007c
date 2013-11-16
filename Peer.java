@@ -155,7 +155,7 @@ public class Peer extends Module implements Runnable{
 		try {
 			 if(newMsg.getHeader() == Constants.HANDSHAKE_HEADER)
 			 {
-				 if(!handshakeSent)
+				 if(handshakeSent)
 				 {
 					neighborPeerID = newMsg.getPeerID();
 					logInstance.writeLogger(logInstance.TCPConnectLog(neighborPeerID));
@@ -176,7 +176,8 @@ public class Peer extends Module implements Runnable{
 			
 			BitFieldMessage builder = new BitFieldMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
-			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, bitField);
+			byte[] field = controller.getBitfield();
+			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, field);
 			Message msg = builder.getMessage();
 
 			outputStream.writeUnshared(msg);

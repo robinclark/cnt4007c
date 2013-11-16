@@ -7,15 +7,19 @@ import java.io.RandomAccessFile;
 public class FileHandler extends Module
 {
 	private HashMap<String, String> commonInfo;
+	private HashMap<String, Configuration.PeerInfo> peerList;
 	private RandomAccessFile outputFile;
 	private String outFileName;
 	private int fileSize;
 	private int pieceSize;
 	private int numOfPieces;
+	private BitfieldHandler bitfieldHandler;
+	private Controller controller;
+	private String peerID;
 
-	public FileHandler(Configuration config)
+	public FileHandler(Controller controller)
 	{
-		commonInfo = config.getCommonInfo();
+		commonInfo = controller.getConfiguration().getCommonInfo();
 		outFileName = commonInfo.get("FileName");
 		fileSize = Integer.parseInt(commonInfo.get("FileSize"));
 		pieceSize = Integer.parseInt(commonInfo.get("PieceSize"));
@@ -43,6 +47,12 @@ public class FileHandler extends Module
 		{
 			e.printStackTrace();
 		}
+		
+		peerList = controller.getConfiguration().getPeerList();
+		peerID = controller.getPeerID();
+		
+		bitfieldHandler = (BitfieldHandler) ModuleFactory.createBitfieldHandlerMod(this);
+		
 	}
 
 	//write piece to file
@@ -87,6 +97,11 @@ public class FileHandler extends Module
 			return null;
 		}
 	
+	}
+	
+	public String getPeerID()
+	{
+		return peerID;
 	}
 
 	public String getOutFileName()

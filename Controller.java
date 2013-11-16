@@ -197,7 +197,11 @@ public class Controller extends Module {
 		return requestedIndex;
 		
 	}
-
+	
+	public byte[] getBitfield()
+	{
+		return fileHandlerInstance.
+	}
 
 	
 	public  void addNeighbors(Peer peer)
