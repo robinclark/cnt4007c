@@ -42,22 +42,32 @@ public class BitfieldHandler extends Module{
 		bitfields.get(peerID)[index] = 1;
 	}
 	
+	public byte[] getBitfield(String peerID)
+	{
+		return bitfields.get(peerID);
+	}
+	
 	//return indices that this peer doesn't have
-	public ArrayList<Integer> getInterestedPieceArray()
+	public ArrayList<Integer> getInterestedPiece(String id)
 	{
 		ArrayList<Integer> interestedArray = new  ArrayList<Integer>();
 		
-		byte[] temp = new byte[numPieces];
-		System.arraycopy(bitfields.get(peerID), 0, temp, 0, numPieces);
+		byte[] bPeer = bitfields.get(peerID);
+		byte[] bNeighbor = bitfields.get(id);
 		
 		for(int i = 0; i < numPieces; i++)
 		{
-			if(temp[i] == 0)
-			{
-				interestedArray.add(i);
-			}
-		}		
-		return interestedArray;
+			if(bPeer[i] == 0 && bNeighbor[i] == 1)
+		}
+		return false;
+	}
+	
+	public boolean getInterested(String id)
+	{
+		byte[] bPeer = bitfields.get(peerID);
+		byte[] bNeighbor = bitfields.get(id);
+		
+		
 	}
 	
 }

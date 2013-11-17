@@ -57,7 +57,7 @@ public class Controller extends Module {
 
 			if(fileHandlerInstance == null)
 			{
-				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerMod(configInstance);				
+				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerMod(this);				
 			}
 
 			
@@ -198,11 +198,16 @@ public class Controller extends Module {
 		
 	}
 	
-	public byte[] getBitfield()
+	public void setPeerBitfield(String id, byte[] bitfield)
 	{
-		return fileHandlerInstance.
+		fileHandlerInstance.setPeerBitfield(id, bitfield);
 	}
-
+	
+	public boolean getInterested(String id)
+	{
+		return fileHandlerInstance.getInterested(id);
+	}
+	
 	
 	public  void addNeighbors(Peer peer)
 	{
@@ -215,14 +220,24 @@ public class Controller extends Module {
 		return neighborPeers;
 	}
         
-        public Configuration getConfiguration()
-        {
-            return configInstance;
-        }
+    public Configuration getConfiguration()
+    {
+        return configInstance;
+    }
 	
 	public Module getLogger()
 	{
 		return logInstance;
+	}
+	
+	public byte[] getBitfield()
+	{
+		return fileHandlerInstance.getBitfield();
+	}
+	
+	public int getFileSize()
+	{
+		return fileSize;
 	}
 	
 }

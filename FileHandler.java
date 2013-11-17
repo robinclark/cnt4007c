@@ -128,4 +128,20 @@ public class FileHandler extends Module
 	{
 		return numOfPieces;
 	}
+	
+	public byte[] getBitfield()
+	{
+		byte[] field = bitfieldHandler.getBitfield(peerID);
+		return field;
+	}
+	
+	public void setPeerBitfield(String id, byte[] bitfield)
+	{
+		bitfieldHandler.setPeerBitfield(id, bitfield);
+	}
+	
+	public boolean getInterested(String id)
+	{
+		return bitfieldHandler.getInterested(id);
+	}
 }

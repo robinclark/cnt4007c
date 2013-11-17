@@ -176,7 +176,8 @@ public class Peer extends Module implements Runnable{
 			
 			BitFieldMessage builder = new BitFieldMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
-			byte[] field = controller.getBitfield();
+			byte[] field = new byte[controller.getFileSize()];
+			System.arraycopy(controller.getBitfield(),0,field,0,controller.getFileSize());
 			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, field);
 			Message msg = builder.getMessage();
 
@@ -190,30 +191,25 @@ public class Peer extends Module implements Runnable{
 
 	private void handleBitFieldMsg(Message msg)
 	{
-		int interestedIndex = 0;
-		
-		//try {
-			BitFieldMessage newMsg = (BitFieldMessage) msg;
-			
-			boolean isInterested = controller.compareBytesForInterested(bitField, newMsg.getMsgPayLoad());			
-			if(isInterested)
-			{
-				sendInterestedMsg();
-				interestedIndex = controller.getRandomInterestedPiece(bitField, newMsg.getMsgPayLoad());
-				sendRequestMsg(interestedIndex);
+		controller.setPeerBitfield(neighborPeerID, ((BitFieldMessage) msg).getMsgPayLoad());
+		sendBitFieldMsg();
+		if(controller.getInterested(neighborPeerID))
+		{
+			try{
+				InterestedMessage builder = new InterestedMessage();
+				NormalMessageCreator creator = new NormalMessageCreator(builder);
+				creator.createNormalMessage(Constants.MSG_INTERESTED_TYPE);
+				Message interestedMsg = builder.getMessage();
 				
-				//logInstance.interestedMessage(neighborPeerID);
-				//logInstance.close(); //temp closing writer
+				outputStream.writeUnshared(interestedMsg);
+				outputStream.flush();
 			}
-			else
+			catch(IOException e)
 			{
-				sendUnInterestedMsg();
+				e.printStackTrace();		
 			}
-		//}catch(IOException e)
-		//{
-		//	e.printStackTrace();
-		//}
-		
+			
+		}
 	}
 
 	private void handleUnInterestedMsg()
