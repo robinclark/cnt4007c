@@ -48,9 +48,9 @@ public class BitfieldHandler extends Module{
 	}
 	
 	//return indices that this peer doesn't have
-	public ArrayList<Integer> getInterestedPiece(String id)
+	public ArrayList<Integer> getInterestedPieceArray(String id)
 	{
-		ArrayList<Integer> interestedArray = new  ArrayList<Integer>();
+		ArrayList<Integer> interestedPieceArray = new  ArrayList<Integer>();
 		
 		byte[] bPeer = bitfields.get(peerID);
 		byte[] bNeighbor = bitfields.get(id);
@@ -58,8 +58,11 @@ public class BitfieldHandler extends Module{
 		for(int i = 0; i < numPieces; i++)
 		{
 			if(bPeer[i] == 0 && bNeighbor[i] == 1)
-		}
-		return false;
+			{
+				interestedPieceArray.add(i);
+			}
+		}	
+		return interestedPieceArray;
 	}
 	
 	public boolean getInterested(String id)
@@ -67,7 +70,14 @@ public class BitfieldHandler extends Module{
 		byte[] bPeer = bitfields.get(peerID);
 		byte[] bNeighbor = bitfields.get(id);
 		
-		
+		for(int i = 0; i < numPieces; i++)
+		{
+			if(bPeer[i] == 0 && bNeighbor[i] == 1)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }
