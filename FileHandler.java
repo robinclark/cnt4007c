@@ -99,6 +99,11 @@ public class FileHandler extends Module
 	
 	}
 	
+	public HashMap<String, Configuration.PeerInfo> getPeerList()
+	{
+		return peerList;
+	}
+	
 	public String getPeerID()
 	{
 		return peerID;

@@ -48,9 +48,9 @@ public class ModuleFactory {
 		return peer;
 	}
 
-	public static Module createFileHandlerMod(Configuration config)
+	public static Module createFileHandlerMod(Controller controller)
 	{
-		FileHandler fileHandler = new FileHandler(config);
+		FileHandler fileHandler = new FileHandler(controller);
 		return fileHandler;
 	}
 	
@@ -59,6 +59,12 @@ public class ModuleFactory {
 		FileHandler fileHandler = new FileHandler(file, fileSize, pieceSize);
 		fileHandler.initialConfiguration();
 		return fileHandler;
+	}
+	
+	public static Module createBitfieldHandlerMod(FileHandler fileHandler)
+	{
+		BitfieldHandler bitfieldHandler = new BitfieldHandler(fileHandler);
+		return bitfieldHandler;
 	}
 
 	public static Module createTopPeerMod()
