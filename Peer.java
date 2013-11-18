@@ -178,7 +178,7 @@ public class Peer extends Module implements Runnable{
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			byte[] field = new byte[controller.getFileSize()];
 			byte[] b = controller.getBitfield();
-			System.arraycopy(controller.getBitfield(),0,field,0,controller.getFileSize());
+			System.arraycopy(controller.getBitfield(),0,field,0,controller.getNumOfPieces());//do you have to copy? can you send reference ovr tcp?
 			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, field);
 			Message msg = builder.getMessage();
 

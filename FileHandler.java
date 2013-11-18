@@ -24,7 +24,7 @@ public class FileHandler extends Module
 		outFileName = commonInfo.get("FileName");
 		fileSize = Integer.parseInt(commonInfo.get("FileSize"));
 		pieceSize = Integer.parseInt(commonInfo.get("PieceSize"));
-		numOfPieces = (int) Math.ceil(fileSize/pieceSize);
+		numOfPieces = (int) Math.ceil((double)fileSize/(double)pieceSize);
 	}
 
 	public FileHandler(String outFileName, int fileSize, int pieceSize)

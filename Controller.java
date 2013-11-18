@@ -254,5 +254,10 @@ public class Controller extends Module {
 		System.out.println();
 	}
 	
+	public int getNumOfPieces()
+	{
+		return numOfPieces;
+	}
+	
 }
 
