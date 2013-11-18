@@ -50,7 +50,7 @@ public class InterestedMessage implements Message{
 	@Override
 	public void setMsgType(byte type) {
 		// TODO Auto-generated method stub
-		
+		msg_type = type;
 	}
 	
 

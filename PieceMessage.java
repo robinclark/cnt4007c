@@ -1,54 +1,55 @@
 
 public class PieceMessage implements Message{
-	int length;
-	byte type;
-	byte[] payload;
+	private int msg_len;
+	private int msg_type;
+	private byte[] msg_payload;
+	private static final long serialVersionUID = 4L;
+	
 
-	@Override
+
 	public void setMsgLen() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setMsgType(byte type) {
-		// TODO Auto-generated method stub
-		this.type = type;
-	}
-
-	@Override
-	public void setMsgPayLoad() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setMsgPayLoad(int index) {
-		// TODO Auto-generated method stub
-		
+		msg_len = msg_payload.length;
 	}
 
 	@Override
 	public void setMsgPayLoad(byte[] payload) {
-		// TODO Auto-generated method stub
-		System.arraycopy(payload,0,this.payload,0,payload.length);
+		
+		msg_payload = payload;
 	}
 
 	@Override
 	public int getMsgType() {
-		// TODO Auto-generated method stub
-		return 0;
+		return msg_type;
 	}
 
 	@Override
 	public int getMsgLen() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return msg_len;
+	}
+	
+	public byte[] getMsgPayLoad()
+	{
+		return msg_payload;
+	}
+	
+	public long getUID()
+	{
+		return serialVersionUID;
+	}
+	
+	public Message getMessage()
+	{
+		return this;
 	}
 
 	@Override
-	public long getUID() {
+	public void setMsgPayLoad(){}
+	public void setMsgPayLoad(int index){}
+
+	@Override
+	public void setMsgType(byte type) {
 		// TODO Auto-generated method stub
-		return 0;
+		msg_type = type;
 	}
 }
