@@ -66,10 +66,10 @@ public class BitfieldHandler extends Module{
 	
 	public byte[] getBitfield(String peerID)
 	{
-		System.out.println("IN BITFIELDHANDLER");
+		//System.out.println("IN BITFIELDHANDLER");
 		byte[] field = bitfields.get(peerID);
 		
-		printBitfield("BITFIELD HANDLER", field);
+		//printBitfield("BITFIELD HANDLER", field);
 		return field;
 	}
 	

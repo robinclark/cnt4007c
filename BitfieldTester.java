@@ -39,6 +39,6 @@ public class BitfieldTester {
 		HashMap<String, byte[]> testfld = bHandler.getBitfields();*/
 		
 		FileHandler fHandler = new FileHandler("test_a.txt", 180768, 32768);
-		fHandler.getBitfield();
+		//fHandler.getBitfield();
 	}
 }

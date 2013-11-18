@@ -65,14 +65,9 @@ public class Peer extends Module implements Runnable{
 
 			System.out.println("hasFile: " + hasFile);
 
-				bitField = controller.setBits(hasFile);
-			
-
-			
-
-					
-			
+			bitField = controller.setBits(hasFile);			
 	}
+	
 	@Override
 	public void run() {
 		sendHandShake();
@@ -82,7 +77,7 @@ public class Peer extends Module implements Runnable{
 			try {
 				Message message = (Message) inputStream.readObject();
 				
-				if(message.getUID() == Constants.HANDSHAKE_UID)
+				if(message.getUID() == Constants.HANDSHAKE_UID) //why isnt this handled like other messages?
 				{
 					handleHandShakeMessage(message);
 				}
@@ -177,11 +172,19 @@ public class Peer extends Module implements Runnable{
 			BitFieldMessage builder = new BitFieldMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			byte[] field = new byte[controller.getFileSize()];
-			byte[] b = controller.getBitfield();
-			System.arraycopy(controller.getBitfield(),0,field,0,controller.getNumOfPieces());//do you have to copy? can you send reference ovr tcp?
+			
+			field = controller.getBitfield(peerID);
+			//System.arraycopy(controller.getBitfield(peerID),0,field,0,controller.getNumOfPieces());
+			System.out.println("BUILDING BITFIELD MESSAGE");
+			//printBitfield(peerID, field);
+			
 			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, field);
 			Message msg = builder.getMessage();
-
+			
+			byte[] payLd = ((BitFieldMessage) msg).getMsgPayLoad();
+			printBitfield(peerID, field);
+			System.out.println("message type: " + msg.getMsgType());
+			
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
 			
@@ -195,6 +198,7 @@ public class Peer extends Module implements Runnable{
 	private void handleBitFieldMsg(Message msg)
 	{
 		controller.setPeerBitfield(neighborPeerID, ((BitFieldMessage) msg).getMsgPayLoad());
+		printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
 		if(controller.getInterested(neighborPeerID))
 		{
 			/*try{
@@ -301,6 +305,14 @@ public class Peer extends Module implements Runnable{
 		return peerID;
 	}
 	
-	
+	public void printBitfield(String s, byte[] b)
+	{
+		System.out.println(s);
+		for(int i = 0; i < b.length; i++)
+		{
+			System.out.print(b[i] + ", ");
+		}
+		System.out.println();
+	}
 
 }

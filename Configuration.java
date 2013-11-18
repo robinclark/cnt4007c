@@ -125,7 +125,7 @@ public class Configuration extends Module {
 					//System.out.println("There was a problem opening the common configuration file. Make sure the file exists");
 				}
 			
-			System.out.println("CONFIG COMPLETE");
+			//System.out.println("CONFIG COMPLETE");
 	}
 
 }

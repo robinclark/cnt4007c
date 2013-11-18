@@ -3,7 +3,7 @@ import java.net.Socket;
 public class ModuleFactory {
 	public static Module createConfigMod()
 	{
-		System.out.println("CREATING CONFIG MOD");
+		//System.out.println("CREATING CONFIG MOD");
 		Configuration config = new Configuration();
 		config.initialConfiguration();
 		
@@ -51,7 +51,7 @@ public class ModuleFactory {
 
 	public static Module createFileHandlerMod(Controller controller)
 	{
-		System.out.println("CREATE FILEHANDLER MOD");
+		//System.out.println("CREATE FILEHANDLER MOD");
 		FileHandler fileHandler = new FileHandler(controller);
 		fileHandler.initialConfiguration();
 		return fileHandler;

@@ -232,10 +232,10 @@ public class Controller extends Module {
 		return logInstance;
 	}
 	
-	public byte[] getBitfield()
+	public byte[] getBitfield(String id)
 	{
-		byte[] field = fileHandlerInstance.getBitfield();
-		printBitfield("CONTROLLER", field);
+		byte[] field = fileHandlerInstance.getBitfield(id);
+		//printBitfield("CONTROLLER", field);
 		return field;
 	}
 	

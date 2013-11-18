@@ -11,9 +11,8 @@ public class BitFieldMessage implements Message{
 	}
 
 	@Override
-	public void setMsgPayLoad(byte[] payload) {
-		
-		msg_payload = payload;
+	public void setMsgPayLoad(byte[] payload) {		
+		msg_payload = payload;//do you have to copy? can you send reference ovr tcp?
 	}
 
 	@Override
@@ -47,15 +46,8 @@ public class BitFieldMessage implements Message{
 	public void setMsgPayLoad(int index){}
 
 	@Override
-	public void setMsgLen(int length) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void setMsgType(byte type) {
-		// TODO Auto-generated method stub
-		
+		msg_type = type;		
 	}
 	
 

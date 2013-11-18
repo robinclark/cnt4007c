@@ -26,14 +26,6 @@ public class NormalMessageCreator {
 		builder.setMsgPayLoad(index);
 		builder.setMsgLen();
 	}
-	
-	public void createNormalMessage(int length, byte type, byte[] payload)
-	{
-		builder.setMsgLen(length);
-		builder.setMsgType(type);
-		builder.setMsgPayLoad(payload);		
-	}
-
 }
 	
 	

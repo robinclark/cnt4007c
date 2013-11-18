@@ -49,7 +49,7 @@ public class FileHandler extends Module
 			e.printStackTrace();
 		}
 		
-		System.out.println("FILEHANDLER GET CONFIG");
+		//System.out.println("FILEHANDLER GET CONFIG");
 		peerList = controller.getConfiguration().getPeerList();
 		peerID = controller.getPeerID();
 		
@@ -134,18 +134,18 @@ public class FileHandler extends Module
 		return numOfPieces;
 	}
 	
-	public byte[] getBitfield()
+	public byte[] getBitfield(String id)
 	{
-		System.out.println("IN FILEHANDLER");
-		byte[] field = bitfieldHandler.getBitfield(peerID);
-		printBitfield("FILEHANDLER", field);
+		//System.out.println("IN FILEHANDLER");
+		byte[] field = bitfieldHandler.getBitfield(id);
+		//printBitfield("FILEHANDLER", field);
 		return field;
 	}
 	
 	public void setPeerBitfield(String id, byte[] bitfield)
 	{
 		bitfieldHandler.setPeerBitfield(id, bitfield);
-		System.out.println("ADDED PEER BITFIELD");
+		//System.out.println("ADDED PEER BITFIELD");
 	}
 	
 	public boolean getInterested(String id)

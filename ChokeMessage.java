@@ -52,12 +52,6 @@ public class ChokeMessage implements Message {
 	}
 
 	@Override
-	public void setMsgLen(int length) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void setMsgType(byte type) {
 		// TODO Auto-generated method stub
 		
