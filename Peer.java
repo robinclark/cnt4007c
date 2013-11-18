@@ -108,10 +108,7 @@ public class Peer extends Module implements Runnable{
 					{
 						handleRequestMsg(message);
 					}
-				}
-				
-				
-				
+				}				
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -119,12 +116,7 @@ public class Peer extends Module implements Runnable{
 			{
 				e.printStackTrace();
 			}	
-}
-
-
-		
-		
-		
+		}		
 	}
 	
 	private void sendHandShake()
@@ -161,6 +153,10 @@ public class Peer extends Module implements Runnable{
 					logInstance.writeLogger(logInstance.TCPConnectLog(neighborPeerID));
 					sendBitFieldMsg();
 				 }
+				 else
+				 {
+					 sendHandShake();
+				 }
 			 }	
 		   }catch(IOException e)
 		    {
@@ -192,7 +188,6 @@ public class Peer extends Module implements Runnable{
 	private void handleBitFieldMsg(Message msg)
 	{
 		controller.setPeerBitfield(neighborPeerID, ((BitFieldMessage) msg).getMsgPayLoad());
-		sendBitFieldMsg();
 		if(controller.getInterested(neighborPeerID))
 		{
 			try{

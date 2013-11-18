@@ -1,28 +1,42 @@
 import java.util.*;
 
 public class BitfieldHandler extends Module{
-	HashMap<String, byte[]> bitfields;
-	FileHandler fileHandler;
-	int numPieces;
-	String peerID;
+	private HashMap<String, byte[]> bitfields;
+	private FileHandler fileHandler;
+	private int numPieces;
+	private String peerID;
+	private boolean hasFile;
 	
 	BitfieldHandler(FileHandler fileHandler)
 	{
+		bitfields = new HashMap<String, byte[]>();
 		this.fileHandler = fileHandler;		
-	}
-
-	@Override
-	public void initialConfiguration() {
-		
 		numPieces = fileHandler.getNumOfPieces();
 		peerID = fileHandler.getPeerID();
 		boolean hasFile = fileHandler.getPeerList().get(peerID).getHasFile();
 		initBitfield(hasFile);
 	}
 	
+	BitfieldHandler(int numPieces, String peerID, boolean hasFile)
+	{
+		bitfields = new HashMap<String, byte[]>();
+		this.numPieces = numPieces;
+		this.peerID = peerID;
+		this.hasFile = hasFile;
+		initBitfield(hasFile);
+	}
+
+	@Override
+	public void initialConfiguration() {
+		
+	}
+	
 	//init own bitfield
 	public void initBitfield(boolean hasFile)
 	{
+		byte[] b = new byte[numPieces];
+		
+		bitfields.put(peerID, b);
 		if(hasFile)
 		{
 			for(int i = 0; i < numPieces; i++)
@@ -30,10 +44,18 @@ public class BitfieldHandler extends Module{
 				bitfields.get(peerID)[i] = 1;
 			}
 		}
+		/*else{
+			for(int i = 0; i < numPieces; i++)
+			{
+				bitfields.get(peerID)[i] = 0;
+			}
+		}*/
 	}
 	
 	public void setPeerBitfield(String peerID, byte[] peerBitfield)
 	{
+		byte[] temp = new byte[numPieces];
+		bitfields.put(peerID, temp);
 		System.arraycopy(peerBitfield, 0, bitfields.get(peerID), 0, numPieces);
 	}
 	
@@ -78,6 +100,11 @@ public class BitfieldHandler extends Module{
 			}
 		}
 		return false;
+	}
+	
+	public HashMap<String, byte[]> getBitfields()
+	{
+		return bitfields;
 	}
 	
 }
