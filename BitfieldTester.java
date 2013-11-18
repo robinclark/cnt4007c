@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class BitfieldTester {
@@ -34,6 +35,9 @@ public class BitfieldTester {
 		
 		boolean b = bHandler.getInterested("1002");
 		System.out.println(b);
+		
+		HashMap<String, byte[]> testfld = bHandler.getBitfields();
+		
 		
 		
 	}

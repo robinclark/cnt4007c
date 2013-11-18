@@ -131,6 +131,7 @@ public class Peer extends Module implements Runnable{
 			outputStream.writeUnshared(message);
 			outputStream.flush();
 			handshakeSent = true;
+			System.out.println("HANDSHAKE SENT");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -151,6 +152,7 @@ public class Peer extends Module implements Runnable{
 				 {
 					neighborPeerID = newMsg.getPeerID();
 					logInstance.writeLogger(logInstance.TCPConnectLog(neighborPeerID));
+					System.out.println("SENDING BITFIELD");
 					sendBitFieldMsg();
 				 }
 				 else
@@ -158,6 +160,8 @@ public class Peer extends Module implements Runnable{
 					 sendHandShake();
 				 }
 			 }	
+			 
+			 System.out.println("HANDSHAKE HANDLED");
 		   }catch(IOException e)
 		    {
 			e.printStackTrace();
@@ -179,6 +183,8 @@ public class Peer extends Module implements Runnable{
 
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
+			
+			System.out.println("BITFIELD SENT");
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}
@@ -198,6 +204,9 @@ public class Peer extends Module implements Runnable{
 				
 				outputStream.writeUnshared(interestedMsg);
 				outputStream.flush();
+				
+				System.out.println("BITFIELD HANDLED");
+				System.out.println("INTERESTED SENT");
 			}
 			catch(IOException e)
 			{

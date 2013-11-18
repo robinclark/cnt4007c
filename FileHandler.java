@@ -138,6 +138,7 @@ public class FileHandler extends Module
 	public void setPeerBitfield(String id, byte[] bitfield)
 	{
 		bitfieldHandler.setPeerBitfield(id, bitfield);
+		System.out.println("ADDED PEER BITFIELD");
 	}
 	
 	public boolean getInterested(String id)
