@@ -31,6 +31,7 @@ public class Controller extends Module {
 	public void initialConfiguration() {
 			if(configInstance == null)
 			{
+				System.out.println("CONFIG INSTANCE START");
 				configInstance = (Configuration) ModuleFactory.createConfigMod();
 				commonInfo = configInstance.getCommonInfo();
 				fileSize = Integer.parseInt(commonInfo.get("FileSize"));
@@ -57,6 +58,7 @@ public class Controller extends Module {
 
 			if(fileHandlerInstance == null)
 			{
+				System.out.println("FILEHANDLER START");
 				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerMod(this);				
 			}
 
@@ -232,12 +234,24 @@ public class Controller extends Module {
 	
 	public byte[] getBitfield()
 	{
-		return fileHandlerInstance.getBitfield();
+		byte[] field = fileHandlerInstance.getBitfield();
+		printBitfield("CONTROLLER", field);
+		return field;
 	}
 	
 	public int getFileSize()
 	{
 		return fileSize;
+	}
+	
+	public void printBitfield(String s, byte[] b)
+	{
+		System.out.println(s);
+		for(int i = 0; i < b.length; i++)
+		{
+			System.out.print(b[i] + ", ");
+		}
+		System.out.println();
 	}
 	
 }

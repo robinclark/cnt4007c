@@ -177,6 +177,7 @@ public class Peer extends Module implements Runnable{
 			BitFieldMessage builder = new BitFieldMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			byte[] field = new byte[controller.getFileSize()];
+			byte[] b = controller.getBitfield();
 			System.arraycopy(controller.getBitfield(),0,field,0,controller.getFileSize());
 			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, field);
 			Message msg = builder.getMessage();
@@ -196,7 +197,7 @@ public class Peer extends Module implements Runnable{
 		controller.setPeerBitfield(neighborPeerID, ((BitFieldMessage) msg).getMsgPayLoad());
 		if(controller.getInterested(neighborPeerID))
 		{
-			try{
+			/*try{
 				InterestedMessage builder = new InterestedMessage();
 				NormalMessageCreator creator = new NormalMessageCreator(builder);
 				creator.createNormalMessage(Constants.MSG_INTERESTED_TYPE);
@@ -211,7 +212,7 @@ public class Peer extends Module implements Runnable{
 			catch(IOException e)
 			{
 				e.printStackTrace();		
-			}
+			}*/
 			
 		}
 	}

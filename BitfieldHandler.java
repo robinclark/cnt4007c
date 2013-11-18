@@ -66,7 +66,11 @@ public class BitfieldHandler extends Module{
 	
 	public byte[] getBitfield(String peerID)
 	{
-		return bitfields.get(peerID);
+		System.out.println("IN BITFIELDHANDLER");
+		byte[] field = bitfields.get(peerID);
+		
+		printBitfield("BITFIELD HANDLER", field);
+		return field;
 	}
 	
 	//return indices that this peer doesn't have
@@ -105,6 +109,16 @@ public class BitfieldHandler extends Module{
 	public HashMap<String, byte[]> getBitfields()
 	{
 		return bitfields;
+	}
+	
+	public void printBitfield(String s, byte[] b)
+	{
+		System.out.println(s);
+		for(int i = 0; i < b.length; i++)
+		{
+			System.out.print(b[i] + ", ");
+		}
+		System.out.println();
 	}
 	
 }

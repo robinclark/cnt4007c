@@ -16,7 +16,7 @@ public class BitfieldTester {
 	
 	public static void main(String[] args)
 	{
-		int numPieces = 6;
+		/*int numPieces = 6;
 		BitfieldHandler bHandler = new BitfieldHandler(numPieces, "1001", true);		
 		
 		printBitfield(bHandler.getBitfield("1001"));
@@ -36,9 +36,9 @@ public class BitfieldTester {
 		boolean b = bHandler.getInterested("1002");
 		System.out.println(b);
 		
-		HashMap<String, byte[]> testfld = bHandler.getBitfields();
+		HashMap<String, byte[]> testfld = bHandler.getBitfields();*/
 		
-		
-		
+		FileHandler fHandler = new FileHandler("test_a.txt", 180768, 32768);
+		fHandler.getBitfield();
 	}
 }

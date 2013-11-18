@@ -19,6 +19,7 @@ public class FileHandler extends Module
 
 	public FileHandler(Controller controller)
 	{
+		this.controller = controller;
 		commonInfo = controller.getConfiguration().getCommonInfo();
 		outFileName = commonInfo.get("FileName");
 		fileSize = Integer.parseInt(commonInfo.get("FileSize"));
@@ -48,10 +49,14 @@ public class FileHandler extends Module
 			e.printStackTrace();
 		}
 		
+		System.out.println("FILEHANDLER GET CONFIG");
 		peerList = controller.getConfiguration().getPeerList();
 		peerID = controller.getPeerID();
 		
-		bitfieldHandler = (BitfieldHandler) ModuleFactory.createBitfieldHandlerMod(this);
+		if(bitfieldHandler == null)
+		{
+			bitfieldHandler = (BitfieldHandler) ModuleFactory.createBitfieldHandlerMod(this);
+		}
 		
 	}
 
@@ -131,7 +136,9 @@ public class FileHandler extends Module
 	
 	public byte[] getBitfield()
 	{
+		System.out.println("IN FILEHANDLER");
 		byte[] field = bitfieldHandler.getBitfield(peerID);
+		printBitfield("FILEHANDLER", field);
 		return field;
 	}
 	
@@ -144,5 +151,15 @@ public class FileHandler extends Module
 	public boolean getInterested(String id)
 	{
 		return bitfieldHandler.getInterested(id);
+	}
+	
+	public void printBitfield(String s, byte[] b)
+	{
+		System.out.println(s);
+		for(int i = 0; i < b.length; i++)
+		{
+			System.out.print(b[i] + ", ");
+		}
+		System.out.println();
 	}
 }
