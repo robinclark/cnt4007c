@@ -31,7 +31,7 @@ public class Controller extends Module {
 	public void initialConfiguration() {
 			if(configInstance == null)
 			{
-				System.out.println("CONFIG INSTANCE START");
+				//System.out.println("CONFIG INSTANCE START");
 				configInstance = (Configuration) ModuleFactory.createConfigMod();
 				commonInfo = configInstance.getCommonInfo();
 				fileSize = Integer.parseInt(commonInfo.get("FileSize"));
@@ -58,7 +58,7 @@ public class Controller extends Module {
 
 			if(fileHandlerInstance == null)
 			{
-				System.out.println("FILEHANDLER START");
+				//System.out.println("FILEHANDLER START");
 				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerMod(this);				
 			}
 

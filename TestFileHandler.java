@@ -4,7 +4,7 @@ public class TestFileHandler
 {
 	public static void main(String[] args)
 	{
-		FileHandler fileHandler0 = (FileHandler) ModuleFactory.createFileHandlerMod("test_a.txt", 180768, 32768);
+		FileHandler fileHandler0 = (FileHandler) ModuleFactory.createFileHandlerMod("peer_1001\test_a.txt", 180768, 32768);
 		FileHandler fileHandler1 = (FileHandler) ModuleFactory.createFileHandlerMod("test_b.txt", 180768, 32768);
 
 		System.out.println("size: "+ fileHandler0.getNumOfPieces());
