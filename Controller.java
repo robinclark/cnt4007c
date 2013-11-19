@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -290,3 +291,25 @@ public class Controller extends Module {
 	}
 }
 
+=======
+public class Controller()
+{
+		private Configuration configFile;
+		//must be synchronized because 
+		public synchronized Controller(int peerID)
+		{
+			configFile = new Configuration(peerID);
+			
+
+			
+		}
+
+
+		public void execute()
+		{
+			new Thread(new Server(configFile)).start();
+		}
+
+		
+}
+>>>>>>> d64a7b915ae8ae15100d0e3cc7bd5fdaa7ddfc72
