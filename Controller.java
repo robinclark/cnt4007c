@@ -219,6 +219,11 @@ public class Controller extends Module {
 			neighborPeers.get(i).sendHaveMsg(index);
 		}
 	}
+
+	public byte[] getPiece(int index)
+	{
+		return fileHandlerInstance.getPiece(index);
+	}
 	
 	public void setPeerBitfield(String id, byte[] bitfield)
 	{

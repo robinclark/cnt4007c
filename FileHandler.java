@@ -62,14 +62,7 @@ public class FileHandler extends Module
 		}
 		
 	}
-
-	//write piece to file
-	public void writePiece(int index, Message m)
-	{
-		//outputFile.seek(index*pieceSize);
-		//outputFile.write(
-	}
-
+	
 	public void writePiece(int index, byte[] piece)
 	{
 			try

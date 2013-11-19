@@ -272,9 +272,21 @@ public class Peer extends Module implements Runnable{
 		
 	}
 	
-	private void sendPiecedMsg()
+	private void sendPiecedMsg(int index)
 	{
-		
+		try 
+		{			
+			PieceMessage builder = new PieceMessage(); //**no interested message class
+			NormalMessageCreator creator = new NormalMessageCreator(builder);
+			byte[] payload = controller.getPiece(index);
+			creator.createNormalMessage(Constants.MSG_PIECE_TYPE, payload);
+			Message msg = builder.getMessage();
+
+			outputStream.writeUnshared(msg);
+			outputStream.flush();
+		}catch(IOException e) {
+			e.printStackTrace();		
+		}
 	}
 
 	private void handlePieceMsg(Message msg)
@@ -329,11 +341,9 @@ public class Peer extends Module implements Runnable{
 	}
 	
 	private void handleChokeMsg(Message msg)
-	{
-		if(msg.getMsgType() == Constants.MSG_CHOKE_TYPE)
-		{
-			isChokedByPeer = true;
-		}
+	{		
+		isChokedByPeer = true;
+
 	}
 	
 	private void sendUnchokeMsg()
@@ -343,10 +353,8 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleUnchokeMsg(Message msg)
 	{
-		if(msg.getMsgType() == Constants.MSG_UNCHOKE_TYPE)
-		{
-			isChokedByPeer = false;
-		}
+		isChokedByPeer = false;
+		
 	}
 	
 
