@@ -3,7 +3,12 @@ public class InterestedMessage implements Message{
 	private int msg_len;
 	private int msg_type;
 	private byte[] msg_payload;
-	private static final long serialVersionUID = 4L;
+	private long serialVersionUID;
+	
+	public InterestedMessage()
+	{
+		this.serialVersionUID = ++serialVersionUID;
+	}
 	
 
 

@@ -5,7 +5,7 @@ public class Configuration extends Module {
 
 	private HashMap<String, Configuration.PeerInfo> peerList;
 
-        private HashMap<String, String> commonInfo;
+    private HashMap<String, String> commonInfo;
 
 
     public HashMap<String, PeerInfo> getPeerList() {

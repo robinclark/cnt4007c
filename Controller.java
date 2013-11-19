@@ -16,11 +16,14 @@ public class Controller extends Module {
     private OptimisticNeighborManager optimisticNeighborManager;
     private PreferredNeighborManager preferredNeighborManager;
 	private HashMap<String, String> commonInfo;
+	private String fileName;
 	private int fileSize;
 	private int pieceSize;
 	private int numOfPieces;
 	private FileHandler fileHandlerInstance;
-
+	private HashMap<String, Configuration.PeerInfo> peerList;
+	private Set<String> peerKeys;
+	
 	public Controller(String peerID)
 	{
 		this.peerID = peerID;
@@ -33,7 +36,11 @@ public class Controller extends Module {
 			{
 				//System.out.println("CONFIG INSTANCE START");
 				configInstance = (Configuration) ModuleFactory.createConfigMod();
+				 peerList = configInstance.getPeerList();
+				 peerKeys = peerList.keySet();
 				commonInfo = configInstance.getCommonInfo();
+				fileName = "peer_" + peerID + "/" + commonInfo.get("FileName");
+				System.out.println(fileName);
 				fileSize = Integer.parseInt(commonInfo.get("FileSize"));
 				pieceSize = Integer.parseInt(commonInfo.get("PieceSize"));
 				numOfPieces = (int) Math.ceil(fileSize/pieceSize);
@@ -103,17 +110,12 @@ public class Controller extends Module {
 	
 	public void createClients() throws UnknownHostException, IOException
 	{
-		HashMap<String, Configuration.PeerInfo> map = configInstance.getPeerList();
-
-		Set<String> peerKeys = map.keySet();
-		
-		
 		for(String peerKey :  peerKeys)
 		{
 		
 				if(Integer.parseInt(peerID) > Integer.parseInt(peerKey))
 				{
-					Socket socket = new Socket(map.get(peerKey).getHostName(), map.get(peerKey).getPortNumber());
+					Socket socket = new Socket(peerList.get(peerKey).getHostName(), peerList.get(peerKey).getPortNumber());
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
 					neighborPeers.add(clientPeer);
 					
@@ -129,9 +131,7 @@ public class Controller extends Module {
 	{
 		int numOfPeers = 0;
 		
-		HashMap<String, Configuration.PeerInfo> peers = configInstance.getPeerList();
-		
-		Set<String> peerKeys = peers.keySet();
+		peerKeys = peerList.keySet();
 		
 		for(String peerKey : peerKeys)
 		{
@@ -200,6 +200,26 @@ public class Controller extends Module {
 		
 	}
 	
+	public boolean allPeersHaveFile()
+	{
+		for(String peerKey: peerKeys)
+		{
+			if(!fileHandlerInstance.hasCompleteFile(peerKey))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void broadcastHaveMsg(int index)
+	{
+		for(int i = 0; i < neighborPeers.size(); i++)
+		{
+			neighborPeers.get(i).sendHaveMsg(index);
+		}
+	}
+	
 	public void setPeerBitfield(String id, byte[] bitfield)
 	{
 		fileHandlerInstance.setPeerBitfield(id, bitfield);
@@ -259,5 +279,14 @@ public class Controller extends Module {
 		return numOfPieces;
 	}
 	
+	public String getFileName()
+	{
+		return fileName;
+	}
+	
+	public int getPieceSize()
+	{
+		return pieceSize;
+	}
 }
 

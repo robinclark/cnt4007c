@@ -4,7 +4,7 @@ public class Constants {
                 public static String COMMON_CFG_FILE = "Common.cfg";
 		public static String PDIR = "./";
 		public static byte MSG_CHOKE_TYPE = 0;
-		public static byte MSG_UNCOKE_TYPE = 1;
+		public static byte MSG_UNCHOKE_TYPE = 1;
 		public static byte MSG_INTERESTED_TYPE = 2;
 		public static byte MSG_UNINTERESTED_TYPE = 3;
 		public static byte MSG_HAVE_TYPE = 4;

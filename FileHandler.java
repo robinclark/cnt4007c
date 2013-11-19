@@ -21,9 +21,12 @@ public class FileHandler extends Module
 	{
 		this.controller = controller;
 		commonInfo = controller.getConfiguration().getCommonInfo();
-		outFileName = commonInfo.get("FileName");
+		/*outFileName = commonInfo.get("FileName");
 		fileSize = Integer.parseInt(commonInfo.get("FileSize"));
-		pieceSize = Integer.parseInt(commonInfo.get("PieceSize"));
+		pieceSize = Integer.parseInt(commonInfo.get("PieceSize"));*/
+		outFileName = controller.getFileName();
+		fileSize = controller.getFileSize();
+		pieceSize = controller.getPieceSize();
 		numOfPieces = (int) Math.ceil((double)fileSize/(double)pieceSize);
 	}
 
@@ -102,6 +105,11 @@ public class FileHandler extends Module
 			return null;
 		}
 	
+	}
+	
+	public boolean hasCompleteFile(String id)
+	{
+		return bitfieldHandler.hasCompleteFile(id);
 	}
 	
 	public HashMap<String, Configuration.PeerInfo> getPeerList()

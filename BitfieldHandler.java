@@ -6,6 +6,7 @@ public class BitfieldHandler extends Module{
 	private int numPieces;
 	private String peerID;
 	private boolean hasFile;
+	private byte[] completeFile;
 	
 	BitfieldHandler(FileHandler fileHandler)
 	{
@@ -35,6 +36,7 @@ public class BitfieldHandler extends Module{
 	public void initBitfield(boolean hasFile)
 	{
 		byte[] b = new byte[numPieces];
+		completeFile = new byte[numPieces];
 		
 		bitfields.put(peerID, b);
 		if(hasFile)
@@ -42,14 +44,16 @@ public class BitfieldHandler extends Module{
 			for(int i = 0; i < numPieces; i++)
 			{
 				bitfields.get(peerID)[i] = 1;
+				completeFile[i] = 1;
 			}
 		}
-		/*else{
+		else
+		{
 			for(int i = 0; i < numPieces; i++)
 			{
-				bitfields.get(peerID)[i] = 0;
+				completeFile[i] = 1;
 			}
-		}*/
+		}
 	}
 	
 	public void setPeerBitfield(String peerID, byte[] peerBitfield)
@@ -119,6 +123,12 @@ public class BitfieldHandler extends Module{
 			System.out.print(b[i] + ", ");
 		}
 		System.out.println();
+	}
+	
+	public boolean hasCompleteFile(String id)
+	{
+			byte[] b = bitfields.get(id);
+			return Arrays.equals(b, completeFile);
 	}
 	
 }

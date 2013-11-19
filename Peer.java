@@ -14,7 +14,7 @@ public class Peer extends Module implements Runnable{
 	private String neighborPeerID;
 	private Logger logInstance;
 	private  Controller controller;
-	private boolean isChockedByPeer;
+	private boolean isChokedByPeer;
 	private int downloadDataSize;
 	private int downloadTime;
 	private Socket neighborPeer;
@@ -98,10 +98,25 @@ public class Peer extends Module implements Runnable{
 					{
 						handleUnInterestedMsg();
 					}
-					
+					else if(message.getMsgType() == Constants.MSG_PIECE_TYPE)
+					{
+						handlePieceMsg(message);
+					}
 					else if(message.getMsgType() == Constants.MSG_REQUEST_TYPE)
 					{
 						handleRequestMsg(message);
+					}
+					else if(message.getMsgType() == Constants.MSG_HAVE_TYPE)
+					{
+						handleHaveMsg(message);
+					}
+					else if(message.getMsgType() == Constants.MSG_CHOKE_TYPE)
+					{
+						handleChokeMsg(message);
+					}
+					else if(message.getMsgType() == Constants.MSG_UNCHOKE_TYPE)
+					{
+						handleUnchokeMsg(message);
 					}
 				}				
 			} catch (ClassNotFoundException e) {
@@ -176,7 +191,7 @@ public class Peer extends Module implements Runnable{
 			field = controller.getBitfield(peerID);
 			//System.arraycopy(controller.getBitfield(peerID),0,field,0,controller.getNumOfPieces());
 			System.out.println("BUILDING BITFIELD MESSAGE");
-			//printBitfield(peerID, field);
+			printBitfield(peerID, field);
 			
 			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, field);
 			Message msg = builder.getMessage();
@@ -221,12 +236,6 @@ public class Peer extends Module implements Runnable{
 		}
 	}
 
-	private void handleUnInterestedMsg()
-	{
-		System.out.println("UnInterested");
-		logInstance.notInterestedMessage(neighborPeerID);
-	}
-
 	private void sendUnInterestedMsg()
 	{	
 		/*try 
@@ -244,12 +253,11 @@ public class Peer extends Module implements Runnable{
 		}*/
 
 	}
-
-	private void handleInterestedMsg()
+	
+	private void handleUnInterestedMsg()
 	{
-		System.out.println("Interested");
-		logInstance.interestedMessage(neighborPeerID);
-		
+		System.out.println("UnInterested");
+		logInstance.notInterestedMessage(neighborPeerID);
 	}
 
 	private void sendInterestedMsg()
@@ -268,6 +276,23 @@ public class Peer extends Module implements Runnable{
 			e.printStackTrace();		
 		}*/
 
+	}
+	
+	private void handleInterestedMsg()
+	{
+		System.out.println("Interested");
+		logInstance.interestedMessage(neighborPeerID);
+		
+	}
+	
+	private void sendPiecedMsg()
+	{
+		
+	}
+
+	private void handlePieceMsg(Message msg)
+	{
+		
 	}
 
 	private void sendRequestMsg(int index)
@@ -293,11 +318,50 @@ public class Peer extends Module implements Runnable{
 
 	private void handleRequestMsg(Message msg)
 	{
-		/*RequestMessage newMsg = (RequestMessage) msg;
-		System.out.println("Requested Index: " + newMsg.getPieceIndex());
-		*/
+		//create & send piece message		
+	}
+	
+	private void broadcastHaveMsg(int index)
+	{
+		controller.broadcastHaveMsg(index);
+	}
+	
+	public void sendHaveMsg(int index)
+	{
+		//const & send have
+	}
+	
+	private void handleHaveMsg(Message msg)
+	{
+		//check if interested
+	}
+	
+	private void sendChokeMsg()
+	{
 		
 	}
+	
+	private void handleChokeMsg(Message msg)
+	{
+		if(msg.getMsgType() == Constants.MSG_CHOKE_TYPE)
+		{
+			isChokedByPeer = true;
+		}
+	}
+	
+	private void sendUnchokeMsg()
+	{
+		
+	}
+	
+	private void handleUnchokeMsg(Message msg)
+	{
+		if(msg.getMsgType() == Constants.MSG_UNCHOKE_TYPE)
+		{
+			isChokedByPeer = false;
+		}
+	}
+	
 
 		 
 	public String getPeerID()
