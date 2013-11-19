@@ -235,6 +235,14 @@ public class Controller extends Module {
 		return fileHandlerInstance.getInterested(id);
 	}
 	
+	public int getInterestedIndex(String id)
+	{
+		ArrayList<Integer> interestedPieces = fileHandlerInstance.getInterestedPieceArray(id);
+		Random rdx = new Random();
+		int index = interestedPieces.get(rdx.nextInt(interestedPieces.size()));
+		return index;
+	}
+	
 	
 	public  void addNeighbors(Peer peer)
 	{

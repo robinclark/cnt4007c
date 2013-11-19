@@ -353,11 +353,11 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleUnchokeMsg(Message msg)
 	{
-		isChokedByPeer = false;
-		
+		isChokedByPeer = false;		
+		sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
 	}
 	
-
+	
 		 
 	public String getPeerID()
 	{

@@ -154,6 +154,11 @@ public class FileHandler extends Module
 		return bitfieldHandler.getInterested(id);
 	}
 	
+	public ArrayList<Integer> getInterestedPieceArray(String id)
+	{
+		return bitfieldHandler.getInterestedPieceArray(id);
+	}
+	
 	public void printBitfield(String s, byte[] b)
 	{
 		System.out.println(s);
