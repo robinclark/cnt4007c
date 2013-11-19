@@ -13,7 +13,7 @@ public class BitfieldHandler extends Module{
 		this.fileHandler = fileHandler;		
 		numPieces = fileHandler.getNumOfPieces();
 		peerID = fileHandler.getPeerID();
-		//boolean hasFile = fileHandler.getPeerList().get(peerID).getHasFile();***
+		boolean hasFile = fileHandler.getPeerList().get(peerID).getHasFile();
 		initBitfield(hasFile);
 	}
 	

@@ -50,8 +50,8 @@ public class FileHandler extends Module
 		}
 		
 		//System.out.println("FILEHANDLER GET CONFIG");
-		//peerList = controller.getConfiguration().getPeerList();***
-		//peerID = controller.getPeerID();***
+		peerList = controller.getConfiguration().getPeerList();
+		peerID = controller.getPeerID();
 		
 		if(bitfieldHandler == null)
 		{
