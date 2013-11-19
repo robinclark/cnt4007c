@@ -4,16 +4,16 @@ public class TestFileHandler
 {
 	public static void main(String[] args)
 	{
-		FileHandler fileHandler0 = (FileHandler) ModuleFactory.createFileHandlerMod("peer_1001\test_a.txt", 180768, 32768);
-		FileHandler fileHandler1 = (FileHandler) ModuleFactory.createFileHandlerMod("test_b.txt", 180768, 32768);
+		FileHandler fHandler = (FileHandler) ModuleFactory.createFileHandlerMod("peer_1001/test_a.txt", 180768, 32768);
+		FileHandler fHandler2 = (FileHandler) ModuleFactory.createFileHandlerMod("peer_1002/test_b.txt", 180768, 32768);
 
-		System.out.println("size: "+ fileHandler0.getNumOfPieces());
+		System.out.println("size: "+ fHandler.getNumOfPieces());
 		
 		//copy from a to b
-		for(int i = 0; i < fileHandler0.getNumOfPieces(); i++)
+		for(int i = 0; i < fHandler.getNumOfPieces(); i++)
 		{			
-			byte[] a = fileHandler0.getPiece(i);
-			fileHandler1.writePiece(i, a);
+			byte[] a = fHandler.getPiece(i);
+			fHandler2.writePiece(i, a);
 		}
 	}
 }

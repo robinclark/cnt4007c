@@ -42,7 +42,7 @@ public class FileHandler extends Module
 			outputFile = new RandomAccessFile(outFileName, "rw");
 			//outputFile.setLength(fileSize);
 			System.out.println("file length: " + outputFile.length());
-			//outputFile.setLength(fileSize);
+			outputFile.setLength(fileSize);
 		}
 		catch(Exception e)
 		{
