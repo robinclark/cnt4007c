@@ -216,29 +216,17 @@ public class Peer extends Module implements Runnable{
 		printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
 		if(controller.getInterested(neighborPeerID))
 		{
-			/*try{
-				InterestedMessage builder = new InterestedMessage();
-				NormalMessageCreator creator = new NormalMessageCreator(builder);
-				creator.createNormalMessage(Constants.MSG_INTERESTED_TYPE);
-				Message interestedMsg = builder.getMessage();
-				
-				outputStream.writeUnshared(interestedMsg);
-				outputStream.flush();
-				
-				System.out.println("BITFIELD HANDLED");
-				System.out.println("INTERESTED SENT");
-			}
-			catch(IOException e)
-			{
-				e.printStackTrace();		
-			}*/
-			
+			sendInterestedMsg();
+		}
+		else
+		{
+			sendUnInterestedMsg();
 		}
 	}
 
 	private void sendUnInterestedMsg()
 	{	
-		/*try 
+		try 
 		{
 			
 			UnInterestedMessage builder = new UnInterestedMessage();
@@ -250,8 +238,7 @@ public class Peer extends Module implements Runnable{
 			outputStream.flush();
 		}catch(IOException e) {
 			e.printStackTrace();		
-		}*/
-
+		}
 	}
 	
 	private void handleUnInterestedMsg()
@@ -262,7 +249,7 @@ public class Peer extends Module implements Runnable{
 
 	private void sendInterestedMsg()
 	{
-		/*try 
+		try 
 		{
 			
 			InterestedMessage builder = new InterestedMessage(); //**no interested message class
@@ -274,7 +261,7 @@ public class Peer extends Module implements Runnable{
 			outputStream.flush();
 		}catch(IOException e) {
 			e.printStackTrace();		
-		}*/
+		}
 
 	}
 	
