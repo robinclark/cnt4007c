@@ -11,7 +11,7 @@ interface Message extends Serializable {
 	public  int getMsgType();
 	public  int getMsgLen();
 	public  long getUID();
-	
+	public void setPieceIndex(int index);
 
 	
 }

@@ -336,17 +336,52 @@ public class Peer extends Module implements Runnable{
 	
 	public void sendHaveMsg(int index)
 	{
-		//const & send have
+		try 
+		{			
+			HaveMessage builder = new HaveMessage();
+			NormalMessageCreator creator = new NormalMessageCreator(builder);
+			creator.createNormalMessage(Constants.MSG_HAVE_TYPE, index);
+			Message msg = builder.getMessage();
+
+			outputStream.writeUnshared(msg);
+			outputStream.flush();
+			
+		}catch(IOException e) {
+			e.printStackTrace();		
+		}		
 	}
 	
 	private void handleHaveMsg(Message msg)
 	{
-		//check if interested
+		System.out.println("HANDLING HAVE");
+		controller.setPiece(((HaveMessage) msg).getPieceIndex(),neighborPeerID);
+		printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
+		if(controller.getInterested(neighborPeerID))
+		{
+			sendInterestedMsg();
+		}
+		else
+		{
+			sendUnInterestedMsg();
+		}
+		
 	}
 	
 	private void sendChokeMsg()
 	{
-		
+		try 
+		{			
+			ChokeMessage builder = new ChokeMessage();
+			NormalMessageCreator creator = new NormalMessageCreator(builder);
+			creator.createNormalMessage(Constants.MSG_CHOKE_TYPE);
+			Message msg = builder.getMessage();
+
+			outputStream.writeUnshared(msg);
+			outputStream.flush();
+			
+		}catch(IOException e) {
+			e.printStackTrace();		
+		}	
 	}
 	
 	private void handleChokeMsg(Message msg)
@@ -365,9 +400,7 @@ public class Peer extends Module implements Runnable{
 		isChokedByPeer = false;		
 		sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
 	}
-	
-	
-		 
+			 
 	public String getPeerID()
 	{
 		return peerID;

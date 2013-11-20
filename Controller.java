@@ -246,6 +246,11 @@ public class Controller extends Module {
 		return index;
 	}
 	
+	public void setPiece(int index, String id)
+	{
+		fileHandlerInstance.setPiece(index, id);
+	}
+	
 	public void addInterestedPeer(String id)
 	{
 		interestedNeighbors.add(id);
