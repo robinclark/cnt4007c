@@ -222,13 +222,13 @@ public class Peer extends Module implements Runnable{
 		{
 			sendUnInterestedMsg();
 		}
+		System.out.println("HANDLING BITFIELD");
 	}
 
 	private void sendUnInterestedMsg()
 	{	
 		try 
-		{
-			
+		{			
 			UnInterestedMessage builder = new UnInterestedMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			creator.createNormalMessage(Constants.MSG_UNINTERESTED_TYPE);
@@ -236,6 +236,7 @@ public class Peer extends Module implements Runnable{
 
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
+			System.out.println("UNINTERESTED SENT");
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}
@@ -243,8 +244,9 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleUnInterestedMsg()
 	{
-		System.out.println("UnInterested");
+		System.out.println("HANDLING UNINTERESTED");
 		logInstance.notInterestedMessage(neighborPeerID);
+		controller.removeInterestedPeer(neighborPeerID);
 	}
 
 	private void sendInterestedMsg()
@@ -259,6 +261,7 @@ public class Peer extends Module implements Runnable{
 
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
+			System.out.println("INTERESTED SENT");
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}
@@ -267,9 +270,9 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleInterestedMsg()
 	{
-		System.out.println("Interested");
+		System.out.println("HANDLING INTERESTED");
 		logInstance.interestedMessage(neighborPeerID);
-		
+		controller.addInterestedPeer(neighborPeerID);
 	}
 	
 	private void sendPiecedMsg(int index)
@@ -284,6 +287,7 @@ public class Peer extends Module implements Runnable{
 
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
+			System.out.println("PIECE SENT");
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}
@@ -318,6 +322,7 @@ public class Peer extends Module implements Runnable{
 	private void handleRequestMsg(Message msg)
 	{
 		//create & send piece message		
+		
 	}
 	
 	private void broadcastHaveMsg(int index)

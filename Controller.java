@@ -23,6 +23,9 @@ public class Controller extends Module {
 	private FileHandler fileHandlerInstance;
 	private HashMap<String, Configuration.PeerInfo> peerList;
 	private Set<String> peerKeys;
+	private List<String> preferredNeighbors;
+	private List<String> interestedNeighbors;
+	private String optimisticallyUnchokedNeighbor;
 	
 	public Controller(String peerID)
 	{
@@ -243,6 +246,15 @@ public class Controller extends Module {
 		return index;
 	}
 	
+	public void addInterestedPeer(String id)
+	{
+		interestedNeighbors.add(id);
+	}
+	
+	public void removeInterestedPeer(String id)
+	{
+		interestedNeighbors.remove(id);//what if peer not in list
+	}
 	
 	public  void addNeighbors(Peer peer)
 	{
