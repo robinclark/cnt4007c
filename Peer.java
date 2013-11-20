@@ -222,7 +222,7 @@ public class Peer extends Module implements Runnable{
 		{
 			sendUnInterestedMsg();
 		}
-		System.out.println("HANDLING BITFIELD");
+		System.out.println("BITFIELD HANDLED");
 	}
 
 	private void sendUnInterestedMsg()
@@ -254,7 +254,7 @@ public class Peer extends Module implements Runnable{
 		try 
 		{
 			
-			InterestedMessage builder = new InterestedMessage(); //**no interested message class
+			InterestedMessage builder = new InterestedMessage(); 
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			creator.createNormalMessage(Constants.MSG_INTERESTED_TYPE);
 			Message msg = builder.getMessage();
@@ -279,10 +279,10 @@ public class Peer extends Module implements Runnable{
 	{
 		try 
 		{			
-			PieceMessage builder = new PieceMessage(); //**no interested message class
+			PieceMessage builder = new PieceMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			byte[] payload = controller.getPiece(index);
-			creator.createNormalMessage(Constants.MSG_PIECE_TYPE, payload);
+			creator.createNormalMessage(Constants.MSG_PIECE_TYPE, index, payload);
 			Message msg = builder.getMessage();
 
 			outputStream.writeUnshared(msg);
@@ -295,7 +295,9 @@ public class Peer extends Module implements Runnable{
 
 	private void handlePieceMsg(Message msg)
 	{
+		System.out.println("HANDLING PIECE");
 		controller.writePiece(((PieceMessage) msg).getPieceIndex(), ((PieceMessage) msg).getMsgPayLoad());
+		
 	}
 
 	private void sendRequestMsg(int index)
@@ -363,8 +365,7 @@ public class Peer extends Module implements Runnable{
 		else
 		{
 			sendUnInterestedMsg();
-		}
-		
+		}		
 	}
 	
 	private void sendChokeMsg()
@@ -392,7 +393,19 @@ public class Peer extends Module implements Runnable{
 	
 	private void sendUnchokeMsg()
 	{
-		
+		try 
+		{			
+			UnchokeMessage builder = new UnchokeMessage();
+			NormalMessageCreator creator = new NormalMessageCreator(builder);
+			creator.createNormalMessage(Constants.MSG_UNCHOKE_TYPE);
+			Message msg = builder.getMessage();
+
+			outputStream.writeUnshared(msg);
+			outputStream.flush();
+			
+		}catch(IOException e) {
+			e.printStackTrace();		
+		}	
 	}
 	
 	private void handleUnchokeMsg(Message msg)

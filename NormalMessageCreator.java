@@ -30,7 +30,8 @@ public class NormalMessageCreator {
 	public void createNormalMessage(byte type, int index, byte[] payload)
 	{
 		builder.setMsgType(type);
-		builder.setMsgPayLoad(index);
+		builder.setPieceIndex(index);
+		builder.setMsgPayLoad(payload);
 		builder.setMsgLen();
 	}
 }
