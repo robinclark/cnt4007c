@@ -275,7 +275,7 @@ public class Peer extends Module implements Runnable{
 		controller.addInterestedPeer(neighborPeerID);
 	}
 	
-	private void sendPiecedMsg(int index)
+	private void sendPieceMsg(int index)
 	{
 		try 
 		{			
@@ -295,14 +295,14 @@ public class Peer extends Module implements Runnable{
 
 	private void handlePieceMsg(Message msg)
 	{
-		
+		controller.writePiece(((PieceMessage) msg).getPieceIndex(), ((PieceMessage) msg).getMsgPayLoad());
 	}
 
 	private void sendRequestMsg(int index)
 	{
-		/*try 
+		try 
 		{
-			if(!isChockedByPeer)
+			if(!isChokedByPeer)
 			{ 
 			
 				RequestMessage builder = new RequestMessage();
@@ -315,14 +315,18 @@ public class Peer extends Module implements Runnable{
 			}
 		}catch(IOException e) {
 			e.printStackTrace();		
-		}*/
+		}
 		
 	}
 
 	private void handleRequestMsg(Message msg)
 	{
-		//create & send piece message		
-		
+		//create & send piece message	
+		if(controller.getPreferredNeighbors().indexOf(neighborPeerID) != -1)
+		{
+			int index = ((RequestMessage) msg).getPieceIndex();
+			sendPieceMsg(index);
+		}
 	}
 	
 	private void broadcastHaveMsg(int index)

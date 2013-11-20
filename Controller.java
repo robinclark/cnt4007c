@@ -256,6 +256,11 @@ public class Controller extends Module {
 		interestedNeighbors.remove(id);//what if peer not in list
 	}
 	
+	public void writePiece(int index, byte[] piece)
+	{
+		fileHandlerInstance.writePiece(index, piece);
+	}
+	
 	public  void addNeighbors(Peer peer)
 	{
 		neighborPeers.add(peer);
@@ -312,6 +317,11 @@ public class Controller extends Module {
 	public int getPieceSize()
 	{
 		return pieceSize;
+	}
+	
+	public List<String> getPreferredNeighbors()
+	{
+		return preferredNeighbors;
 	}
 }
 
