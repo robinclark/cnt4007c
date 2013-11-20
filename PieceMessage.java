@@ -2,6 +2,7 @@
 public class PieceMessage implements Message{
 	private int msg_len;
 	private int msg_type;
+	private int index;
 	private byte[] msg_payload;
 	private static final long serialVersionUID = 4L;
 	
@@ -51,5 +52,15 @@ public class PieceMessage implements Message{
 	public void setMsgType(byte type) {
 		// TODO Auto-generated method stub
 		msg_type = type;
+	}
+	
+	public void setPieceIndex(int index)
+	{
+		this.index = index;
+	}
+	
+	public int getPieceIndex()
+	{
+		return index;
 	}
 }
