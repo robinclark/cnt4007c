@@ -23,16 +23,16 @@ public class Peer extends Module implements Runnable{
 	private boolean hasFile;
 	private byte[] bitField;
 	private boolean handshakeSent = false;
-	private float uploadRate = 0.0f;
-	private float startTime = 0.0f;
+	private float downloadRate = 0.0f;
+	private long startTime = 0;
+	private int bytesDownloaded = 0; 
 	
 	public Peer(Socket socket, Controller controller)
 	{
 			neighborPeer = socket;
-			this.controller = controller;
-			
-			
+			this.controller = controller;	
 	}
+	
 	@Override
 	public void initialConfiguration() 
 	{
@@ -298,8 +298,9 @@ public class Peer extends Module implements Runnable{
 	private void handlePieceMsg(Message msg)
 	{
 		System.out.println("HANDLING PIECE");
-		controller.writePiece(((PieceMessage) msg).getPieceIndex(), ((PieceMessage) msg).getMsgPayLoad());
-		
+		byte payload[] = ((PieceMessage) msg).getMsgPayLoad();
+		controller.writePiece(((PieceMessage) msg).getPieceIndex(), payload);
+		bytesDownloaded += payload.length;
 	}
 
 	private void sendRequestMsg(int index)
@@ -412,6 +413,7 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleUnchokeMsg(Message msg)
 	{
+		startTimer();
 		isChokedByPeer = false;		
 		sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
 	}
@@ -431,9 +433,20 @@ public class Peer extends Module implements Runnable{
 		System.out.println();
 	}
 	
-	public float getUploadRate()
+	public float getDownloadRate()
 	{
-		return uploadRate;
+		long totalTime = System.currentTimeMillis() - startTime;
+		downloadRate = bytesDownloaded/totalTime;
+		return downloadRate;
+	}
+	
+	public void startTimer()
+	{
+		startTime = System.currentTimeMillis();
 	}
 
+	public void restartData()
+	{
+		bytesDownloaded = 0;
+	}
 }

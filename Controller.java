@@ -290,7 +290,7 @@ public class Controller extends Module {
 	{
 		for(Peer p: neighborPeers)
 		{
-			peerUploadRates.put(p.getPeerID(), p.getUploadRate());
+			peerUploadRates.put(p.getPeerID(), p.getDownloadRate());
 		}
 		return peerUploadRates;
 	}
