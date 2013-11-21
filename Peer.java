@@ -437,6 +437,7 @@ public class Peer extends Module implements Runnable{
 	{
 		long totalTime = System.currentTimeMillis() - startTime;
 		downloadRate = bytesDownloaded/totalTime;
+		startTimer();
 		return downloadRate;
 	}
 	

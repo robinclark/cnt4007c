@@ -26,7 +26,7 @@ public class Controller extends Module {
 	private List<String> preferredNeighbors;
 	private List<String> interestedNeighbors;
 	private String optimisticallyUnchokedNeighbor;
-	private HashMap<String, Float> peerUploadRates;
+	private HashMap<String, Float> peerDownloadRates;
 	
 	public Controller(String peerID)
 	{
@@ -86,7 +86,7 @@ public class Controller extends Module {
 				//initpeeruploadrates
 				for(String peerKey: peerKeys)
 				{
-					peerUploadRates.put(peerKey, 0.0f);
+					peerDownloadRates.put(peerKey, 0.0f);
 				}
 				
 				//start preferred neighbor selection
@@ -153,8 +153,7 @@ public class Controller extends Module {
 			}
 		}
 		
-		return numOfPeers;	
-		
+		return numOfPeers;			
 	}
 
 
@@ -286,13 +285,13 @@ public class Controller extends Module {
 		return neighborPeers;
 	}
 	
-	public HashMap<String, Float> getPeerUploadRates()
+	public HashMap<String, Float> getPeerDownloadRates()
 	{
 		for(Peer p: neighborPeers)
 		{
-			peerUploadRates.put(p.getPeerID(), p.getDownloadRate());
+			peerDownloadRates.put(p.getPeerID(), p.getDownloadRate());
 		}
-		return peerUploadRates;
+		return peerDownloadRates;
 	}
         
     public Configuration getConfiguration()

@@ -1,4 +1,12 @@
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -15,6 +23,9 @@ public class PreferredNeighborManager implements Runnable{
     String optimisticNeighbor[];
     ScheduledExecutorService scheduler = null;
     ScheduledFuture<?> taskHandle = null;
+    //MapUtil mapUtil;
+    
+   
     
     PreferredNeighborManager(Controller peerController)
     {
@@ -22,9 +33,11 @@ public class PreferredNeighborManager implements Runnable{
         configInstance = controller.getConfiguration();
         
         scheduler = Executors.newScheduledThreadPool(1);
-        int unchokingInterval = Integer.parseInt(configInstance.getCommonInfo().get("OptimisticUnchokingInterval"));
+        int unchokingInterval = Integer.parseInt(configInstance.getCommonInfo().get("UnchokingInterval"));
         System.out.println(unchokingInterval);
         taskHandle = scheduler.scheduleAtFixedRate(this, unchokingInterval, unchokingInterval, TimeUnit.SECONDS);
+        
+        //mapUtil = new MapUtil();
     }
     
     PreferredNeighborManager(int unchokingInterval)
@@ -36,7 +49,23 @@ public class PreferredNeighborManager implements Runnable{
     @Override
     public void run() {
         //select neighbors that have transmitted to this peer at the highest rates
-    	HashMap<String, Float> uploadRates = controller.getPeerUploadRates();    	
+    	//HashMap<String, Float> downloadRates = controller.getPeerDownloadRates();    	
+    	
+    	Random random = new Random(System.currentTimeMillis());
+        Map<String, Float> testMap = new HashMap<String, Float>(10);
+        for(int i = 0 ; i < 10 ; ++i) {
+            testMap.put( "SomeString" + random.nextInt()%1000, (Float)(random.nextInt()%1000 + random.nextFloat()));
+            
+        }
+        
+        System.out.println("size: " + testMap.size());
+        testMap = MapUtil.sortByValue( testMap );
+    	
+    		
+    	for(Entry<String, Float> entry: testMap.entrySet())
+    	{
+    		System.out.println(entry.getKey() + ", " + entry.getValue());
+    	}    	
     }
     
     
