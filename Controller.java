@@ -26,6 +26,7 @@ public class Controller extends Module {
 	private List<String> preferredNeighbors;
 	private List<String> interestedNeighbors;
 	private String optimisticallyUnchokedNeighbor;
+	private HashMap<String, Float> peerUploadRates;
 	
 	public Controller(String peerID)
 	{
@@ -71,10 +72,9 @@ public class Controller extends Module {
 				//System.out.println("FILEHANDLER START");
 				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerMod(this);				
 			}
-
 			
 			isShuttingDown = false;
-
+			
 	}
 	
 	public void execute()
@@ -82,6 +82,12 @@ public class Controller extends Module {
 			try {
 				createServers();	
 				createClients();
+				
+				//initpeeruploadrates
+				for(String peerKey: peerKeys)
+				{
+					peerUploadRates.put(peerKey, 0.0f);
+				}
 				
 				//start preferred neighbor selection
 				//select optimistic neighbor
@@ -278,6 +284,15 @@ public class Controller extends Module {
 	public List<Peer> getNeighborsList()
 	{
 		return neighborPeers;
+	}
+	
+	public HashMap<String, Float> getPeerUploadRates()
+	{
+		for(Peer p: neighborPeers)
+		{
+			peerUploadRates.put(p.getPeerID(), p.getUploadRate());
+		}
+		return peerUploadRates;
 	}
         
     public Configuration getConfiguration()

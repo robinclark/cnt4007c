@@ -1,4 +1,8 @@
-import java.util.concurrent.*;
+import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -19,19 +23,20 @@ public class PreferredNeighborManager implements Runnable{
         
         scheduler = Executors.newScheduledThreadPool(1);
         int unchokingInterval = Integer.parseInt(configInstance.getCommonInfo().get("OptimisticUnchokingInterval"));
-        taskHandle = scheduler.scheduleAtFixedRate(this, 0, unchokingInterval, TimeUnit.SECONDS);
+        System.out.println(unchokingInterval);
+        taskHandle = scheduler.scheduleAtFixedRate(this, unchokingInterval, unchokingInterval, TimeUnit.SECONDS);
     }
     
     PreferredNeighborManager(int unchokingInterval)
     {       
         scheduler = Executors.newScheduledThreadPool(1);
-
-        taskHandle = scheduler.scheduleAtFixedRate(this, 5, unchokingInterval, TimeUnit.SECONDS);
+        taskHandle = scheduler.scheduleAtFixedRate(this, unchokingInterval, unchokingInterval, TimeUnit.SECONDS);
     }
 
     @Override
     public void run() {
-        System.out.println("Woo");
+        //select neighbors that have transmitted to this peer at the highest rates
+    	HashMap<String, Float> uploadRates = controller.getPeerUploadRates();    	
     }
     
     

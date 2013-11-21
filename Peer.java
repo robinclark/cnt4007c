@@ -23,6 +23,8 @@ public class Peer extends Module implements Runnable{
 	private boolean hasFile;
 	private byte[] bitField;
 	private boolean handshakeSent = false;
+	private float uploadRate = 0.0f;
+	private float startTime = 0.0f;
 	
 	public Peer(Socket socket, Controller controller)
 	{
@@ -427,6 +429,11 @@ public class Peer extends Module implements Runnable{
 			System.out.print(b[i] + ", ");
 		}
 		System.out.println();
+	}
+	
+	public float getUploadRate()
+	{
+		return uploadRate;
 	}
 
 }
