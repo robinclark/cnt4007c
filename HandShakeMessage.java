@@ -68,5 +68,11 @@ public class HandShakeMessage implements Message
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public void setPieceIndex(int index) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

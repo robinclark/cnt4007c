@@ -82,6 +82,9 @@ public class Controller extends Module {
 			try {
 				createServers();	
 				createClients();
+				
+				//start preferred neighbor selection
+				//select optimistic neighbor
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

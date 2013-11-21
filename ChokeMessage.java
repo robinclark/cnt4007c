@@ -57,6 +57,12 @@ public class ChokeMessage implements Message {
 		
 	}
 
+	@Override
+	public void setPieceIndex(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 	

@@ -57,6 +57,14 @@ public class InterestedMessage implements Message{
 		// TODO Auto-generated method stub
 		msg_type = type;
 	}
+
+
+
+	@Override
+	public void setPieceIndex(int index) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

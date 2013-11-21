@@ -49,6 +49,12 @@ public class BitFieldMessage implements Message{
 	public void setMsgType(byte type) {
 		msg_type = type;		
 	}
+
+	@Override
+	public void setPieceIndex(int index) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
