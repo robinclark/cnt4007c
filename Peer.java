@@ -26,6 +26,7 @@ public class Peer extends Module implements Runnable{
 	private float downloadRate = 0.0f;
 	private long startTime = 0;
 	private int bytesDownloaded = 0; 
+	private boolean isOptimisticMessage = false;
 	
 	public Peer(Socket socket, Controller controller)
 	{
@@ -38,6 +39,8 @@ public class Peer extends Module implements Runnable{
 	{
 		
 			peerID = controller.getPeerID();
+
+			if(peerID.equals("1001"))isChokedByPeer = true;
 			
 			isShuttingDown = controller.isShuttingDown();
 			
@@ -321,11 +324,12 @@ public class Peer extends Module implements Runnable{
 	private void handleRequestMsg(Message msg)
 	{
 		//create & send piece message	
-		if(controller.getPreferredNeighbors().indexOf(neighborPeerID) != -1)
+		/*if(controller.getPreferredNeighbors().indexOf(neighborPeerID) != -1)
 		{
 			int index = ((RequestMessage) msg).getPieceIndex();
 			sendPieceMsg(index);
 		}
+		*/
 	}
 	
 	private void broadcastHaveMsg(int index)
@@ -388,13 +392,19 @@ public class Peer extends Module implements Runnable{
 
 	}
 	
-	private void sendUnchokeMsg()
+/*most likely a bad idea to make unchokemessage public but this is for testing purposes until we can find a better solution*/
+	public void sendUnchokeMsg(boolean isOptimisticMessage)
 	{
+		this.isOptimisticMessage = isOptimisticMessage;
 		try 
-		{			
-			UnchokeMessage builder = new UnchokeMessage();
+		{	
+					
+			UnchokeMessage builder = new UnchokeMessage();			
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
+						
 			creator.createNormalMessage(Constants.MSG_UNCHOKE_TYPE);
+		
+			System.out.println("\nUNCHOKING: " + neighborPeerID);
 			Message msg = builder.getMessage();
 
 			outputStream.writeUnshared(msg);
@@ -407,14 +417,32 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleUnchokeMsg(Message msg)
 	{
+		System.out.println("FINALLY UNCHOKED: " );
 		startTimer();
-		isChokedByPeer = false;		
+		if(isOptimisticMessage){controller.setOptimisticPeerID(peerID);}
+		isChokedByPeer = false;	
+		controller.setNeighbor(this);	
 		sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
 	}
 			 
 	public String getPeerID()
 	{
 		return peerID;
+	}
+
+	public String getNeighborPeerID()
+	{
+		return neighborPeerID;
+	}
+
+	public boolean isChokedByPeer()
+	{
+		return isChokedByPeer;
+	}
+
+	public void isChoked(boolean state)
+	{
+		isChokedByPeer = state;
 	}
 	
 	public void printBitfield(String s, byte[] b)

@@ -12,9 +12,10 @@ public class Controller extends Module {
 	private Server serverInstance;
 	private List<Peer> neighborPeers;
 	private boolean isShuttingDown;
+	private String optimisticPeerID;
 	private Controller ctrl;
-    private OptimisticNeighborManager optimisticNeighborManager;
-    private PreferredNeighborManager preferredNeighborManager;
+    	private OptimisticNeighborManager optimisticNeighborManager;
+    	private PreferredNeighborManager preferredNeighborManager;
 	private HashMap<String, String> commonInfo;
 	private String fileName;
 	private int fileSize;
@@ -75,6 +76,13 @@ public class Controller extends Module {
 			{
 				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerMod(this);				
 			}
+		
+			if( optimisticNeighborManager == null)
+			{
+
+				 optimisticNeighborManager = new OptimisticNeighborManager(this,5);
+				
+			}
 			
 			isShuttingDown = false;
 			
@@ -91,7 +99,7 @@ public class Controller extends Module {
 				{
 					//peerUploadRates.put(peerKey, 0.0f);
 				}
-				
+				new Thread( optimisticNeighborManager).start();
 				//start preferred neighbor selection
 				//select optimistic neighbor
 			} catch (UnknownHostException e) {
@@ -265,10 +273,32 @@ public class Controller extends Module {
 		neighborPeers.add(peer);
 		System.out.println("ADDING PEER FROM SEVER: " + peer);
 	}
+
+	public void setNeighbor(Peer peer)
+	{
+		int index  = neighborPeers.indexOf(peer) ;
+		System.out.println("INDEX: " + index);
+		System.out.println("choking: " + peer.isChokedByPeer());
+		System.out.println("beforechoking: " + neighborPeers.get(0).isChokedByPeer());
+		if(index != -1)
+		{
+			neighborPeers.set(index,peer);
+		} 
+	}
+
+	public void setOptimisticPeerID(String id)
+	{
+		optimisticPeerID = id;
+	}
 	
 	public List<Peer> getNeighborsList()
 	{
 		return neighborPeers;
+	}
+
+	public List<String> getInterestedPeers()
+	{
+		return interestedNeighbors;
 	}
 	
 	public HashMap<String, Float> getPeerUploadRates()

@@ -1,3 +1,5 @@
+import java.nio.ByteBuffer; 
+
 public class RequestMessage implements Message{
         private int msg_len;
         private int msg_type;
@@ -42,7 +44,10 @@ public class RequestMessage implements Message{
 
         public void setMsgPayLoad(){}
         
-        public void setMsgPayLoad(int index){}
+        public void setMsgPayLoad(int index)
+	{
+		msg_payload = ByteBuffer.allocate(4).putInt(index).array();
+	}
 	
 	public void setMsgPayLoad(int index, byte[] payload){}
 

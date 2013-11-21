@@ -93,7 +93,7 @@ public class BitfieldHandler extends Module{
 		
 		for(int i = 0; i < numPieces; i++)
 		{
-			if(bPeer[i] == 1 && bNeighbor[i] == 0)
+			if(bPeer[i] == 0 && bNeighbor[i] == 1)
 			{
 				interestedPieceArray.add(i);
 			}
@@ -108,7 +108,7 @@ public class BitfieldHandler extends Module{
 		
 		for(int i = 0; i < numPieces; i++)
 		{
-			if(bPeer[i] == 1 && bNeighbor[i] == 0)
+			if(bPeer[i] == 0 && bNeighbor[i] == 1)
 			{
 				return true;
 			}
