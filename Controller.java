@@ -74,7 +74,6 @@ public class Controller extends Module {
 			}
 			
 			isShuttingDown = false;
-			
 	}
 	
 	public void execute()
@@ -344,6 +343,34 @@ public class Controller extends Module {
 	public List<String> getPreferredNeighbors()
 	{
 		return preferredNeighbors;
+	}
+	
+	public void setPreferredNeighbors(List<String> preferred)
+	{
+		preferredNeighbors = preferred;
+		//send unchoke messages to peers
+		unchokePreferredChokeOthers();
+	}
+	
+	public void unchokePreferredChokeOthers()
+	{
+		for(String prefkey: preferredNeighbors)
+		{
+			for(Peer peer: neighborPeers)
+			{
+				if(peer.getHandshakeSent())
+				{
+					if(peer.getNeighborPeerID().equals(prefkey))
+					{
+						peer.sendUnchokeMsg();
+					}
+					else
+					{
+						peer.sendChokeMsg();
+					}
+				}
+			}
+		}
 	}
 }
 

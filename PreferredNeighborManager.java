@@ -1,12 +1,7 @@
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -23,7 +18,7 @@ public class PreferredNeighborManager implements Runnable{
     String optimisticNeighbor[];
     ScheduledExecutorService scheduler = null;
     ScheduledFuture<?> taskHandle = null;
-    //MapUtil mapUtil;
+    int numPreferredNeighbors;
     
    
     
@@ -31,13 +26,12 @@ public class PreferredNeighborManager implements Runnable{
     {
         this.controller = peerController;
         configInstance = controller.getConfiguration();
+        numPreferredNeighbors = Integer.parseInt(configInstance.getCommonInfo().get("NumberOfPreferredNeighbors"));
         
         scheduler = Executors.newScheduledThreadPool(1);
         int unchokingInterval = Integer.parseInt(configInstance.getCommonInfo().get("UnchokingInterval"));
         System.out.println(unchokingInterval);
         taskHandle = scheduler.scheduleAtFixedRate(this, unchokingInterval, unchokingInterval, TimeUnit.SECONDS);
-        
-        //mapUtil = new MapUtil();
     }
     
     PreferredNeighborManager(int unchokingInterval)
@@ -49,23 +43,24 @@ public class PreferredNeighborManager implements Runnable{
     @Override
     public void run() {
         //select neighbors that have transmitted to this peer at the highest rates
-    	//HashMap<String, Float> downloadRates = controller.getPeerDownloadRates();    	
-    	
-    	Random random = new Random(System.currentTimeMillis());
-        Map<String, Float> testMap = new HashMap<String, Float>(10);
-        for(int i = 0 ; i < 10 ; ++i) {
-            testMap.put( "SomeString" + random.nextInt()%1000, (Float)(random.nextInt()%1000 + random.nextFloat()));
-            
-        }
+    	Map<String, Float> downloadRates = controller.getPeerDownloadRates();    	
         
-        System.out.println("size: " + testMap.size());
-        testMap = MapUtil.sortByValue( testMap );
-    	
-    		
-    	for(Entry<String, Float> entry: testMap.entrySet())
+        System.out.println("downloadrate size: " + downloadRates.size());
+        downloadRates = MapUtil.sortByValue( downloadRates );
+    
+    	for(Entry<String, Float> entry: downloadRates.entrySet())
     	{
-    		System.out.println(entry.getKey() + ", " + entry.getValue());
+    		System.out.println("peerDownloadRates: " + entry.getKey() + ", " + entry.getValue());
     	}    	
+    	
+    	List<String> preferredNeighbors = new ArrayList<String>();
+    	for(Entry<String, Float> entry: downloadRates.entrySet())
+    	{
+    		preferredNeighbors.add(entry.getKey());
+    		if(preferredNeighbors.size() == numPreferredNeighbors) break;
+    	}
+    	
+    	controller.setPreferredNeighbors(preferredNeighbors);
     }
     
     

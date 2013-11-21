@@ -371,7 +371,7 @@ public class Peer extends Module implements Runnable{
 		}		
 	}
 	
-	private void sendChokeMsg()
+	public void sendChokeMsg()
 	{
 		try 
 		{			
@@ -394,7 +394,7 @@ public class Peer extends Module implements Runnable{
 
 	}
 	
-	private void sendUnchokeMsg()
+	public void sendUnchokeMsg()
 	{
 		try 
 		{			
@@ -449,5 +449,15 @@ public class Peer extends Module implements Runnable{
 	public void restartData()
 	{
 		bytesDownloaded = 0;
+	}
+	
+	public String getNeighborPeerID()
+	{
+		return neighborPeerID;
+	}
+	
+	public boolean getHandshakeSent()
+	{
+		return handshakeSent;
 	}
 }
