@@ -17,6 +17,8 @@ public class UnchokeMessage implements Message{
 		msg_payload = payload;
 	}
 
+	public void setMsgPayLoad(int index, byte[] payload){}
+
 	public int getMsgType() {
 		return msg_type;
 	}

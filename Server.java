@@ -6,7 +6,6 @@ import java.util.*;
 
 public class Server extends Module implements Runnable
 {
-	//private Configuration configInstance;
 	private String peerID;
 	private Controller controllerInstance;
 	
@@ -44,14 +43,9 @@ public class Server extends Module implements Runnable
 				System.out.println("CONNECTING: " + peer);
 			
 				Peer neighborPeer = (Peer) ModuleFactory.createPeer(peer, controllerInstance);
-				System.out.println("PEERID : " + controllerInstance.getPeerID());
-
+			
+				controllerInstance.addNeighbors(neighborPeer);
 		
-				//System.out.println("NP: " + neighborPeer);
-			//	synchronized(this)
-			//0	{			
-					controllerInstance.addNeighbors(neighborPeer);
-			//	}
 				new Thread(neighborPeer).start();
 			}
 		}catch(IOException e)

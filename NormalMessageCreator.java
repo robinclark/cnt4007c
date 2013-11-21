@@ -23,17 +23,17 @@ public class NormalMessageCreator {
 	public void createNormalMessage(byte type, int index)
 	{
 		builder.setMsgType(type);
-		builder.setPieceIndex(index);
+		builder.setMsgPayLoad(index);
 		builder.setMsgLen();
 	}
-	
+
 	public void createNormalMessage(byte type, int index, byte[] payload)
 	{
 		builder.setMsgType(type);
-		builder.setPieceIndex(index);
-		builder.setMsgPayLoad(payload);
+		builder.setMsgPayLoad(index, payload);
 		builder.setMsgLen();
 	}
+	
 }
 	
 	

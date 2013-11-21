@@ -56,6 +56,8 @@ public class HandShakeMessage implements Message
 	}
 
 	public void setMsgPayLoad(int index){}
+	
+	public void setMsgPayLoad(int index, byte[] payload){}
 
 	@Override
 	public int getMsgType() {
@@ -69,10 +71,5 @@ public class HandShakeMessage implements Message
 		return 0;
 	}
 
-	@Override
-	public void setPieceIndex(int index) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+
 }

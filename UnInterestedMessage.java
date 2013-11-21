@@ -10,7 +10,7 @@ public class UnInterestedMessage implements Message{
 	}
 
 	public void setMsgLen() {
-		msg_len = msg_payload.length;
+		msg_len = 1;
 	}
 
 	@Override
@@ -34,6 +34,8 @@ public class UnInterestedMessage implements Message{
 	{
 		return msg_payload;
 	}
+
+	public void setMsgPayLoad(int index, byte[] payload){}
 	
 	public long getUID()
 	{
@@ -55,11 +57,7 @@ public class UnInterestedMessage implements Message{
 		msg_type = type;
 	}
 
-	@Override
-	public void setPieceIndex(int index) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 
 }

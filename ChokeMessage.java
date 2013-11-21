@@ -40,6 +40,7 @@ public class ChokeMessage implements Message {
 	{
 		return msg_payload;
 	}
+	public void setMsgPayLoad(int index, byte[] payload){}
 	
 	public long getUID()
 	{
@@ -57,11 +58,7 @@ public class ChokeMessage implements Message {
 		
 	}
 
-	@Override
-	public void setPieceIndex(int index) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	
 	

@@ -8,10 +8,10 @@ interface Message extends Serializable {
 	public  void setMsgPayLoad();//***what does this do?
 	public  void setMsgPayLoad(int index);	
 	public  void setMsgPayLoad(byte[] payload);
+	public void setMsgPayLoad(int index, byte[] payload);
 	public  int getMsgType();
 	public  int getMsgLen();
 	public  long getUID();
-	public void setPieceIndex(int index);
 
 	
 }

@@ -44,16 +44,11 @@ public class BitFieldMessage implements Message{
 	@Override
 	public void setMsgPayLoad(){}
 	public void setMsgPayLoad(int index){}
+	public void setMsgPayLoad(int index, byte[] payload){}
 
 	@Override
 	public void setMsgType(byte type) {
 		msg_type = type;		
-	}
-
-	@Override
-	public void setPieceIndex(int index) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 

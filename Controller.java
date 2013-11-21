@@ -38,10 +38,9 @@ public class Controller extends Module {
 	public void initialConfiguration() {
 			if(configInstance == null)
 			{
-				//System.out.println("CONFIG INSTANCE START");
 				configInstance = (Configuration) ModuleFactory.createConfigMod();
-				 peerList = configInstance.getPeerList();
-				 peerKeys = peerList.keySet();
+				peerList = configInstance.getPeerList();
+				peerKeys = peerList.keySet();
 				commonInfo = configInstance.getCommonInfo();
 				fileName = "peer_" + peerID + "/" + commonInfo.get("FileName");
 				System.out.println(fileName);
@@ -66,10 +65,14 @@ public class Controller extends Module {
 				neighborPeers = new ArrayList<Peer>();
 			}
 
+			if(interestedNeighbors == null)
+			{
+				interestedNeighbors = new ArrayList<String>();
+			}
+
 
 			if(fileHandlerInstance == null)
 			{
-				//System.out.println("FILEHANDLER START");
 				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerMod(this);				
 			}
 			
@@ -86,7 +89,7 @@ public class Controller extends Module {
 				//initpeeruploadrates
 				for(String peerKey: peerKeys)
 				{
-					peerUploadRates.put(peerKey, 0.0f);
+					//peerUploadRates.put(peerKey, 0.0f);
 				}
 				
 				//start preferred neighbor selection
@@ -130,9 +133,7 @@ public class Controller extends Module {
 					Socket socket = new Socket(peerList.get(peerKey).getHostName(), peerList.get(peerKey).getPortNumber());
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
 					neighborPeers.add(clientPeer);
-					
-					System.out.println("ADDING PEER FROM CLIENT: " + clientPeer + " " + peerKey);
-					
+		
 					new Thread(clientPeer).start();
 				}
 		}
@@ -173,24 +174,6 @@ public class Controller extends Module {
 	
 		return bits;
 		
-	}
-	
-	public synchronized boolean compareBytesForInterested(byte[] bitFieldA, byte[] bitFieldB)
-	{
-		boolean flag = false;
-		for(int i = 0; i < numOfPieces; i++)
-		{
-			if((byte)bitFieldA[i] != (byte)bitFieldB[i] && bitFieldA[i] == (byte)1)
-			{
-				flag = true;
-				break;
-				
-			}
-			
-		}
-		
-		return flag;
-	
 	}
 
 	public synchronized int getRandomInterestedPiece(byte[] bitFieldA, byte[] bitFieldB)
@@ -267,7 +250,9 @@ public class Controller extends Module {
 	
 	public void removeInterestedPeer(String id)
 	{
-		interestedNeighbors.remove(id);//what if peer not in list
+		try{
+			interestedNeighbors.remove(id);
+		 }catch(IndexOutOfBoundsException  e){} //fail silently if peer does not exist
 	}
 	
 	public void writePiece(int index, byte[] piece)
