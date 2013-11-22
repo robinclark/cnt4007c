@@ -1,8 +1,8 @@
 //handle file segments
-import java.util.*;
-import java.lang.Exception.*;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FileHandler extends Module
 {
@@ -61,6 +61,18 @@ public class FileHandler extends Module
 			bitfieldHandler = (BitfieldHandler) ModuleFactory.createBitfieldHandlerMod(this);
 		}
 		
+	}
+	
+	public void shutdown()
+	{
+		try
+		{
+			outputFile.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void writePiece(int index, byte[] piece)

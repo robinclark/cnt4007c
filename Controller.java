@@ -399,11 +399,25 @@ public class Controller extends Module {
 			}
 		}
 		System.out.println("EVERYONE HAS FILE");
+		//closeEverything();
 	}
 	
 	public boolean getHasFile()
 	{
 		return hasFileStatus.get(peerID);
+	}
+	
+	public void closeEverything()
+	{
+		for(Peer p: neighborPeers)
+		{
+			p.shutdown();
+			//p.interrupt();
+			//p.join();
+		}
+		//preferrednighbor manager
+		//optimiistic neighbor manager
+		//filehandler
 	}
 }
 

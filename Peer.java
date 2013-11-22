@@ -120,6 +120,19 @@ public class Peer extends Module implements Runnable{
 		}		
 	}
 	
+	public void shutdown()
+	{
+		try
+		{
+			inputStream.close();
+			outputStream.close();
+		}
+		catch (IOException e) {
+			
+            e.printStackTrace();
+		}               
+	}
+	
 	private void sendHandShake()
 	{
 		

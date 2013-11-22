@@ -39,6 +39,12 @@ public class PreferredNeighborManager implements Runnable{
         scheduler = Executors.newScheduledThreadPool(1);
         taskHandle = scheduler.scheduleAtFixedRate(this, unchokingInterval, unchokingInterval, TimeUnit.SECONDS);
     }
+    
+    public void shutdown()
+    {
+    	scheduler.shutdown();
+    	taskHandle.cancel(true);
+    }
 
     @Override
     public void run() {
