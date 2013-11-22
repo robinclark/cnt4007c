@@ -27,6 +27,7 @@ public class Controller extends Module {
 	private List<String> interestedNeighbors;
 	private String optimisticallyUnchokedNeighbor;
 	private HashMap<String, Float> peerDownloadRates;
+	private HashMap<String, Boolean> hasFileStatus;
 	
 	public Controller(String peerID)
 	{
@@ -41,6 +42,13 @@ public class Controller extends Module {
 				configInstance = (Configuration) ModuleFactory.createConfigMod();
 				peerList = configInstance.getPeerList();
 				peerKeys = peerList.keySet();
+				
+				hasFileStatus = new HashMap<String, Boolean>();
+				for(String peerKey: peerKeys)
+				{
+					hasFileStatus.put(peerKey, configInstance.getPeerList().get(peerKey).getHasFile());
+				}
+				
 				commonInfo = configInstance.getCommonInfo();
 				fileName = "peer_" + peerID + "/" + commonInfo.get("FileName");
 				System.out.println(fileName);
@@ -322,7 +330,7 @@ public class Controller extends Module {
 			if(p.getHandshakeReceived())
 			{
 				peerDownloadRates.put(p.getNeighborPeerID(), p.getDownloadRate());
-				System.out.println(p.getNeighborPeerID() + "handshakeReceived: " + p.getHandshakeReceived());
+				//System.out.println(p.getNeighborPeerID() + "handshakeReceived: " + p.getHandshakeReceived());
 			}
 		}
 		return peerDownloadRates;
@@ -377,6 +385,25 @@ public class Controller extends Module {
 				}
 			}
 		}
+	}
+	
+	public void setHasFile(String id)
+	{
+		hasFileStatus.put(id, true);
+		
+		for(String peerKey: peerKeys)
+		{
+			if(!hasFileStatus.get(peerKey))
+			{
+				return;
+			}
+		}
+		System.out.println("EVERYONE HAS FILE");
+	}
+	
+	public boolean getHasFile()
+	{
+		return hasFileStatus.get(peerID);
 	}
 }
 

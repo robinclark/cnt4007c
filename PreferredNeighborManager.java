@@ -45,7 +45,7 @@ public class PreferredNeighborManager implements Runnable{
         //select neighbors that have transmitted to this peer at the highest rates
     	Map<String, Float> downloadRates = controller.getPeerDownloadRates();   
         downloadRates = MapUtil.sortByValue( downloadRates );
-        System.out.println("downloadrate size: " + downloadRates.size());
+        System.out.println("downloadRates.size(): " + downloadRates.size());
         
     	for(Entry<String, Float> entry: downloadRates.entrySet())
     	{

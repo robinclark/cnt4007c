@@ -4,12 +4,11 @@ public class UnchokeMessage implements Message{
 	private int msg_type;
 	private int index;
 	private byte[] msg_payload;
-	private static final long serialVersionUID = 7L;
-	
+	private static final long serialVersionUID = 7L;	
 
 
 	public void setMsgLen() {
-		msg_len = msg_payload.length;
+		msg_len = 0;
 	}
 
 	public void setMsgPayLoad(byte[] payload) {

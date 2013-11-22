@@ -58,13 +58,6 @@ public class Peer extends Module implements Runnable{
 				}
 				
 			}
-
-			Configuration config = controller.getConfiguration();
-			HashMap<String, Configuration.PeerInfo> peers = config.getPeerList();
-		
-			Configuration.PeerInfo peer = peers.get(peerID);
-			hasFile = peer.getHasFile();
-		
 	}
 	
 	@Override
@@ -161,7 +154,6 @@ public class Peer extends Module implements Runnable{
 				 }
 				 handshakeReceived = true;
 				 System.out.println("HANDSHAKE HANDLED");
-				 sendUnchokeMsg();
 			 }				 
 		   }catch(IOException e)
 		    {
@@ -284,6 +276,7 @@ public class Peer extends Module implements Runnable{
 	{
 		try 
 		{			
+			System.out.println("CONSTRUCTING PIECE");
 			PieceMessage builder = new PieceMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			byte[] payload = controller.getPiece(index);
@@ -304,6 +297,9 @@ public class Peer extends Module implements Runnable{
 		controller.writePiece(((PieceMessage) msg).getPieceIndex(), payload);
 		bytesDownloaded += payload.length;
 		System.out.println("PIECE HANDLED");
+		printBitfield("PIECE: ", controller.getBitfield(peerID));
+		
+		sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
 	}
 
 	private void sendRequestMsg(int index)
@@ -317,6 +313,7 @@ public class Peer extends Module implements Runnable{
 				NormalMessageCreator creator = new NormalMessageCreator(builder);
 				creator.createNormalMessage(Constants.MSG_REQUEST_TYPE, index);
 				Message msg = builder.getMessage();
+				System.out.println("REQUEST INDEX: " + index);
 
 				outputStream.writeUnshared(msg);
 				outputStream.flush();
@@ -331,9 +328,11 @@ public class Peer extends Module implements Runnable{
 	private void handleRequestMsg(Message msg)
 	{
 		//create & send piece message	
+		System.out.println(neighborPeerID + " FOUND: " + controller.getPreferredNeighbors().indexOf(neighborPeerID));
 		if(controller.getPreferredNeighbors().indexOf(neighborPeerID) != -1)
 		{
 			int index = ((RequestMessage) msg).getPieceIndex();
+			System.out.println("REQUESTING INDEX: " + index);
 			sendPieceMsg(index);		
 		}
 		System.out.println("REQUEST HANDLED");
@@ -425,10 +424,13 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleUnchokeMsg(Message msg)
 	{
-		/*System.out.println("TRYING TO HANDLE UNCHOKE");
+		//System.out.println("TRYING TO HANDLE UNCHOKE");
 		startTimer();
 		isChokedByPeer = false;		
-		sendRequestMsg(controller.getInterestedIndex(neighborPeerID));*/
+		if(!controller.getHasFile())
+		{
+			sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
+		}
 		System.out.println("UNCHOKE HANDLED");
 	}
 			 
