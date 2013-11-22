@@ -38,10 +38,9 @@ public class Controller extends Module {
 	public void initialConfiguration() {
 			if(configInstance == null)
 			{
-				//System.out.println("CONFIG INSTANCE START");
 				configInstance = (Configuration) ModuleFactory.createConfigMod();
-				 peerList = configInstance.getPeerList();
-				 peerKeys = peerList.keySet();
+				peerList = configInstance.getPeerList();
+				peerKeys = peerList.keySet();
 				commonInfo = configInstance.getCommonInfo();
 				fileName = "peer_" + peerID + "/" + commonInfo.get("FileName");
 				System.out.println(fileName);
@@ -66,14 +65,22 @@ public class Controller extends Module {
 				neighborPeers = new ArrayList<Peer>();
 			}
 
+			if(interestedNeighbors == null)
+			{
+				interestedNeighbors = new ArrayList<String>();
+			}
+
 
 			if(fileHandlerInstance == null)
 			{
-				//System.out.println("FILEHANDLER START");
 				fileHandlerInstance = (FileHandler) ModuleFactory.createFileHandlerMod(this);				
 			}
 			
 			isShuttingDown = false;
+			
+			peerDownloadRates = new HashMap<String, Float>();
+			preferredNeighborManager = new PreferredNeighborManager(this);
+			new Thread(preferredNeighborManager).start();
 	}
 	
 	public void execute()
@@ -81,12 +88,6 @@ public class Controller extends Module {
 			try {
 				createServers();	
 				createClients();
-				
-				//initpeeruploadrates
-				for(String peerKey: peerKeys)
-				{
-					peerDownloadRates.put(peerKey, 0.0f);
-				}
 				
 				//start preferred neighbor selection
 				//select optimistic neighbor
@@ -129,9 +130,7 @@ public class Controller extends Module {
 					Socket socket = new Socket(peerList.get(peerKey).getHostName(), peerList.get(peerKey).getPortNumber());
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
 					neighborPeers.add(clientPeer);
-					
-					System.out.println("ADDING PEER FROM CLIENT: " + clientPeer + " " + peerKey);
-					
+		
 					new Thread(clientPeer).start();
 				}
 		}
@@ -172,24 +171,6 @@ public class Controller extends Module {
 		return bits;
 		
 	}
-	
-	public synchronized boolean compareBytesForInterested(byte[] bitFieldA, byte[] bitFieldB)
-	{
-		boolean flag = false;
-		for(int i = 0; i < numOfPieces; i++)
-		{
-			if((byte)bitFieldA[i] != (byte)bitFieldB[i] && bitFieldA[i] == (byte)1)
-			{
-				flag = true;
-				break;
-				
-			}
-			
-		}
-		
-		return flag;
-	
-	}
 
 	public synchronized int getRandomInterestedPiece(byte[] bitFieldA, byte[] bitFieldB)
 	{
@@ -222,7 +203,7 @@ public class Controller extends Module {
 		return true;
 	}
 	
-	public void broadcastHaveMsg(int index)
+	public synchronized void broadcastHaveMsg(int index)
 	{
 		for(int i = 0; i < neighborPeers.size(); i++)
 		{
@@ -230,22 +211,22 @@ public class Controller extends Module {
 		}
 	}
 
-	public byte[] getPiece(int index)
+	public synchronized byte[] getPiece(int index)
 	{
 		return fileHandlerInstance.getPiece(index);
 	}
 	
-	public void setPeerBitfield(String id, byte[] bitfield)
+	public synchronized void setPeerBitfield(String id, byte[] bitfield)
 	{
 		fileHandlerInstance.setPeerBitfield(id, bitfield);
 	}
 	
-	public boolean getInterested(String id)
+	public synchronized boolean getInterested(String id)
 	{
 		return fileHandlerInstance.getInterested(id);
 	}
 	
-	public int getInterestedIndex(String id)
+	public synchronized int  getInterestedIndex(String id)
 	{
 		ArrayList<Integer> interestedPieces = fileHandlerInstance.getInterestedPieceArray(id);
 		Random rdx = new Random();
@@ -253,22 +234,24 @@ public class Controller extends Module {
 		return index;
 	}
 	
-	public void setPiece(int index, String id)
+	public synchronized void setPiece(int index, String id)
 	{
 		fileHandlerInstance.setPiece(index, id);
 	}
 	
-	public void addInterestedPeer(String id)
+	public synchronized void addInterestedPeer(String id)
 	{
 		interestedNeighbors.add(id);
 	}
 	
-	public void removeInterestedPeer(String id)
+	public synchronized void removeInterestedPeer(String id)
 	{
-		interestedNeighbors.remove(id);//what if peer not in list
+		try{
+			interestedNeighbors.remove(id);
+		 }catch(IndexOutOfBoundsException  e){} //fail silently if peer does not exist
 	}
 	
-	public void writePiece(int index, byte[] piece)
+	public synchronized void writePiece(int index, byte[] piece)
 	{
 		fileHandlerInstance.writePiece(index, piece);
 	}
@@ -283,16 +266,7 @@ public class Controller extends Module {
 	{
 		return neighborPeers;
 	}
-	
-	public HashMap<String, Float> getPeerDownloadRates()
-	{
-		for(Peer p: neighborPeers)
-		{
-			peerDownloadRates.put(p.getPeerID(), p.getDownloadRate());
-		}
-		return peerDownloadRates;
-	}
-        
+	 
     public Configuration getConfiguration()
     {
         return configInstance;
@@ -303,7 +277,7 @@ public class Controller extends Module {
 		return logInstance;
 	}
 	
-	public byte[] getBitfield(String id)
+	public synchronized byte[] getBitfield(String id)
 	{
 		byte[] field = fileHandlerInstance.getBitfield(id);
 		//printBitfield("CONTROLLER", field);
@@ -340,7 +314,21 @@ public class Controller extends Module {
 		return pieceSize;
 	}
 	
-	public List<String> getPreferredNeighbors()
+
+	public HashMap<String, Float> getPeerDownloadRates()
+	{
+		for(Peer p: neighborPeers)
+		{
+			if(p.getHandshakeReceived())
+			{
+				peerDownloadRates.put(p.getNeighborPeerID(), p.getDownloadRate());
+				System.out.println(p.getNeighborPeerID() + "handshakeReceived: " + p.getHandshakeReceived());
+			}
+		}
+		return peerDownloadRates;
+	}
+       	
+	public synchronized List<String> getPreferredNeighbors()
 	{
 		return preferredNeighbors;
 	}
@@ -348,6 +336,12 @@ public class Controller extends Module {
 	public void setPreferredNeighbors(List<String> preferred)
 	{
 		preferredNeighbors = preferred;
+		
+		System.out.println("PreferredNeighbors");
+    	for(String neighbor: preferredNeighbors)
+    	{
+    		System.out.println(neighbor);
+    	}
 		//send unchoke messages to peers
 		unchokePreferredChokeOthers();
 	}
@@ -358,15 +352,27 @@ public class Controller extends Module {
 		{
 			for(Peer peer: neighborPeers)
 			{
-				if(peer.getHandshakeSent())
+				if(peer.getHandshakeReceived())
 				{
 					if(peer.getNeighborPeerID().equals(prefkey))
 					{
-						peer.sendUnchokeMsg();
+						System.out.println("KEYS EQUAL: " + prefkey + ", CHOKED: " + peer.getIsChokedByPeer());
+						
+						if(peer.getIsChokedByPeer())
+						{
+							System.out.println("UNCHOKING");
+							peer.sendUnchokeMsg();
+							
+						}
 					}
 					else
 					{
-						peer.sendChokeMsg();
+						System.out.println("KEYS UNEQUAL: " + prefkey + ", CHOKED" + peer.getIsChokedByPeer());
+						if(!peer.getIsChokedByPeer())
+						{
+							System.out.println("CHOKING");
+							peer.sendChokeMsg();
+						}
 					}
 				}
 			}

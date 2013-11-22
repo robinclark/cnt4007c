@@ -14,6 +14,7 @@ public class BitfieldHandler extends Module{
 		this.fileHandler = fileHandler;		
 		numPieces = fileHandler.getNumOfPieces();
 		peerID = fileHandler.getPeerID();
+		//System.out.println("PEERID BITFIELD: " + peerID);
 		boolean hasFile = fileHandler.getPeerList().get(peerID).getHasFile();
 		initBitfield(hasFile);
 	}
@@ -39,6 +40,7 @@ public class BitfieldHandler extends Module{
 		completeFile = new byte[numPieces];
 		
 		bitfields.put(peerID, b);
+		//System.out.println("BIT: " + peerID);
 		if(hasFile)
 		{
 			for(int i = 0; i < numPieces; i++)
@@ -51,6 +53,7 @@ public class BitfieldHandler extends Module{
 		{
 			for(int i = 0; i < numPieces; i++)
 			{
+				bitfields.get(peerID)[i] = 0;
 				completeFile[i] = 1;
 			}
 		}
@@ -60,11 +63,14 @@ public class BitfieldHandler extends Module{
 	{
 		byte[] temp = new byte[numPieces];
 		bitfields.put(peerID, temp);
+		//System.out.println("SETTING BITFIELD: " + peerID);
 		System.arraycopy(peerBitfield, 0, bitfields.get(peerID), 0, numPieces);
 	}
 	
 	public void setPiece(int index, String peerID)
 	{
+		
+		//System.out.println("BIT: " + bitfields.get("1001") + " index: " + peerID);
 		bitfields.get(peerID)[index] = 1;
 	}
 	

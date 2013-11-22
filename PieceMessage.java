@@ -47,16 +47,17 @@ public class PieceMessage implements Message{
 	@Override
 	public void setMsgPayLoad(){}
 	public void setMsgPayLoad(int index){}
+	
+	public void setMsgPayLoad(int index, byte[] payload)
+	{
+		this.index = index;
+		msg_payload = payload;
+	}
 
 	@Override
 	public void setMsgType(byte type) {
 		// TODO Auto-generated method stub
 		msg_type = type;
-	}
-	
-	public void setPieceIndex(int index)
-	{
-		this.index = index;
 	}
 	
 	public int getPieceIndex()

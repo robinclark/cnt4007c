@@ -3,7 +3,6 @@ import java.net.Socket;
 public class ModuleFactory {
 	public static Module createConfigMod()
 	{
-		//System.out.println("CREATING CONFIG MOD");
 		Configuration config = new Configuration();
 		config.initialConfiguration();
 		

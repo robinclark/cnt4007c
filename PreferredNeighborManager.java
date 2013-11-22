@@ -43,11 +43,10 @@ public class PreferredNeighborManager implements Runnable{
     @Override
     public void run() {
         //select neighbors that have transmitted to this peer at the highest rates
-    	Map<String, Float> downloadRates = controller.getPeerDownloadRates();    	
-        
-        System.out.println("downloadrate size: " + downloadRates.size());
+    	Map<String, Float> downloadRates = controller.getPeerDownloadRates();   
         downloadRates = MapUtil.sortByValue( downloadRates );
-    
+        System.out.println("downloadrate size: " + downloadRates.size());
+        
     	for(Entry<String, Float> entry: downloadRates.entrySet())
     	{
     		System.out.println("peerDownloadRates: " + entry.getKey() + ", " + entry.getValue());

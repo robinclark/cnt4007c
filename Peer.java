@@ -14,7 +14,7 @@ public class Peer extends Module implements Runnable{
 	private String neighborPeerID;
 	private Logger logInstance;
 	private  Controller controller;
-	private boolean isChokedByPeer;
+	private boolean isChokedByPeer = true;
 	private int downloadDataSize;
 	private int downloadTime;
 	private Socket neighborPeer;
@@ -23,6 +23,7 @@ public class Peer extends Module implements Runnable{
 	private boolean hasFile;
 	private byte[] bitField;
 	private boolean handshakeSent = false;
+	private boolean handshakeReceived = false;
 	private float downloadRate = 0.0f;
 	private long startTime = 0;
 	private int bytesDownloaded = 0; 
@@ -53,7 +54,6 @@ public class Peer extends Module implements Runnable{
 					inputStream = new ObjectInputStream(neighborPeer.getInputStream());
 				
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -64,28 +64,25 @@ public class Peer extends Module implements Runnable{
 		
 			Configuration.PeerInfo peer = peers.get(peerID);
 			hasFile = peer.getHasFile();
-
-			System.out.println("hasFile: " + hasFile);
-
-			bitField = controller.setBits(hasFile);			
+		
 	}
 	
 	@Override
 	public void run() {
 		sendHandShake();
+
 		while(!isShuttingDown)
 		{
 
 			try {
 				Message message = (Message) inputStream.readObject();
 				
-				if(message.getUID() == Constants.HANDSHAKE_UID) //why isnt this handled like other messages?
+				if(message.getUID() == Constants.HANDSHAKE_UID) /* differentiates betwen normal messages and handshake messages*/
 				{
 					handleHandShakeMessage(message);
 				}
 				else
 				{
-					System.out.println("MSGTYPE: " + message.getMsgType());
 					if(message.getMsgType() == Constants.MSG_BITFIELD_TYPE)
 					{
 						handleBitFieldMsg(message);
@@ -122,7 +119,6 @@ public class Peer extends Module implements Runnable{
 					}
 				}				
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch(IOException e)
 			{
@@ -134,12 +130,9 @@ public class Peer extends Module implements Runnable{
 	private void sendHandShake()
 	{
 		
-		try {
-			
+		try {			
 			HandShakeMessage message = new HandShakeMessage();
-			
 			message.setPeerID(peerID);
-		
 			outputStream.writeUnshared(message);
 			outputStream.flush();
 			handshakeSent = true;
@@ -152,11 +145,7 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleHandShakeMessage(Message msg)
 	{
-		 HandShakeMessage newMsg = (HandShakeMessage) msg;
-		 System.out.println("CTRL: " + controller);
-		 System.out.println("peers: " + controller.getNeighborsList());
-	
-		 
+		 HandShakeMessage newMsg = (HandShakeMessage) msg; 
 		try {
 			 if(newMsg.getHeader() == Constants.HANDSHAKE_HEADER)
 			 {
@@ -164,19 +153,19 @@ public class Peer extends Module implements Runnable{
 				 {
 					neighborPeerID = newMsg.getPeerID();
 					logInstance.writeLogger(logInstance.TCPConnectLog(neighborPeerID));
-					System.out.println("SENDING BITFIELD");
 					sendBitFieldMsg();
 				 }
 				 else
 				 {
 					 sendHandShake();
 				 }
-			 }	
-			 
-			 System.out.println("HANDSHAKE HANDLED");
+				 handshakeReceived = true;
+				 System.out.println("HANDSHAKE HANDLED");
+				 sendUnchokeMsg();
+			 }				 
 		   }catch(IOException e)
 		    {
-			e.printStackTrace();
+			   e.printStackTrace();
 		    }
 		 
 	}
@@ -188,24 +177,22 @@ public class Peer extends Module implements Runnable{
 			
 			BitFieldMessage builder = new BitFieldMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
-			byte[] field = new byte[controller.getFileSize()];
-			
-			field = controller.getBitfield(peerID);
-			//System.arraycopy(controller.getBitfield(peerID),0,field,0,controller.getNumOfPieces());
-			System.out.println("BUILDING BITFIELD MESSAGE");
-			printBitfield(peerID, field);
+	
+			byte[] field = controller.getBitfield(peerID);
+
+			//printBitfield(peerID, field);
 			
 			creator.createNormalMessage(Constants.MSG_BITFIELD_TYPE, field);
 			Message msg = builder.getMessage();
 			
 			byte[] payLd = ((BitFieldMessage) msg).getMsgPayLoad();
-			printBitfield(peerID, field);
-			System.out.println("message type: " + msg.getMsgType());
+			
+			
 			
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
-			
 			System.out.println("BITFIELD SENT");
+			printBitfield(peerID, field);
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}
@@ -215,7 +202,7 @@ public class Peer extends Module implements Runnable{
 	private void handleBitFieldMsg(Message msg)
 	{
 		controller.setPeerBitfield(neighborPeerID, ((BitFieldMessage) msg).getMsgPayLoad());
-		printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
+	
 		if(controller.getInterested(neighborPeerID))
 		{
 			sendInterestedMsg();
@@ -225,12 +212,14 @@ public class Peer extends Module implements Runnable{
 			sendUnInterestedMsg();
 		}
 		System.out.println("BITFIELD HANDLED");
+		printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
 	}
 
 	private void sendUnInterestedMsg()
 	{	
 		try 
 		{			
+			
 			UnInterestedMessage builder = new UnInterestedMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			creator.createNormalMessage(Constants.MSG_UNINTERESTED_TYPE);
@@ -246,9 +235,16 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleUnInterestedMsg()
 	{
-		System.out.println("HANDLING UNINTERESTED");
-		logInstance.notInterestedMessage(neighborPeerID);
-		controller.removeInterestedPeer(neighborPeerID);
+		try {
+
+			logInstance.writeLogger(logInstance.notInterestedMessage(neighborPeerID));
+			controller.removeInterestedPeer(neighborPeerID);
+			System.out.println("UNINTERESTED HANDLED");
+		    }catch(IOException e)
+		    {
+		    	e.printStackTrace();
+		    }
+
 	}
 
 	private void sendInterestedMsg()
@@ -272,9 +268,16 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleInterestedMsg()
 	{
-		System.out.println("HANDLING INTERESTED");
-		logInstance.interestedMessage(neighborPeerID);
-		controller.addInterestedPeer(neighborPeerID);
+		try {
+
+
+			logInstance.writeLogger(logInstance.interestedMessage(neighborPeerID));
+			controller.addInterestedPeer(neighborPeerID);
+			System.out.println("INTERESTED HANDLED");
+		    }catch(IOException e)
+	            {		
+			e.printStackTrace();
+	            }	
 	}
 	
 	private void sendPieceMsg(int index)
@@ -297,10 +300,10 @@ public class Peer extends Module implements Runnable{
 
 	private void handlePieceMsg(Message msg)
 	{
-		System.out.println("HANDLING PIECE");
 		byte payload[] = ((PieceMessage) msg).getMsgPayLoad();
 		controller.writePiece(((PieceMessage) msg).getPieceIndex(), payload);
 		bytesDownloaded += payload.length;
+		System.out.println("PIECE HANDLED");
 	}
 
 	private void sendRequestMsg(int index)
@@ -317,6 +320,7 @@ public class Peer extends Module implements Runnable{
 
 				outputStream.writeUnshared(msg);
 				outputStream.flush();
+				System.out.println("REQUEST SENT");
 			}
 		}catch(IOException e) {
 			e.printStackTrace();		
@@ -330,13 +334,15 @@ public class Peer extends Module implements Runnable{
 		if(controller.getPreferredNeighbors().indexOf(neighborPeerID) != -1)
 		{
 			int index = ((RequestMessage) msg).getPieceIndex();
-			sendPieceMsg(index);
+			sendPieceMsg(index);		
 		}
+		System.out.println("REQUEST HANDLED");
 	}
 	
 	private void broadcastHaveMsg(int index)
 	{
 		controller.broadcastHaveMsg(index);
+		System.out.println("BROADCAST HAVE");
 	}
 	
 	public void sendHaveMsg(int index)
@@ -350,7 +356,7 @@ public class Peer extends Module implements Runnable{
 
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
-			
+			System.out.println("HAVE SENT");
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}		
@@ -358,9 +364,7 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleHaveMsg(Message msg)
 	{
-		System.out.println("HANDLING HAVE");
-		controller.setPiece(((HaveMessage) msg).getPieceIndex(),neighborPeerID);
-		printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
+		controller.setPiece(((HaveMessage) msg).getPieceIndex(),neighborPeerID);		
 		if(controller.getInterested(neighborPeerID))
 		{
 			sendInterestedMsg();
@@ -369,12 +373,15 @@ public class Peer extends Module implements Runnable{
 		{
 			sendUnInterestedMsg();
 		}		
+		System.out.println("HAVE HANDLED");
+		printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
 	}
 	
 	public void sendChokeMsg()
 	{
 		try 
 		{			
+			System.out.println("TRYING TO CHOKE");
 			ChokeMessage builder = new ChokeMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			creator.createNormalMessage(Constants.MSG_CHOKE_TYPE);
@@ -382,7 +389,7 @@ public class Peer extends Module implements Runnable{
 
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
-			
+			System.out.println("CHOKE SENT");
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}	
@@ -390,7 +397,9 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleChokeMsg(Message msg)
 	{		
+		System.out.println("TRYING TO HANDLE CHOKE");
 		isChokedByPeer = true;
+		System.out.println("CHOKE HANDLED");
 
 	}
 	
@@ -398,14 +407,17 @@ public class Peer extends Module implements Runnable{
 	{
 		try 
 		{			
+			
 			UnchokeMessage builder = new UnchokeMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			creator.createNormalMessage(Constants.MSG_UNCHOKE_TYPE);
 			Message msg = builder.getMessage();
-
+			System.out.println("MESSAGE TYPE: " + msg.getMsgType());
+			
+			System.out.println("TRYING TO UNCHOKE");
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
-			
+			System.out.println("UNCHOKE SENT");
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}	
@@ -413,9 +425,11 @@ public class Peer extends Module implements Runnable{
 	
 	private void handleUnchokeMsg(Message msg)
 	{
+		/*System.out.println("TRYING TO HANDLE UNCHOKE");
 		startTimer();
 		isChokedByPeer = false;		
-		sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
+		sendRequestMsg(controller.getInterestedIndex(neighborPeerID));*/
+		System.out.println("UNCHOKE HANDLED");
 	}
 			 
 	public String getPeerID()
@@ -459,5 +473,15 @@ public class Peer extends Module implements Runnable{
 	public boolean getHandshakeSent()
 	{
 		return handshakeSent;
+	}
+	
+	public boolean getHandshakeReceived()
+	{
+		return handshakeReceived;
+	}
+	
+	public boolean getIsChokedByPeer()
+	{
+		return isChokedByPeer;
 	}
 }

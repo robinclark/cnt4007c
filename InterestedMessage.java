@@ -13,7 +13,7 @@ public class InterestedMessage implements Message{
 
 
 	public void setMsgLen() {
-		msg_len = msg_payload.length;
+		msg_len = 1;
 	}
 
 	@Override
@@ -52,6 +52,8 @@ public class InterestedMessage implements Message{
 	public void setMsgPayLoad(){}
 	public void setMsgPayLoad(int index){}
 
+	public void setMsgPayLoad(int index, byte[] payload){}
+
 	@Override
 	public void setMsgType(byte type) {
 		// TODO Auto-generated method stub
@@ -60,11 +62,6 @@ public class InterestedMessage implements Message{
 
 
 
-	@Override
-	public void setPieceIndex(int index) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+
 
 }
