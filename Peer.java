@@ -294,12 +294,17 @@ public class Peer extends Module implements Runnable{
 	private void handlePieceMsg(Message msg)
 	{
 		byte payload[] = ((PieceMessage) msg).getMsgPayLoad();
-		controller.writePiece(((PieceMessage) msg).getPieceIndex(), payload);
+		int index = ((PieceMessage) msg).getPieceIndex();
+		controller.writePiece(index, payload);
 		bytesDownloaded += payload.length;
 		System.out.println("PIECE HANDLED");
 		printBitfield("PIECE: ", controller.getBitfield(peerID));
 		
-		sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
+		sendHaveMsg(index);
+		if(!controller.getHasFile())
+		{
+			sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
+		}		
 	}
 
 	private void sendRequestMsg(int index)
