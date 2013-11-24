@@ -39,6 +39,7 @@ public class Controller extends Module {
 	private ExecutorService pool;
 	private ArrayList<Future<?>> futures;
 	private ArrayList<Integer> requestedPieces;
+	private ArrayList<String> peerKeyArray;
 	
 	public Controller(String peerID)
 	{
@@ -53,12 +54,17 @@ public class Controller extends Module {
 				configInstance = (Configuration) ModuleFactory.createConfigMod();
 				peerList = configInstance.getPeerList();
 				peerKeys = peerList.keySet();
+				peerKeyArray = new ArrayList<String>();
+				
 				
 				hasFileStatus = new HashMap<String, Boolean>();
 				for(String peerKey: peerKeys)
 				{
-					hasFileStatus.put(peerKey, configInstance.getPeerList().get(peerKey).getHasFile());
+					hasFileStatus.put(peerKey, configInstance.getPeerList().get(peerKey).getHasFile());					
+					peerKeyArray.add(peerKey);
 				}
+				
+				peerKeyArray.remove(peerID);
 				
 				commonInfo = configInstance.getCommonInfo();
 				fileName = "peer_" + peerID + "/" + commonInfo.get("FileName");
@@ -545,6 +551,18 @@ public class Controller extends Module {
 	public synchronized void removeRequestedPiece(int index)
 	{
 		requestedPieces.remove(Integer.valueOf(index));
+	}
+	
+	public ArrayList<String> getPeerKeyArray()
+	{
+		System.out.println("PEERKEYS");
+		
+		
+		for(String s: peerKeyArray)
+		{
+			System.out.println(s);
+		}
+		return peerKeyArray;
 	}
 }
 

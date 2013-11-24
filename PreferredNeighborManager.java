@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -14,12 +15,12 @@ import java.util.concurrent.TimeUnit;
 public class PreferredNeighborManager implements Runnable{
     private Controller controller;
     private Configuration configInstance;
-    String preferredNeighbors[];
-    String optimisticNeighbor[];
+    //String preferredNeighbors[];
+   // String optimisticNeighbor[];
     ScheduledExecutorService scheduler = null;
     ScheduledFuture<?> taskHandle = null;
     int numPreferredNeighbors;
-    
+	List<String> preferredNeighbors;
    
     
     PreferredNeighborManager(Controller peerController)
@@ -27,6 +28,7 @@ public class PreferredNeighborManager implements Runnable{
         this.controller = peerController;
         configInstance = controller.getConfiguration();
         numPreferredNeighbors = Integer.parseInt(configInstance.getCommonInfo().get("NumberOfPreferredNeighbors"));
+
         
         scheduler = Executors.newScheduledThreadPool(1);
         int unchokingInterval = Integer.parseInt(configInstance.getCommonInfo().get("UnchokingInterval"));
@@ -72,17 +74,57 @@ public class PreferredNeighborManager implements Runnable{
 
     @Override
     public void run() {
-        //select neighbors that have transmitted to this peer at the highest rates
+    	//determine preferred neighbors
+        preferredNeighbors = new ArrayList<String>();
+        
+    	if(controller.getHasFile())
+    	{
+    		System.out.println(controller.getPeerID() + " HAS FILE CHOOSING AT RANDOM");
+			ArrayList<String> keys = controller.getPeerKeyArray();
+			ArrayList<Integer> randomIndices = new ArrayList<Integer>();
+			
+			Random rdx = new Random(System.currentTimeMillis());
+			int index = -1;
+			
+			System.out.println("NUM PREFERRED: " + numPreferredNeighbors);
+			System.out.println("random size: " + randomIndices.size());
+			while(randomIndices.size() < numPreferredNeighbors)
+			{
+				
+				index = rdx.nextInt(keys.size());
+				System.out.println(controller.getPeerID() + " RANDOM INDEX: " + index);
+				if(!randomIndices.contains(Integer.valueOf(index)))
+				{
+					randomIndices.add(index);
+					System.out.println(controller.getPeerID() + " RANDOM INDEX ADDED: " + index);
+				}
+			}
+			
+			for(Integer i: randomIndices)
+			{
+				preferredNeighbors.add(keys.get(i));
+			}
+			
+			System.out.println("DETERMINED AT RANDOM");
+			for(String s: preferredNeighbors)
+			{
+				System.out.println(s);
+			}
+    	}
+		    	
+
+    	//setPreferredDownload();
+    	//select neighbors that have transmitted to this peer at the highest rates
     	Map<String, Float> downloadRates = controller.getPeerDownloadRates();   
         downloadRates = MapUtil.sortByValue( downloadRates );
-      //  System.out.println("downloadRates.size(): " + downloadRates.size());
+        //System.out.println("downloadRates.size(): " + downloadRates.size());
         
     	for(Entry<String, Float> entry: downloadRates.entrySet())
     	{
     		System.out.println("PNM peerDownloadRates: " + entry.getKey() + ", " + entry.getValue());
     	}    	
     	
-    	List<String> preferredNeighbors = new ArrayList<String>();
+    	//List<String> preferredNeighbors = new ArrayList<String>();
     	for(Entry<String, Float> entry: downloadRates.entrySet())
     	{
     		if(controller.getInterestedNeighbors().contains(entry.getKey()))
@@ -91,9 +133,34 @@ public class PreferredNeighborManager implements Runnable{
     		}
     		
     		if(preferredNeighbors.size() == numPreferredNeighbors) break;
-    	}
+    	}	 
+
     	
     	controller.setPreferredNeighbors(preferredNeighbors);
+    }
+    
+    public void setPreferredDownload()
+    {
+    	//select neighbors that have transmitted to this peer at the highest rates
+    	Map<String, Float> downloadRates = controller.getPeerDownloadRates();   
+        downloadRates = MapUtil.sortByValue( downloadRates );
+        //System.out.println("downloadRates.size(): " + downloadRates.size());
+        
+    	for(Entry<String, Float> entry: downloadRates.entrySet())
+    	{
+    		System.out.println("PNM peerDownloadRates: " + entry.getKey() + ", " + entry.getValue());
+    	}    	
+    	
+    	//List<String> preferredNeighbors = new ArrayList<String>();
+    	for(Entry<String, Float> entry: downloadRates.entrySet())
+    	{
+    		if(controller.getInterestedNeighbors().contains(entry.getKey()))
+    		{
+    			preferredNeighbors.add(entry.getKey());
+    		}
+    		
+    		if(preferredNeighbors.size() == numPreferredNeighbors) break;
+    	}	    	
     }
     
     
