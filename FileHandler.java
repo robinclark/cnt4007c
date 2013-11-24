@@ -29,14 +29,9 @@ public class FileHandler extends Module
 		fileSize = controller.getFileSize();
 		pieceSize = controller.getPieceSize();
 		numOfPieces = (int) Math.ceil((double)fileSize/(double)pieceSize);
-		
-		if(bitfieldHandler == null)
-		{
-			bitfieldHandler = (BitfieldHandler) ModuleFactory.createBitfieldHandlerMod(this);
-		}
 	}
 
-	public FileHandler(String outFileName, int fileSize, int pieceSize, String peerID, boolean has)
+	/*public FileHandler(String outFileName, int fileSize, int pieceSize, String peerID, boolean has)
 	{
 		this.outFileName = outFileName;
 		this.fileSize = fileSize;
@@ -48,7 +43,7 @@ public class FileHandler extends Module
 		{
 			bitfieldHandler = (BitfieldHandler) ModuleFactory.createBitfieldHandlerMod(this, has);
 		}
-	}
+	}*/
 	
 	public void initialConfiguration()
 	{
@@ -66,14 +61,14 @@ public class FileHandler extends Module
 		
 		//System.out.println("FILEHANDLER GET CONFIG");
 
-			peerList = controller.getConfiguration().getPeerList();
-			peerID = controller.getPeerID();
-		
+		peerList = controller.getConfiguration().getPeerList();
+		peerID = controller.getPeerID();
+	
 
-		/*if(bitfieldHandler == null)
+		if(bitfieldHandler == null)
 		{
 			bitfieldHandler = (BitfieldHandler) ModuleFactory.createBitfieldHandlerMod(this);
-		}*/
+		}
 		
 	}
 	

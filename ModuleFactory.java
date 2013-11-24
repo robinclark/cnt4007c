@@ -62,12 +62,6 @@ public class ModuleFactory {
 		return fileHandler;
 	}
 	
-	public static Module createFileHandlerMod(String file, int fileSize, int pieceSize, String id, boolean has)
-	{
-		FileHandler fileHandler = new FileHandler(file, fileSize, pieceSize, id, has);
-		fileHandler.initialConfiguration();
-		return fileHandler;
-	}
 	
 	public static Module createBitfieldHandlerMod(FileHandler fileHandler)
 	{
@@ -75,11 +69,6 @@ public class ModuleFactory {
 		return bitfieldHandler;
 	}
 	
-	public static Module createBitfieldHandlerMod(FileHandler fileHandler, boolean has)
-	{
-		BitfieldHandler bitfieldHandler = new BitfieldHandler(fileHandler, has);
-		return bitfieldHandler;
-	}
 
 	public static Module createTopPeerMod()
 	{
