@@ -1,60 +1,70 @@
-import java.nio.ByteBuffer;
+import java.nio.ByteBuffer; 
 
 public class RequestMessage implements Message{
-	 private int msg_len;
-     private int msg_type;
-     private int index;
-     private byte[] msg_payload;
-     private static final long serialVersionUID = 5L;
+        private int msg_len;
+        private int msg_type;
+        private int index;
+        private byte[] msg_payload;
+        private static final long serialVersionUID = 4L;
+        
 
-     public void setMsgLen() {
-             msg_len = msg_payload.length;
-     }
 
-     public void setMsgPayLoad(byte[] payload) {
-             
-             msg_payload = payload;
-     }
+        public void setMsgLen() {
+                msg_len = msg_payload.length;
+        }
 
-     public int getMsgType() {
-             return msg_type;
-     }
+        public void setMsgPayLoad(byte[] payload) {
+                
+                msg_payload = payload;
+        }
 
-     public int getMsgLen() {
-             
-             return msg_len;
-     }
-     
-     public byte[] getMsgPayLoad()
-     {
-             return msg_payload;
-     }
-     
-     public long getUID()
-     {
-             return serialVersionUID;
-     }
-     
-     public Message getMessage()
-     {
-             return this;
-     }
+        public int getMsgType() {
+                return msg_type;
+        }
 
-     public void setMsgPayLoad(){}
+        public int getMsgLen() {
+                
+                return msg_len;
+        }
+        
+        public byte[] getMsgPayLoad()
+        {
+                return msg_payload;
+        }
+        
+        public long getUID()
+        {
+                return serialVersionUID;
+        }
+        
+        public Message getMessage()
+        {
+                return this;
+        }
 
-	public void setMsgPayLoad(int index, byte[] payload){}
-     
-     public void setMsgPayLoad(int index){
-		msg_payload = ByteBuffer.allocate(4).putInt(index).array();	
+        public void setMsgPayLoad(){}
+        
+        public void setMsgPayLoad(int index)
+	{
+		msg_payload = ByteBuffer.allocate(4).putInt(index).array();
 	}
 
-     public void setMsgType(byte type) {
-             // TODO Auto-generated method stub
-             msg_type = type;
-     }
-     
-     public int getPieceIndex()
-     {
-             return ByteBuffer.wrap(msg_payload).getInt();
-     }
+		@Override
+		public void setMsgType(byte type) {
+			msg_type = type;
+			
+		}
+
+		@Override
+		public void setMsgPayLoad(int index, byte[] payload) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		public int getPieceIndex()
+		{
+			return ByteBuffer.wrap(msg_payload).getInt();
+		}
+	
+
 }

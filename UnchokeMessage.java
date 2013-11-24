@@ -9,6 +9,7 @@ public class UnchokeMessage implements Message{
 
 	public void setMsgLen() {
 		msg_len = 0;
+
 	}
 
 	public void setMsgPayLoad(byte[] payload) {
