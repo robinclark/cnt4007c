@@ -42,6 +42,7 @@ public class PreferredNeighborManager implements Runnable{
     
     public void shutdown()
     {
+    	
     	try{
 			 System.err.println("TERMINATING PREFERRED******************");
 			if (!scheduler.awaitTermination(15, TimeUnit.SECONDS)) {
@@ -66,6 +67,7 @@ public class PreferredNeighborManager implements Runnable{
 			// (Re-)Cancel if current thread also interrupted
 			scheduler.shutdownNow();
 		}
+    	taskHandle.cancel(true);
     }
 
     @Override

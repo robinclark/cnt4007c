@@ -308,14 +308,16 @@ public class Peer extends Module implements Runnable{
 
 	private void handlePieceMsg(Message msg)
 	{
+		System.out.println("HANDLING PIECE");
 		byte payload[] = ((PieceMessage) msg).getMsgPayLoad();
 		int index = ((PieceMessage) msg).getPieceIndex();
+		sendHaveMsg(index);//--send have b4 writing piece; is this a problem?
 		controller.writePiece(index, payload);
 		bytesDownloaded += payload.length;
 		System.out.println("PIECE HANDLED");
 		printBitfield("PIECE: ", controller.getBitfield(peerID));
 		
-		sendHaveMsg(index);
+		
 		if(!controller.getHasFile())
 		{
 			sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
@@ -328,16 +330,18 @@ public class Peer extends Module implements Runnable{
 		{
 			if(!isChokedByPeer)
 			{ 
-			
-				RequestMessage builder = new RequestMessage();
-				NormalMessageCreator creator = new NormalMessageCreator(builder);
-				creator.createNormalMessage(Constants.MSG_REQUEST_TYPE, index);
-				Message msg = builder.getMessage();
-				System.out.println("REQUEST INDEX: " + index);
-
-				outputStream.writeUnshared(msg);
-				outputStream.flush();
-				System.out.println("REQUEST SENT");
+				if(index >= 0)
+				{
+					RequestMessage builder = new RequestMessage();
+					NormalMessageCreator creator = new NormalMessageCreator(builder);
+					creator.createNormalMessage(Constants.MSG_REQUEST_TYPE, index);
+					Message msg = builder.getMessage();
+					System.out.println("REQUEST INDEX: " + index);
+	
+					outputStream.writeUnshared(msg);
+					outputStream.flush();
+					System.out.println("REQUEST SENT");
+				}
 			}
 		}catch(IOException e) {
 			e.printStackTrace();		

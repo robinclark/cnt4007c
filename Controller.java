@@ -259,9 +259,16 @@ public class Controller extends Module {
 	public synchronized int  getInterestedIndex(String id)
 	{
 		ArrayList<Integer> interestedPieces = fileHandlerInstance.getInterestedPieceArray(id);
-		Random rdx = new Random();
-		int index = interestedPieces.get(rdx.nextInt(interestedPieces.size()));
-		return index;
+		if(!interestedPieces.isEmpty())
+		{
+			Random rdx = new Random();
+			int index = interestedPieces.get(rdx.nextInt(interestedPieces.size()));
+			return index;
+		}
+		else
+		{
+			return -1;
+		}
 	}
 	
 	public synchronized void setPiece(int index, String id)
@@ -339,7 +346,7 @@ public class Controller extends Module {
 	
 	public void printBitfield(String s, byte[] b)
 	{
-		System.out.println(s);
+		System.out.println(s + " ");
 		for(int i = 0; i < b.length; i++)
 		{
 			System.out.print(b[i] + ", ");
@@ -439,10 +446,15 @@ public class Controller extends Module {
 			}
 		}
 		System.out.println("EVERYONE HAS FILE");
+		for(String s: peerKeys)
+		{
+			byte[] b = getBitfield(s);
+			printBitfield(s, b);
+		}
 		closeEverything();
 	}
 	
-	public boolean getHasFile()
+	public synchronized boolean getHasFile()
 	{
 		return hasFileStatus.get(peerID);
 	}

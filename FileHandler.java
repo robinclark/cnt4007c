@@ -108,9 +108,12 @@ public class FileHandler extends Module
 				outputFile.write(piece);
 				
 				bitfieldHandler.setPiece(index, peerID);
+				System.out.println(peerID + " WRITE PIECE: INDEX: " + index + " ***********************");
+				
 				if(hasCompleteFile(peerID))
 				{
-					controller.setHasFile(peerID);
+					System.out.println(peerID + " WRITE PIECE: HAS COMPLETE FILE ***********************");
+					controller.setHasFile(peerID);					
 				}
 			}
 			catch(IOException e)
@@ -193,6 +196,7 @@ public class FileHandler extends Module
 		if(hasCompleteFile(id))
 		{
 			controller.setHasFile(id);
+			System.out.println(id + " SET BITFIELD: HAS COMPLETE FILE ***********************");
 		}
 			
 		//System.out.println("ADDED PEER BITFIELD");
@@ -210,11 +214,14 @@ public class FileHandler extends Module
 	
 	public void setPiece(int index, String id)
 	{
+		
 		bitfieldHandler.setPiece(index, id);
+		System.out.println(id + " SET PIECE: " + index + " ***********************");		
 		
 		if(hasCompleteFile(id))
 		{
 			controller.setHasFile(id);
+			System.out.println(id + " SET PIECE: HAS COMPLETE FILE ***********************");
 		}
 	}
 	
