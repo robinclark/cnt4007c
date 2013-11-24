@@ -83,7 +83,11 @@ public class PreferredNeighborManager implements Runnable{
     	List<String> preferredNeighbors = new ArrayList<String>();
     	for(Entry<String, Float> entry: downloadRates.entrySet())
     	{
-    		preferredNeighbors.add(entry.getKey());
+    		if(controller.getInterestedNeighbors().contains(entry.getKey()))
+    		{
+    			preferredNeighbors.add(entry.getKey());
+    		}
+    		
     		if(preferredNeighbors.size() == numPreferredNeighbors) break;
     	}
     	

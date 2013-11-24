@@ -272,13 +272,31 @@ public class Controller extends Module {
 	public synchronized void addInterestedPeer(String id)
 	{
 		interestedNeighbors.add(id);
+		System.out.println("*****ADDED INTERESTED");
+		for(String s: interestedNeighbors)
+		{
+			System.out.println(s);
+		}
 	}
 	
 	public synchronized void removeInterestedPeer(String id)
 	{
-		try{
+		try
+		{
 			interestedNeighbors.remove(id);
-		 }catch(IndexOutOfBoundsException  e){} //fail silently if peer does not exist
+			System.out.println("*****REMOVED INTERESTED");
+			for(String s: interestedNeighbors)
+			{
+				System.out.println(s);
+			}
+		 }
+		catch(IndexOutOfBoundsException  e)
+		{} //fail silently if peer does not exist
+	}
+	
+	public synchronized List<String> getInterestedNeighbors()
+	{
+		return interestedNeighbors;
 	}
 	
 	public synchronized void writePiece(int index, byte[] piece)
