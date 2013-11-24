@@ -74,10 +74,15 @@ public class Peer extends Module implements Runnable{
 		}
 		public void run()
 		{
+			System.out.println("*****TIMEOUT***** " + index);
+			
+			
 			byte b[] = controller.getBitfield(peerID);
+			printBitfield("TIMER", b);
 			if(b[index] == 0)
 			{
-				controller.removeRequestedPiece(index);
+				System.out.println("*****PIECE NOT SENT IN TIME***** " + index);
+				//controller.removeRequestedPiece(index);
 			}	
 			timer.cancel();
 		}
@@ -332,11 +337,12 @@ public class Peer extends Module implements Runnable{
 
 	private void handlePieceMsg(Message msg)
 	{
+		//timer.cancel();//whenever recieve a piece cancel the timer
 		System.out.println("HANDLING PIECE");
 		byte payload[] = ((PieceMessage) msg).getMsgPayLoad();
 		int index = ((PieceMessage) msg).getPieceIndex();
-		
-		controller.removeRequestedPiece(index);//remove piece fr requested pieces
+		broadcastHaveMsg(index);
+		//controller.removeRequestedPiece(index);//remove piece fr requested pieces
 		sendHaveMsg(index);//--send have b4 writing piece; is this a problem?
 		controller.writePiece(index, payload);
 		bytesDownloaded += payload.length;
@@ -360,6 +366,8 @@ public class Peer extends Module implements Runnable{
 			{ 
 				if(index >= 0)
 				{
+					//controller.addRequestedPiece(index);//add requested piece when send req
+					
 					RequestMessage builder = new RequestMessage();
 					NormalMessageCreator creator = new NormalMessageCreator(builder);
 					creator.createNormalMessage(Constants.MSG_REQUEST_TYPE, index);
@@ -370,8 +378,8 @@ public class Peer extends Module implements Runnable{
 					outputStream.flush();
 					System.out.println("REQUEST SENT");
 					
-					controller.addRequestedPiece(index);//add requested piece when send req
-					startPieceTime();//start timer
+					System.out.println("**********STARTING TIMER*******");
+					//startPieceTime(index);//start timer
 				}
 			}
 		}catch(IOException e) {
@@ -427,6 +435,7 @@ public class Peer extends Module implements Runnable{
 		{
 			sendUnInterestedMsg();
 		}		
+
 		System.out.println("HAVE HANDLED");
 		printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
 	}
@@ -538,8 +547,8 @@ public class Peer extends Module implements Runnable{
 		return isChokedByPeer;
 	}
 	
-	public void startPieceTime()
+	public void startPieceTime(int index)
 	{
-		
+		timer.schedule(new WaitForPiece(index), 1000);
 	}
 }

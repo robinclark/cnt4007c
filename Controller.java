@@ -266,13 +266,13 @@ public class Controller extends Module {
 		{
 			Random rdx = new Random();
 			int index = interestedPieces.get(rdx.nextInt(interestedPieces.size()));
-			if(requestedPieces.size() < interestedPieces.size())
+			/*if(requestedPieces.size() < interestedPieces.size())
 			{
 				while(requestedPieces.contains(index))					
 				{
 					index = interestedPieces.get(rdx.nextInt(interestedPieces.size()));
 				}
-			}
+			}*/
 			return index;
 		}
 		else
@@ -452,6 +452,7 @@ public class Controller extends Module {
 		{
 			if(!hasFileStatus.get(peerKey))
 			{
+				System.out.println(peerKey + "STILL DO ESNT HAVE FILE");
 				return;
 			}
 		}
@@ -543,7 +544,7 @@ public class Controller extends Module {
 	
 	public synchronized void removeRequestedPiece(int index)
 	{
-		requestedPieces.remove(index);
+		requestedPieces.remove(Integer.valueOf(index));
 	}
 }
 
