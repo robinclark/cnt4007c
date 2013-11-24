@@ -2,8 +2,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Peer extends Module implements Runnable{
@@ -32,6 +30,7 @@ public class Peer extends Module implements Runnable{
 	{
 			neighborPeer = socket;
 			this.controller = controller;	
+			System.out.println(peerID + " CONTROLLER: " + controller);
 	}
 	
 	@Override
@@ -62,62 +61,65 @@ public class Peer extends Module implements Runnable{
 	
 	@Override
 	public void run() {
-		sendHandShake();
+		
 
-		while(!isShuttingDown)
-		{
+		
 
 			try {
-				Message message = (Message) inputStream.readObject();
+				sendHandShake();
 				
-				if(message.getUID() == Constants.HANDSHAKE_UID) /* differentiates betwen normal messages and handshake messages*/
+				while(!isShuttingDown)
 				{
-					handleHandShakeMessage(message);
+					Message message = (Message) inputStream.readObject();
+					
+					if(message.getUID() == Constants.HANDSHAKE_UID) /* differentiates betwen normal messages and handshake messages*/
+					{
+						handleHandShakeMessage(message);
+					}
+					else
+					{
+						if(message.getMsgType() == Constants.MSG_BITFIELD_TYPE)
+						{
+							handleBitFieldMsg(message);
+						}
+	
+						else if(message.getMsgType() == Constants.MSG_INTERESTED_TYPE)	
+						{
+							handleInterestedMsg();
+						}
+	
+						else if(message.getMsgType() == Constants.MSG_UNINTERESTED_TYPE)
+						{
+							handleUnInterestedMsg();
+						}
+						else if(message.getMsgType() == Constants.MSG_PIECE_TYPE)
+						{
+							handlePieceMsg(message);
+						}
+						else if(message.getMsgType() == Constants.MSG_REQUEST_TYPE)
+						{
+							handleRequestMsg(message);
+						}
+						else if(message.getMsgType() == Constants.MSG_HAVE_TYPE)
+						{
+							handleHaveMsg(message);
+						}
+						else if(message.getMsgType() == Constants.MSG_CHOKE_TYPE)
+						{
+							handleChokeMsg(message);
+						}
+						else if(message.getMsgType() == Constants.MSG_UNCHOKE_TYPE)
+						{
+							handleUnchokeMsg(message);
+						}
+					}				
 				}
-				else
-				{
-					if(message.getMsgType() == Constants.MSG_BITFIELD_TYPE)
-					{
-						handleBitFieldMsg(message);
-					}
-
-					else if(message.getMsgType() == Constants.MSG_INTERESTED_TYPE)	
-					{
-						handleInterestedMsg();
-					}
-
-					else if(message.getMsgType() == Constants.MSG_UNINTERESTED_TYPE)
-					{
-						handleUnInterestedMsg();
-					}
-					else if(message.getMsgType() == Constants.MSG_PIECE_TYPE)
-					{
-						handlePieceMsg(message);
-					}
-					else if(message.getMsgType() == Constants.MSG_REQUEST_TYPE)
-					{
-						handleRequestMsg(message);
-					}
-					else if(message.getMsgType() == Constants.MSG_HAVE_TYPE)
-					{
-						handleHaveMsg(message);
-					}
-					else if(message.getMsgType() == Constants.MSG_CHOKE_TYPE)
-					{
-						handleChokeMsg(message);
-					}
-					else if(message.getMsgType() == Constants.MSG_UNCHOKE_TYPE)
-					{
-						handleUnchokeMsg(message);
-					}
-				}				
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch(IOException e)
 			{
 				e.printStackTrace();
-			}	
-		}		
+			}
 	}
 	
 	public void shutdown()

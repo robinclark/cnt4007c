@@ -46,7 +46,8 @@ public class Server extends Module implements Runnable
 			
 				controllerInstance.addNeighbors(neighborPeer);
 		
-				new Thread(neighborPeer).start();
+				//new Thread(neighborPeer).start();
+				controllerInstance.addThread(neighborPeer);
 			}
 		}catch(IOException e)
 		{

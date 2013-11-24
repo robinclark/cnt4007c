@@ -1,8 +1,11 @@
 import java.net.Socket;
 
 public class ModuleFactory {
+	private static Module ctrl;
+	
 	public static Module createConfigMod()
 	{
+		
 		Configuration config = new Configuration();
 		config.initialConfiguration();
 		
@@ -27,8 +30,11 @@ public class ModuleFactory {
 
 	public static Module createCtrlMod(String peerID)
 	{
-		Controller ctrl = new Controller(peerID);
-		ctrl.initialConfiguration();
+		if(ctrl == null)
+		{
+			ctrl = new Controller(peerID);
+			ctrl.initialConfiguration();
+		}
 		return ctrl;
 	}
 
@@ -56,9 +62,9 @@ public class ModuleFactory {
 		return fileHandler;
 	}
 	
-	public static Module createFileHandlerMod(String file, int fileSize, int pieceSize)
+	public static Module createFileHandlerMod(String file, int fileSize, int pieceSize, String id, boolean has)
 	{
-		FileHandler fileHandler = new FileHandler(file, fileSize, pieceSize);
+		FileHandler fileHandler = new FileHandler(file, fileSize, pieceSize, id, has);
 		fileHandler.initialConfiguration();
 		return fileHandler;
 	}
@@ -66,6 +72,12 @@ public class ModuleFactory {
 	public static Module createBitfieldHandlerMod(FileHandler fileHandler)
 	{
 		BitfieldHandler bitfieldHandler = new BitfieldHandler(fileHandler);
+		return bitfieldHandler;
+	}
+	
+	public static Module createBitfieldHandlerMod(FileHandler fileHandler, boolean has)
+	{
+		BitfieldHandler bitfieldHandler = new BitfieldHandler(fileHandler, has);
 		return bitfieldHandler;
 	}
 

@@ -19,6 +19,17 @@ public class BitfieldHandler extends Module{
 		initBitfield(hasFile);
 	}
 	
+	BitfieldHandler(FileHandler fileHandler, boolean has)
+	{
+		bitfields = new HashMap<String, byte[]>();
+		this.fileHandler = fileHandler;		
+		numPieces = fileHandler.getNumOfPieces();
+		peerID = fileHandler.getPeerID();
+		//System.out.println("PEERID BITFIELD: " + peerID);
+		//boolean hasFile = fileHandler.getPeerList().get(peerID).getHasFile();
+		initBitfield(hasFile);
+	}
+	
 	BitfieldHandler(int numPieces, String peerID, boolean hasFile)
 	{
 		bitfields = new HashMap<String, byte[]>();

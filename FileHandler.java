@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class FileHandler extends Module
 {
@@ -28,14 +29,25 @@ public class FileHandler extends Module
 		fileSize = controller.getFileSize();
 		pieceSize = controller.getPieceSize();
 		numOfPieces = (int) Math.ceil((double)fileSize/(double)pieceSize);
+		
+		if(bitfieldHandler == null)
+		{
+			bitfieldHandler = (BitfieldHandler) ModuleFactory.createBitfieldHandlerMod(this);
+		}
 	}
 
-	public FileHandler(String outFileName, int fileSize, int pieceSize)
+	public FileHandler(String outFileName, int fileSize, int pieceSize, String peerID, boolean has)
 	{
 		this.outFileName = outFileName;
 		this.fileSize = fileSize;
 		this.pieceSize = pieceSize;
 		numOfPieces = (int) Math.ceil((double)fileSize/(double)pieceSize);
+		this.peerID = peerID;
+		
+		if(bitfieldHandler == null)
+		{
+			bitfieldHandler = (BitfieldHandler) ModuleFactory.createBitfieldHandlerMod(this, has);
+		}
 	}
 	
 	public void initialConfiguration()
@@ -53,26 +65,44 @@ public class FileHandler extends Module
 		}
 		
 		//System.out.println("FILEHANDLER GET CONFIG");
-		peerList = controller.getConfiguration().getPeerList();
-		peerID = controller.getPeerID();
+
+			peerList = controller.getConfiguration().getPeerList();
+			peerID = controller.getPeerID();
 		
-		if(bitfieldHandler == null)
+
+		/*if(bitfieldHandler == null)
 		{
 			bitfieldHandler = (BitfieldHandler) ModuleFactory.createBitfieldHandlerMod(this);
-		}
+		}*/
 		
 	}
 	
-	public void shutdown()
+	public void close()
 	{
 		try
 		{
+			System.out.println("CLOSING RAND FILE");
 			outputFile.close();
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public void writePieceTest(int index, byte[] piece)
+	{
+			try
+			{
+				outputFile.seek(index*pieceSize);
+				outputFile.write(piece);
+				
+				bitfieldHandler.setPiece(index, peerID);
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
 	}
 	
 	public void writePiece(int index, byte[] piece)
@@ -103,10 +133,11 @@ public class FileHandler extends Module
 		{
 			outputFile.seek(index*pieceSize);
 			int readSize = outputFile.read(data);
-			if(readSize != pieceSize)
+			if(readSize < pieceSize)
 			{
 				byte[] smallerData = new byte[readSize];
-				System.arraycopy(smallerData, 0, data,0, smallerData.length);
+				System.arraycopy(data, 0, smallerData, 0, smallerData.length);
+				return smallerData;
 			}				
 			return data;
 		}

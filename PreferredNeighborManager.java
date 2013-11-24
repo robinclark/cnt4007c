@@ -42,8 +42,30 @@ public class PreferredNeighborManager implements Runnable{
     
     public void shutdown()
     {
-    	scheduler.shutdown();
-    	taskHandle.cancel(true);
+    	try{
+			 System.err.println("TERMINATING PREFERRED******************");
+			if (!scheduler.awaitTermination(15, TimeUnit.SECONDS)) {
+				scheduler.shutdownNow(); // Cancel currently executing tasks
+			       // Wait a while for tasks to respond to being cancelled
+			       if (!scheduler.awaitTermination(15, TimeUnit.SECONDS))
+			       {
+			           System.out.println("PREFERRED did not terminate");
+			       }
+			       else
+			       {
+			    	   System.out.println("PREFERRED DID TERMINATE");
+			       }
+			}
+			else
+			{
+				System.out.println("PREFERRED DID TERMINATE");
+			}
+		}
+		catch(InterruptedException e)
+		{
+			// (Re-)Cancel if current thread also interrupted
+			scheduler.shutdownNow();
+		}
     }
 
     @Override

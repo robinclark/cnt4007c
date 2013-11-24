@@ -1,8 +1,16 @@
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class Controller extends Module {
 	
@@ -28,6 +36,8 @@ public class Controller extends Module {
 	private String optimisticallyUnchokedNeighbor;
 	private HashMap<String, Float> peerDownloadRates;
 	private HashMap<String, Boolean> hasFileStatus;
+	private ExecutorService pool;
+	private ArrayList<Future<?>> futures;
 	
 	public Controller(String peerID)
 	{
@@ -56,6 +66,7 @@ public class Controller extends Module {
 				pieceSize = Integer.parseInt(commonInfo.get("PieceSize"));
 				numOfPieces = (int) Math.ceil(fileSize/pieceSize);
 				
+				pool = Executors.newFixedThreadPool(peerList.size());
 			}
 			
 			if(logInstance == null)
@@ -88,7 +99,16 @@ public class Controller extends Module {
 			
 			peerDownloadRates = new HashMap<String, Float>();
 			preferredNeighborManager = new PreferredNeighborManager(this);
-			new Thread(preferredNeighborManager).start();
+			
+			futures = new ArrayList<Future<?>>();
+			
+			//new Thread(preferredNeighborManager).start();
+			futures.add(pool.submit(preferredNeighborManager));
+	}
+	
+	public void addThread(Runnable r)
+	{
+		futures.add(pool.submit(r));
 	}
 	
 	public void execute()
@@ -125,7 +145,8 @@ public class Controller extends Module {
 
 	public void createServers()
 	{
-		new Thread(serverInstance).start();
+		//new Thread(serverInstance).start();
+		futures.add(pool.submit(serverInstance));
 	}
 	
 	public void createClients() throws UnknownHostException, IOException
@@ -139,7 +160,8 @@ public class Controller extends Module {
 					Peer clientPeer = (Peer) ModuleFactory.createPeer(socket, this);
 					neighborPeers.add(clientPeer);
 		
-					new Thread(clientPeer).start();
+					//new Thread(clientPeer).start();
+					futures.add(pool.submit(clientPeer));
 				}
 		}
 		
@@ -399,7 +421,7 @@ public class Controller extends Module {
 			}
 		}
 		System.out.println("EVERYONE HAS FILE");
-		//closeEverything();
+		closeEverything();
 	}
 	
 	public boolean getHasFile()
@@ -409,15 +431,66 @@ public class Controller extends Module {
 	
 	public void closeEverything()
 	{
-		for(Peer p: neighborPeers)
+		System.out.println("SHUTTING DOWN");
+		
+		for(Future<?> f: futures)
 		{
-			p.shutdown();
-			//p.interrupt();
-			//p.join();
+			System.out.println("B4 FUTURE DONE: " + f.isDone());
+			f.cancel(true);
 		}
-		//preferrednighbor manager
-		//optimiistic neighbor manager
-		//filehandler
+		
+		preferredNeighborManager.shutdown();
+		
+		List<Runnable> threads = pool.shutdownNow();
+		System.out.println("NUMBER THREADS: " + threads.size());
+		
+		for(Future<?> f: futures)
+		{
+			System.out.println("AFTR FUTURE DONE: " + f.isDone());
+		}
+		
+		try{
+			 System.err.println("TERMINATING******************");
+			if (!pool.awaitTermination(15, TimeUnit.SECONDS)) {
+			       pool.shutdownNow(); // Cancel currently executing tasks
+			       // Wait a while for tasks to respond to being cancelled
+			       if (!pool.awaitTermination(15, TimeUnit.SECONDS))
+			       {
+			           System.err.println("Pool did not terminate");
+			       }
+			       else
+			       {
+			    	   System.err.println("POOL DID TERMINATE");
+			       }
+			}
+			else
+			{
+				System.err.println("POOL DID TERMINATE");
+			}
+		}
+		catch(InterruptedException e)
+		{
+			// (Re-)Cancel if current thread also interrupted
+		     pool.shutdownNow();
+		}
+
+		for(Future<?> f: futures)
+		{
+			System.out.println("AFTER SHUTDOWN FUTURE DONE: " + f.isDone());
+		}
+		
+			try{
+				logInstance.close();
+				fileHandlerInstance.close();
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+			
+			System.exit(0);
+
 	}
+	
 }
 
