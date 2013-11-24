@@ -3,6 +3,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Peer extends Module implements Runnable{
 	private ObjectInputStream inputStream;
@@ -25,6 +27,7 @@ public class Peer extends Module implements Runnable{
 	private float downloadRate = 0.0f;
 	private long startTime = 0;
 	private int bytesDownloaded = 0; 
+	private Timer timer;
 	
 	public Peer(Socket socket, Controller controller)
 	{
@@ -57,6 +60,27 @@ public class Peer extends Module implements Runnable{
 				}
 				
 			}
+			
+			timer = new Timer();
+	}
+	
+	private class WaitForPiece extends TimerTask
+	{
+		int index = -1;
+		
+		public WaitForPiece(int index)
+		{
+			this.index = index;
+		}
+		public void run()
+		{
+			byte b[] = controller.getBitfield(peerID);
+			if(b[index] == 0)
+			{
+				controller.removeRequestedPiece(index);
+			}	
+			timer.cancel();
+		}
 	}
 	
 	@Override
@@ -311,6 +335,8 @@ public class Peer extends Module implements Runnable{
 		System.out.println("HANDLING PIECE");
 		byte payload[] = ((PieceMessage) msg).getMsgPayLoad();
 		int index = ((PieceMessage) msg).getPieceIndex();
+		
+		controller.removeRequestedPiece(index);//remove piece fr requested pieces
 		sendHaveMsg(index);//--send have b4 writing piece; is this a problem?
 		controller.writePiece(index, payload);
 		bytesDownloaded += payload.length;
@@ -322,6 +348,8 @@ public class Peer extends Module implements Runnable{
 		{
 			sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
 		}		
+		
+		
 	}
 
 	private void sendRequestMsg(int index)
@@ -341,6 +369,9 @@ public class Peer extends Module implements Runnable{
 					outputStream.writeUnshared(msg);
 					outputStream.flush();
 					System.out.println("REQUEST SENT");
+					
+					controller.addRequestedPiece(index);//add requested piece when send req
+					startPieceTime();//start timer
 				}
 			}
 		}catch(IOException e) {
@@ -484,13 +515,9 @@ public class Peer extends Module implements Runnable{
 	public void startTimer()
 	{
 		startTime = System.currentTimeMillis();
-	}
-
-	public void restartData()
-	{
 		bytesDownloaded = 0;
 	}
-	
+
 	public String getNeighborPeerID()
 	{
 		return neighborPeerID;
@@ -509,5 +536,10 @@ public class Peer extends Module implements Runnable{
 	public boolean getIsChokedByPeer()
 	{
 		return isChokedByPeer;
+	}
+	
+	public void startPieceTime()
+	{
+		
 	}
 }

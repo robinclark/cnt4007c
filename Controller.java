@@ -38,6 +38,7 @@ public class Controller extends Module {
 	private HashMap<String, Boolean> hasFileStatus;
 	private ExecutorService pool;
 	private ArrayList<Future<?>> futures;
+	private ArrayList<Integer> requestedPieces;
 	
 	public Controller(String peerID)
 	{
@@ -104,6 +105,8 @@ public class Controller extends Module {
 			
 			//new Thread(preferredNeighborManager).start();
 			futures.add(pool.submit(preferredNeighborManager));
+			
+			requestedPieces = new ArrayList<Integer>();
 	}
 	
 	public void addThread(Runnable r)
@@ -263,6 +266,13 @@ public class Controller extends Module {
 		{
 			Random rdx = new Random();
 			int index = interestedPieces.get(rdx.nextInt(interestedPieces.size()));
+			if(requestedPieces.size() < interestedPieces.size())
+			{
+				while(requestedPieces.contains(index))					
+				{
+					index = interestedPieces.get(rdx.nextInt(interestedPieces.size()));
+				}
+			}
 			return index;
 		}
 		else
@@ -522,5 +532,18 @@ public class Controller extends Module {
 
 	}
 	
+	public synchronized void addRequestedPiece(int index)
+	{
+		if(requestedPieces.contains(index))
+		{
+			System.out.println("DUPLICATE PIECES FOUND****************************8");
+		}
+		requestedPieces.add(index);
+	}
+	
+	public synchronized void removeRequestedPiece(int index)
+	{
+		requestedPieces.remove(index);
+	}
 }
 
