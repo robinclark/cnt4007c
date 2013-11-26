@@ -16,9 +16,7 @@ public class Server extends Module implements Runnable
 	}
 
 	@Override
-	public void initialConfiguration() {
-		
-		
+	public void initialConfiguration() {		
 	}
 
 	@Override

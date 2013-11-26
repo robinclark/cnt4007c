@@ -195,7 +195,7 @@ public class Peer extends Module implements Runnable{
 				 if(handshakeSent)
 				 {
 					neighborPeerID = newMsg.getPeerID();
-					logInstance.writeLogger(logInstance.TCPConnectLog(neighborPeerID));
+					logInstance.writeLogger(logInstance.TCPConnectToLog(neighborPeerID));
 					sendBitFieldMsg();
 				 }
 				 else

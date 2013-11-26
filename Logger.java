@@ -47,7 +47,12 @@ public class Logger extends Module {
 			
 			}
 	
-	public String TCPConnectLog(String destPeerID)
+	public String TCPConnectToLog(String destPeerID)
+	{
+		return "[" + Time + "]: Peer [" + peer_ID + "]  makes a connection to Peer [" + destPeerID + "].\n";
+	}
+	
+	public String TCPConnectFromLog(String destPeerID)
 	{
 		return "[" + Time + "]: Peer [" + peer_ID + "]  makes a connection to Peer [" + destPeerID + "].\n";
 	}
@@ -65,12 +70,12 @@ public class Logger extends Module {
 	
 	public String unchoking(String destPeerID)
 	{
-		return "[" + Time + "]: Peer [ " + peer_ID + "] is unchocked by [ " + destPeerID + "].\n";
+		return "[" + Time + "]: Peer [ " + peer_ID + "] is unchoked by [ " + destPeerID + "].\n";
 	}
 	
 	public String chocking(String destPeerID)
 	{
-		return "[" + Time + "]: Peer [ " + peer_ID + "] is chocked by [ " + destPeerID + "].\n";
+		return "[" + Time + "]: Peer [ " + peer_ID + "] is choked by [ " + destPeerID + "].\n";
 	}
 	
 	public String haveMessage(String destPeerID, int pieceIndx)
@@ -87,6 +92,11 @@ public class Logger extends Module {
 	public String notInterestedMessage(String destPeerID)
 	{
 		return "[" + Time + "]: Peer [ " + peer_ID + "] recieved an ' not interested' message from [ " + destPeerID + "].\n";
+	}
+	
+	public String downloadPiece(String destPeerID, int index, int numPieces)
+	{
+		return "[" + Time + "]: Peer [ " + peer_ID + "] has downloaded the piece " + index + " from [ " + destPeerID + "]. Now the number of pieces it has is " + numPieces + "\n";
 	}
 	
 	public String completionMessage()

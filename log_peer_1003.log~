@@ -1,0 +1,607 @@
+[Sun Nov 24 03:25:11 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 03:25:11 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 03:25:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 04:05:26 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:05:26 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:15:39 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 04:15:39 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:15:39 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:17:25 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 04:17:25 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:17:25 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:18:12 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 04:18:12 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:12 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 04:18:56 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:18:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:19:42 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 04:19:42 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:19:42 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 04:45:40 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:45:40 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 04:49:32 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 04:49:32 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 05:21:19 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:21:19 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Sun Nov 24 05:28:06 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Sun Nov 24 05:28:06 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Mon Nov 25 03:14:56 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Mon Nov 25 03:14:56 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Mon Nov 25 03:14:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:38:37 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:38:37 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:39:53 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:39:53 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:41:38 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:41:38 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:41:38 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:42:27 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:42:27 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:11 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:43:11 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:11 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:30 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:43:30 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:43:30 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:44:33 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:44:33 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:44:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:46:39 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:46:39 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:46:59 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:46:59 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:51:03 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:51:03 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:03 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:51:21 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:21 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:56 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:51:56 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:51:56 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:24 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:53:24 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:24 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:53:51 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:53:51 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 03:56:58 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 03:56:58 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 03:56:58 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 03:56:58 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:27:09 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 04:27:09 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:27:09 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 04:28:55 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an 'interested' message from [ 1002].
+[Tue Nov 26 04:28:55 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:29:33 2013]: Peer [1003]  makes a connection to Peer [1001].
+[Tue Nov 26 04:29:33 2013]: Peer [1003]  makes a connection to Peer [1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1001].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
+[Tue Nov 26 04:29:33 2013]: Peer [ 1003] recieved an ' not interested' message from [ 1002].
