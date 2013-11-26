@@ -88,7 +88,7 @@ public class PreferredNeighborManager implements Runnable{
 			
 			System.out.println("NUM PREFERRED: " + numPreferredNeighbors);
 			System.out.println("random size: " + randomIndices.size());
-			while(randomIndices.size() < numPreferredNeighbors)
+			while((randomIndices.size() < numPreferredNeighbors) && (randomIndices.size() < keys.size()))
 			{
 				
 				index = rdx.nextInt(keys.size());
@@ -97,6 +97,7 @@ public class PreferredNeighborManager implements Runnable{
 				{
 					randomIndices.add(index);
 					System.out.println(controller.getPeerID() + " RANDOM INDEX ADDED: " + index);
+					//break;
 				}
 			}
 			

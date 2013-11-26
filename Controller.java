@@ -20,7 +20,7 @@ public class Controller extends Module {
 	private Server serverInstance;
 	private List<Peer> neighborPeers;
 	private boolean isShuttingDown;
-	private String optimisticPeerID;
+	private String optimisticPeerID = "";
 	private Controller ctrl;
     	private OptimisticNeighborManager optimisticNeighborManager;
     	private PreferredNeighborManager preferredNeighborManager;
@@ -106,7 +106,7 @@ public class Controller extends Module {
 			if( optimisticNeighborManager == null)
 			{
 
-				 optimisticNeighborManager = new OptimisticNeighborManager(this,5);
+				 optimisticNeighborManager = new OptimisticNeighborManager(this);
 				
 			}
 			
@@ -230,7 +230,7 @@ public class Controller extends Module {
 
 	public synchronized int getRandomInterestedPiece(byte[] bitFieldA, byte[] bitFieldB)
 	{
-		Random rdx = new Random();
+		Random rdx = new Random(System.currentTimeMillis());
 		int requestedIndex;
 		ArrayList<Integer> availablePieces = new ArrayList<Integer>();
 		for(int i = 0; i < numOfPieces; i++)
@@ -287,7 +287,7 @@ public class Controller extends Module {
 		ArrayList<Integer> interestedPieces = fileHandlerInstance.getInterestedPieceArray(id);
 		if(!interestedPieces.isEmpty())
 		{
-			Random rdx = new Random();
+			Random rdx = new Random(System.currentTimeMillis());
 			int index = interestedPieces.get(rdx.nextInt(interestedPieces.size()));
 			/*if(requestedPieces.size() < interestedPieces.size())
 			{

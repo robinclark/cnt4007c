@@ -37,7 +37,7 @@ public class OptimisticNeighborManager implements Runnable{
 	
 	System.out.println("DOING OPTIMISTIC CHANGING WORK");
 	HashMap<Integer,Peer> InterestedAndChokedPeers = new HashMap<Integer,Peer>();
-	Random rdx = new Random();
+	Random rdx = new Random(System.currentTimeMillis());
 	Peer ChokedPeer;	
 	int x = 0;
 	System.out.println("optim: " + controller);

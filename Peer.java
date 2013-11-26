@@ -384,7 +384,7 @@ public class Peer extends Module implements Runnable{
 					outputStream.flush();
 					System.out.println("REQUEST SENT");
 					
-					System.out.println("**********STARTING TIMER*******");
+					//System.out.println("**********STARTING TIMER*******");
 					//startPieceTime(index);//start timer
 				}
 			}

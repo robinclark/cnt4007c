@@ -52,6 +52,11 @@ public class FileHandler extends Module
 			outputFile = new RandomAccessFile(outFileName, "rw");
 			//outputFile.setLength(fileSize);
 			System.out.println("file length: " + outputFile.length());
+			if(outputFile.length() < fileSize)
+			{
+				System.out.println("peer " + peerID + " does not have complete file");
+				controller.closeEverything();
+			}
 			outputFile.setLength(fileSize);
 		}
 		catch(Exception e)
