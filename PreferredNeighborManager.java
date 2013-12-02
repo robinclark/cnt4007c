@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class PreferredNeighborManager implements Runnable{
     private Controller controller;
+    private Logger log;
     private Configuration configInstance;
     //String preferredNeighbors[];
    // String optimisticNeighbor[];
@@ -138,6 +140,14 @@ public class PreferredNeighborManager implements Runnable{
 
     	
     	controller.setPreferredNeighbors(preferredNeighbors);
+	
+	try
+	{
+		controller.getLogger().writeLogger(controller.getLogger().changeOfPeers(preferredNeighbors));
+	}catch(IOException e)
+	{
+		System.out.println("logger has not been set up or is invaild");
+	}
     }
     
     public void setPreferredDownload()

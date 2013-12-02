@@ -73,7 +73,7 @@ public class Logger extends Module {
 		return "[" + Time + "]: Peer [ " + peer_ID + "] is unchoked by [ " + destPeerID + "].\n";
 	}
 	
-	public String chocking(String destPeerID)
+	public String choking(String destPeerID)
 	{
 		return "[" + Time + "]: Peer [ " + peer_ID + "] is choked by [ " + destPeerID + "].\n";
 	}

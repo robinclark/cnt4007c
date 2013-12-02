@@ -22,6 +22,7 @@ public class Controller extends Module {
 	private boolean isShuttingDown;
 	private String optimisticPeerID = "";
 	private Controller ctrl;
+	private Logger logger;
     	private OptimisticNeighborManager optimisticNeighborManager;
     	private PreferredNeighborManager preferredNeighborManager;
 	private HashMap<String, String> commonInfo;
@@ -393,7 +394,7 @@ public class Controller extends Module {
         return configInstance;
     }
 	
-	public Module getLogger()
+	public Logger getLogger()
 	{
 		return logInstance;
 	}
@@ -423,6 +424,11 @@ public class Controller extends Module {
 	public int getNumOfPieces()
 	{
 		return numOfPieces;
+	}
+
+	public int getNumOfPieces(String peerID)
+	{
+		return fileHandlerInstance.numOfPieces(peerID);
 	}
 	
 	public String getFileName()
@@ -619,5 +625,7 @@ public class Controller extends Module {
 	{
 		return optimisticPeerID;
 	}
+
+	
 }
 

@@ -4,6 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
 
 public class OptimisticNeighborManager implements Runnable{
@@ -13,6 +14,7 @@ public class OptimisticNeighborManager implements Runnable{
     private String optimisticNeighbor[];
     private ScheduledExecutorService scheduler = null;
     private ScheduledFuture<?> taskHandle = null;
+    private Logger log;
     
     OptimisticNeighborManager(Controller peerController)
     {
@@ -35,16 +37,12 @@ public class OptimisticNeighborManager implements Runnable{
     @Override
     public void run() {
 	
-	System.out.println("DOING OPTIMISTIC CHANGING WORK");
 	HashMap<Integer,Peer> InterestedAndChokedPeers = new HashMap<Integer,Peer>();
 	Random rdx = new Random(System.currentTimeMillis());
 	Peer ChokedPeer;	
 	int x = 0;
-	System.out.println("optim: " + controller);
 	for(Peer neighborPeer : controller.getNeighborsList())
 	{
-
-		System.out.print(" PEER: " + neighborPeer.getPeerID() + " Neighbor: " + neighborPeer.getNeighborPeerID());
 		for(String neighborPeerID : controller.getInterestedPeers())
 		{
 	
@@ -58,7 +56,6 @@ public class OptimisticNeighborManager implements Runnable{
 		} 
 
 	}
-	System.out.println();
 
 	if(x != 0)
 	{
@@ -68,11 +65,18 @@ public class OptimisticNeighborManager implements Runnable{
 		{
 			if(ChokedPeer.getPeerID() == neighborPeer.getPeerID())
 			{
-					
-				neighborPeer.sendUnchokeMsg(true);
-				neighborPeer.isChoked(false);
-				controller.setNeighbor(neighborPeer);
-				controller.setOptimisticPeerID(neighborPeer.getPeerID());
+				try{
+					controller.getLogger().writeLogger(controller.getLogger().changeOfOptimistic(neighborPeer.getNeighborPeerID()));				
+					neighborPeer.sendUnchokeMsg(true);
+					neighborPeer.isChoked(false);
+					controller.setNeighbor(neighborPeer);
+					controller.setOptimisticPeerID(neighborPeer.getPeerID());
+				   }catch(IOException e)
+				   {
+					System.out.println("logger has not been set up or is invaild");
+				   }
+
+
 			}
 
 		

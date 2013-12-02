@@ -229,6 +229,23 @@ public class FileHandler extends Module
 			System.out.println(id + " SET PIECE: HAS COMPLETE FILE ***********************");
 		}
 	}
+
+	public int numOfPieces(String peerID)
+	{
+		int num = 0;
+
+		 byte[] pieces = bitfieldHandler.getBitfields().get(peerID);
+		
+		for(int i = 0; i < pieces.length; i++)
+		{
+			if(pieces[i] == (byte)1)
+			{
+				num++;
+			}
+		}
+
+		return num;
+	}
 	
 	public void printBitfield(String s, byte[] b)
 	{
