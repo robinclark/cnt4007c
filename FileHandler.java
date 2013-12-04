@@ -47,12 +47,17 @@ public class FileHandler extends Module
 	
 	public void initialConfiguration()
 	{
+		//System.out.println("FILEHANDLER GET CONFIG");
+
+		peerList = controller.getConfiguration().getPeerList();
+		peerID = controller.getPeerID();
+		
 		try
 		{
 			outputFile = new RandomAccessFile(outFileName, "rw");
 			//outputFile.setLength(fileSize);
 			System.out.println("file length: " + outputFile.length());
-			if(outputFile.length() < fileSize)
+			if(outputFile.length() < fileSize && peerList.get(peerID).getHasFile())
 			{
 				System.out.println("peer " + peerID + " does not have complete file");
 				controller.closeEverything();
@@ -63,11 +68,6 @@ public class FileHandler extends Module
 		{
 			e.printStackTrace();
 		}
-		
-		//System.out.println("FILEHANDLER GET CONFIG");
-
-		peerList = controller.getConfiguration().getPeerList();
-		peerID = controller.getPeerID();
 	
 
 		if(bitfieldHandler == null)

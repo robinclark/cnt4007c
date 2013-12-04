@@ -49,10 +49,10 @@ public class PreferredNeighborManager implements Runnable{
     	
     	try{
 			 System.err.println("TERMINATING PREFERRED******************");
-			if (!scheduler.awaitTermination(15, TimeUnit.SECONDS)) {
+			if (!scheduler.awaitTermination(1, TimeUnit.SECONDS)) {
 				scheduler.shutdownNow(); // Cancel currently executing tasks
 			       // Wait a while for tasks to respond to being cancelled
-			       if (!scheduler.awaitTermination(15, TimeUnit.SECONDS))
+			       if (!scheduler.awaitTermination(1, TimeUnit.SECONDS))
 			       {
 			           System.out.println("PREFERRED did not terminate");
 			       }
@@ -69,6 +69,7 @@ public class PreferredNeighborManager implements Runnable{
 		catch(InterruptedException e)
 		{
 			// (Re-)Cancel if current thread also interrupted
+			System.out.println("preferred neighbor exception shutdown *********************************");
 			scheduler.shutdownNow();
 		}
     	taskHandle.cancel(true);
@@ -94,7 +95,7 @@ public class PreferredNeighborManager implements Runnable{
 			{
 				
 				index = rdx.nextInt(keys.size());
-				System.out.println(controller.getPeerID() + " RANDOM INDEX: " + index);
+				//System.out.println(controller.getPeerID() + " RANDOM INDEX: " + index);
 				if(!randomIndices.contains(Integer.valueOf(index)))
 				{
 					randomIndices.add(index);
@@ -113,67 +114,50 @@ public class PreferredNeighborManager implements Runnable{
 			{
 				System.out.println(s);
 			}
+			
+			controller.setPreferredNeighbors(preferredNeighbors);
     	}
+    	else
+    	{
+
+		    	//setPreferredDownload();
+		    	//select neighbors that have transmitted to this peer at the highest rates
+		    	Map<String, Float> downloadRates = controller.getPeerDownloadRates();   
+		        downloadRates = MapUtil.sortByValue( downloadRates );
+		        //System.out.println("downloadRates.size(): " + downloadRates.size());
+		        
+		    	//for(Entry<String, Float> entry: downloadRates.entrySet())
+		    	//{
+		    	//	System.out.println("PNM peerDownloadRates: " + entry.getKey() + ", " + entry.getValue());
+		    	//}    	
 		    	
-
-    	//setPreferredDownload();
-    	//select neighbors that have transmitted to this peer at the highest rates
-    	Map<String, Float> downloadRates = controller.getPeerDownloadRates();   
-        downloadRates = MapUtil.sortByValue( downloadRates );
-        //System.out.println("downloadRates.size(): " + downloadRates.size());
-        
-    	for(Entry<String, Float> entry: downloadRates.entrySet())
-    	{
-    		System.out.println("PNM peerDownloadRates: " + entry.getKey() + ", " + entry.getValue());
-    	}    	
-    	
-    	//List<String> preferredNeighbors = new ArrayList<String>();
-    	for(Entry<String, Float> entry: downloadRates.entrySet())
-    	{
-    		if(controller.getInterestedNeighbors().contains(entry.getKey()))
-    		{
-    			preferredNeighbors.add(entry.getKey());
-    		}
-    		
-    		if(preferredNeighbors.size() == numPreferredNeighbors) break;
-    	}	 
-
-    	
-    	controller.setPreferredNeighbors(preferredNeighbors);
-	
-	try
-	{
-		controller.getLogger().writeLogger(controller.getLogger().changeOfPeers(preferredNeighbors));
-	}catch(IOException e)
-	{
-		System.out.println("logger has not been set up or is invaild");
-	}
-    }
-    
-    public void setPreferredDownload()
-    {
-    	//select neighbors that have transmitted to this peer at the highest rates
-    	Map<String, Float> downloadRates = controller.getPeerDownloadRates();   
-        downloadRates = MapUtil.sortByValue( downloadRates );
-        //System.out.println("downloadRates.size(): " + downloadRates.size());
-        
-    	for(Entry<String, Float> entry: downloadRates.entrySet())
-    	{
-    		System.out.println("PNM peerDownloadRates: " + entry.getKey() + ", " + entry.getValue());
-    	}    	
-    	
-    	//List<String> preferredNeighbors = new ArrayList<String>();
-    	for(Entry<String, Float> entry: downloadRates.entrySet())
-    	{
-    		if(controller.getInterestedNeighbors().contains(entry.getKey()))
-    		{
-    			preferredNeighbors.add(entry.getKey());
-    		}
-    		
-    		if(preferredNeighbors.size() == numPreferredNeighbors) break;
-    	}	    	
-    }
-    
-    
-    
+		    	//List<String> preferredNeighbors = new ArrayList<String>();
+		    	for(Entry<String, Float> entry: downloadRates.entrySet())
+		    	{
+		    		if(controller.getInterestedNeighbors().contains(entry.getKey()))
+		    		{
+		    			preferredNeighbors.add(entry.getKey());
+		    		}
+		    		
+		    		if(preferredNeighbors.size() == numPreferredNeighbors) break;
+		    	}	 
+		
+		    	
+		    	controller.setPreferredNeighbors(preferredNeighbors);
+		    	
+		    	System.out.println("*******************DETERMINED FROM DOWNLOAD");
+				for(String s: preferredNeighbors)
+				{
+					System.out.println(s);
+				}
+			
+			try
+			{
+				controller.getLogger().writeLogger(controller.getLogger().changeOfPeers(preferredNeighbors));
+			}catch(IOException e)
+			{
+				System.out.println("logger has not been set up or is invaild");
+			}
+    	}
+    }    
 }

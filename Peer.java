@@ -46,7 +46,7 @@ public class Peer extends Module implements Runnable{
 		
 			peerID = controller.getPeerID();
 
-			if(peerID.equals("1001"))isChokedByPeer = true;
+			//if(peerID.equals("1001"))isChokedByPeer = true;
 			
 			isShuttingDown = controller.isShuttingDown();
 			
@@ -85,7 +85,7 @@ public class Peer extends Module implements Runnable{
 			
 			
 			byte b[] = controller.getBitfield(peerID);
-			printBitfield("TIMER", b);
+			//printBitfield("TIMER", b);
 			if(b[index] == 0)
 			{
 				System.out.println("*****PIECE NOT SENT IN TIME***** " + index);
@@ -104,7 +104,7 @@ public class Peer extends Module implements Runnable{
 			try {
 				sendHandShake();
 				
-				while(!isShuttingDown)
+				while(!controller.isShuttingDown())
 				{
 					Message message = (Message) inputStream.readObject();
 					
@@ -235,7 +235,7 @@ public class Peer extends Module implements Runnable{
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
 			System.out.println("BITFIELD SENT");
-			printBitfield(peerID, field);
+			//printBitfield(peerID, field);
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}
@@ -255,7 +255,7 @@ public class Peer extends Module implements Runnable{
 			sendUnInterestedMsg();
 		}
 		System.out.println("BITFIELD HANDLED");
-		printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
+		//printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
 	}
 
 	private void sendUnInterestedMsg()
@@ -353,7 +353,7 @@ public class Peer extends Module implements Runnable{
 			int index = ((PieceMessage) msg).getPieceIndex();
 			broadcastHaveMsg(index);
 			//controller.removeRequestedPiece(index);//remove piece fr requested pieces
-			sendHaveMsg(index);//--send have b4 writing piece; is this a problem?
+			//sendHaveMsg(index);//--send have b4 writing piece; is this a problem?
 			controller.writePiece(index, payload);
 
 			numOfPieces = controller.getNumOfPieces(peerID);
@@ -361,10 +361,10 @@ public class Peer extends Module implements Runnable{
 				
 			bytesDownloaded += payload.length;
 			System.out.println("PIECE HANDLED");
-			printBitfield("PIECE: ", controller.getBitfield(peerID));
+		//	printBitfield("PIECE: ", controller.getBitfield(peerID));
 		
 		
-			if(!controller.getHasFile())
+			if(controller.getInterested(neighborPeerID)/*!controller.getHasFile()*/)
 			{
 				sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
 			}
@@ -393,7 +393,7 @@ public class Peer extends Module implements Runnable{
 	
 					outputStream.writeUnshared(msg);
 					outputStream.flush();
-					System.out.println("REQUEST SENT");
+					System.out.println("REQUEST SENT to " + neighborPeerID);
 					
 					//System.out.println("**********STARTING TIMER*******");
 					//startPieceTime(index);//start timer
@@ -409,15 +409,15 @@ public class Peer extends Module implements Runnable{
 	{
 		//create & send piece message	
 
-		System.out.println(neighborPeerID + " FOUND: " + controller.getPreferredNeighbors().indexOf(neighborPeerID));
+		//System.out.println(neighborPeerID + " FOUND: " + controller.getPreferredNeighbors().indexOf(neighborPeerID));
 
-		if(controller.getPreferredNeighbors().indexOf(neighborPeerID) != -1)
-		{
+		//if(controller.getPreferredNeighbors().indexOf(neighborPeerID) != -1)
+		//{
 			int index = ((RequestMessage) msg).getPieceIndex();
-			System.out.println("REQUESTING INDEX: " + index);
+			System.out.println("REQUESTed INDEX: " + index);
 			sendPieceMsg(index);		
-		}
-		System.out.println("REQUEST HANDLED");
+		//}
+		System.out.println("REQUEST HANDLED for" + neighborPeerID);
 
 	}
 	
@@ -450,7 +450,7 @@ public class Peer extends Module implements Runnable{
 		try
 		{
 			logInstance.writeLogger(logInstance.haveMessage(neighborPeerID,((HaveMessage) msg).getPieceIndex()));
-			controller.setPiece(((HaveMessage) msg).getPieceIndex(),neighborPeerID);		
+			//controller.setPiece(((HaveMessage) msg).getPieceIndex(),neighborPeerID);		
 			if(controller.getInterested(neighborPeerID))
 			{
 				sendInterestedMsg();
@@ -460,8 +460,8 @@ public class Peer extends Module implements Runnable{
 				sendUnInterestedMsg();
 			}		
 
-			System.out.println("HAVE HANDLED");
-			printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
+			System.out.println("HAVE HANDLED from " + neighborPeerID);
+		//	printBitfield(neighborPeerID, controller.getBitfield(neighborPeerID));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -471,7 +471,7 @@ public class Peer extends Module implements Runnable{
 	{
 		try 
 		{			
-			System.out.println("TRYING TO CHOKE");
+			System.out.println("TRYING TO CHOKE " + neighborPeerID);
 			ChokeMessage builder = new ChokeMessage();
 			NormalMessageCreator creator = new NormalMessageCreator(builder);
 			creator.createNormalMessage(Constants.MSG_CHOKE_TYPE);
@@ -479,7 +479,7 @@ public class Peer extends Module implements Runnable{
 
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
-			System.out.println("CHOKE SENT");
+			System.out.println("CHOKE SENT to " + neighborPeerID);
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}	
@@ -490,9 +490,9 @@ public class Peer extends Module implements Runnable{
 		try
 		{	
 			logInstance.writeLogger(logInstance.choking(neighborPeerID));
-			System.out.println("TRYING TO HANDLE CHOKE");
+			System.out.println("TRYING TO HANDLE CHOKE FROM " + neighborPeerID);
 			isChokedByPeer = true;
-			System.out.println("CHOKE HANDLED");
+			System.out.println("CHOKE HANDLED FROM " + neighborPeerID);
 		}catch(IOException e)
 		{
 			e.printStackTrace();
@@ -519,10 +519,10 @@ public class Peer extends Module implements Runnable{
 			Message msg = builder.getMessage();
 			System.out.println("MESSAGE TYPE: " + msg.getMsgType());
 			
-			System.out.println("TRYING TO UNCHOKE");
+			//System.out.println("TRYING TO UNCHOKE");
 			outputStream.writeUnshared(msg);
 			outputStream.flush();
-			System.out.println("UNCHOKE SENT");
+			System.out.println("UNCHOKE SENT to " + neighborPeerID);
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}	
@@ -536,18 +536,18 @@ public class Peer extends Module implements Runnable{
 			logInstance.writeLogger(logInstance.unchoking(neighborPeerID));
 			startTimer();
 			isChokedByPeer = false;		
-			if(!controller.getHasFile())
+			if(controller.getInterested(neighborPeerID)/*!controller.getHasFile()*/)
 			{
 				sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
 			}
-			System.out.println("UNCHOKE HANDLED");
+			System.out.println("UNCHOKE HANDLED from " + neighborPeerID);
 
-			System.out.println("FINALLY UNCHOKED: " );
+			//System.out.println("FINALLY UNCHOKED: " );
 			startTimer();
 			if(isOptimisticMessage){controller.setOptimisticPeerID(neighborPeerID);}
-			isChokedByPeer = false;	
-			controller.setNeighbor(this);	
-			sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
+			//isChokedByPeer = false;	
+			//controller.setNeighbor(this);	
+			//sendRequestMsg(controller.getInterestedIndex(neighborPeerID));
 		}catch(IOException e)
 		{	
 			e.printStackTrace();
@@ -617,5 +617,9 @@ public class Peer extends Module implements Runnable{
 	public void startPieceTime(int index)
 	{
 		//timer.schedule(new WaitForPiece(index), 1000);
+	}
+	public void setIsShuttingDown(boolean s)
+	{
+		isShuttingDown = s;
 	}
 }

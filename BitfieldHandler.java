@@ -117,13 +117,16 @@ public class BitfieldHandler extends Module{
 		byte[] bPeer = bitfields.get(peerID);
 		byte[] bNeighbor = bitfields.get(id);
 		
-		for(int i = 0; i < numPieces; i++)
-		{
-			if(bPeer[i] == 0 && bNeighbor[i] == 1)
+		if(hasFile) return false;
+
+			for(int i = 0; i < numPieces; i++)
 			{
-				return true;
+				if(bPeer[i] == 0 && bNeighbor[i] == 1)
+				{
+					return true;
+				}
 			}
-		}
+		
 		return false;
 	}
 	

@@ -122,6 +122,7 @@ public class Controller extends Module {
 			
 			
 			requestedPieces = new ArrayList<Integer>();
+			
 	}
 	
 	public void addThread(Runnable r)
@@ -134,7 +135,7 @@ public class Controller extends Module {
 			try {
 				createServers();	
 				createClients();
-
+				
 				//initpeeruploadrates
 				for(String peerKey: peerKeys)
 				{
@@ -262,9 +263,9 @@ public class Controller extends Module {
 	
 	public synchronized void broadcastHaveMsg(int index)
 	{
-		for(int i = 0; i < neighborPeers.size(); i++)
+		for(Peer p: neighborPeers)
 		{
-			neighborPeers.get(i).sendHaveMsg(index);
+			p.sendHaveMsg(index);
 		}
 	}
 
@@ -345,7 +346,7 @@ public class Controller extends Module {
 		fileHandlerInstance.writePiece(index, piece);
 	}
 	
-	public  void addNeighbors(Peer peer)
+	public void addNeighbors(Peer peer)
 	{
 		neighborPeers.add(peer);
 		System.out.println("ADDING PEER FROM SEVER: " + peer);
@@ -462,9 +463,9 @@ public class Controller extends Module {
 	
 	public void setPreferredNeighbors(List<String> preferred)
 	{
-		preferredNeighbors = preferred;
+		preferredNeighbors = new ArrayList<String>(preferred);
 		
-		System.out.println("PreferredNeighbors");
+		System.out.println("*************PreferredNeighbors controller");
     	for(String neighbor: preferredNeighbors)
     	{
     		System.out.println(neighbor);
@@ -475,7 +476,7 @@ public class Controller extends Module {
 	
 	public void unchokePreferredChokeOthers()
 	{
-		for(String prefkey: preferredNeighbors)
+		/*for(String prefkey: preferredNeighbors)
 		{
 			for(Peer peer: neighborPeers)
 			{
@@ -483,24 +484,45 @@ public class Controller extends Module {
 				{
 					if(peer.getNeighborPeerID().equals(prefkey))
 					{
-						System.out.println("KEYS EQUAL: " + prefkey + ", CHOKED: " + peer.getIsChokedByPeer());
 						
 						if(peer.getIsChokedByPeer())
 						{
-							System.out.println("UNCHOKING");
+							//System.out.println("UNCHOKING");
 							peer.sendUnchokeMsg(false);
 							
 						}
 					}
 					else
 					{
-						System.out.println("KEYS UNEQUAL: " + prefkey + ", CHOKED" + peer.getIsChokedByPeer());
+						//System.out.println("KEYS UNEQUAL: " + prefkey + ", CHOKED" + peer.getIsChokedByPeer());
 						if(!peer.getIsChokedByPeer() && !optimisticPeerID.equals(peer.getPeerID()))
 						{
-							System.out.println("CHOKING");
+							//System.out.println("CHOKING");
 							peer.sendChokeMsg();
 						}
 					}
+				}
+			}
+		}*/
+		
+		for(Peer peer: neighborPeers)
+		{
+			if(preferredNeighbors.contains(peer.getPeerID()))
+			{
+				if(peer.getIsChokedByPeer())
+				{
+					//System.out.println("UNCHOKING");
+					peer.sendUnchokeMsg(false);
+					
+				}
+			}
+			else
+			{
+				//System.out.println("KEYS UNEQUAL: " + prefkey + ", CHOKED" + peer.getIsChokedByPeer());
+				if(!peer.getIsChokedByPeer() && !optimisticPeerID.equals(peer.getPeerID()))
+				{
+					//System.out.println("CHOKING");
+					peer.sendChokeMsg();
 				}
 			}
 		}
@@ -514,7 +536,7 @@ public class Controller extends Module {
 		{
 			if(!hasFileStatus.get(peerKey))
 			{
-				System.out.println(peerKey + "STILL DO ESNT HAVE FILE");
+				System.out.println(peerKey + "STILL DOESNT HAVE FILE");
 				return;
 			}
 		}
@@ -536,6 +558,8 @@ public class Controller extends Module {
 	{
 		System.out.println("SHUTTING DOWN");
 		
+		isShuttingDown = true;
+		
 		for(Future<?> f: futures)
 		{
 			System.out.println("B4 FUTURE DONE: " + f.isDone());
@@ -543,6 +567,7 @@ public class Controller extends Module {
 		}
 		
 		preferredNeighborManager.shutdown();
+		optimisticNeighborManager.shutdown();
 		
 		List<Runnable> threads = pool.shutdownNow();
 		System.out.println("NUMBER THREADS: " + threads.size());
@@ -574,6 +599,7 @@ public class Controller extends Module {
 		catch(InterruptedException e)
 		{
 			// (Re-)Cancel if current thread also interrupted
+			System.out.println("POOL SHUTDOWN CALLED***********************************************8");
 		     pool.shutdownNow();
 		}
 
